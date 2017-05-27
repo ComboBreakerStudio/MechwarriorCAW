@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{434058A6-A11C-FF19-108B-07C5AFBCBECA}</ProjectGuid>
+    <ProjectGuid>{FB3EC6DD-5CDB-A145-44F3-F0A44F9D4539}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -46,11 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Hoh&apos;aStuff\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Hoh&apos;aStuff\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Hoh&apos;aStuff\Scripts\PlayerMotor.cs" />
-     <Compile Include="Assets\Hoh&apos;aStuff\Scripts\PlayerSetup.cs" />
-     <Compile Include="Assets\Hoh&apos;aStuff\Scripts\ThirdPersonCamera.cs" />
+     <Compile Include="Assets\Hoh&apos;Stuff\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Hoh&apos;Stuff\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Hoh&apos;Stuff\Scripts\PlayerMotor.cs" />
+     <Compile Include="Assets\Hoh&apos;Stuff\Scripts\PlayerSetup.cs" />
      <Compile Include="Assets\Scripts\MainStat\CrowdControl.cs" />
      <Compile Include="Assets\Scripts\MainStat\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\MainStat\SubStat\TorsoStats.cs" />
