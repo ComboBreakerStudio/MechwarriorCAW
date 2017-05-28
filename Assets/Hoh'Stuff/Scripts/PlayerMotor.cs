@@ -10,8 +10,12 @@ public class PlayerMotor : MonoBehaviour {
 	private Transform upper;
 
 	private Vector3 velocity = Vector3.zero;
-	private Vector3 rotation = Vector3.zero;
-	private Vector3 cameraRotation = Vector3.zero;
+	private float cameraRotationX = 0f;
+	private float currentCameraRotationX = 0f;
+	private float rotationY = 0f;
+	private float currentRotationY = 0f;
+	private Vector2 pitchMinMax = new Vector2 (-30, 30);
+	private Vector2 yawMinMax = new Vector2 (-45, 45);
 
 	private Rigidbody rb;
 
@@ -27,15 +31,15 @@ public class PlayerMotor : MonoBehaviour {
 	}
 
 	// Gets a rotational vector
-	public void Rotate(Vector3 _rotation)
+	public void Rotate(float _rotationY)
 	{
-		rotation = _rotation;
+		rotationY = _rotationY;
 	}
 
 	// Gets a rotational vector for the camera
-	public void RotateCamera(Vector3 _cameraRotation)
+	public void RotateCamera(float _cameraRotationX)
 	{
-		cameraRotation = _cameraRotation;
+		cameraRotationX = _cameraRotationX;
 	}
 
 	// Run every physics iteration
@@ -57,10 +61,18 @@ public class PlayerMotor : MonoBehaviour {
 	// Perform rotation
 	void PerformRotation()
 	{
-		rb.MoveRotation (rb.rotation * Quaternion.Euler (rotation));
+		currentRotationY = rotationY;
+		currentRotationY = Mathf.Clamp (currentRotationY, yawMinMax.x, yawMinMax.y);
+
+		//rb.transform.eulerAngles = new Vector3 (0, currentRotationY, 0);
+		rb.MoveRotation (rb.rotation * Quaternion.Euler (0, -currentRotationY, 0));
 		if (cam != null) 
 		{
-			cam.transform.Rotate (-cameraRotation);
+			//New rotational calculation
+			currentCameraRotationX -= cameraRotationX;
+			currentCameraRotationX = Mathf.Clamp (currentCameraRotationX, pitchMinMax.x, pitchMinMax.y);
+
+			cam.transform.eulerAngles = new Vector3 (currentCameraRotationX, 0, 0);
 		}
 	}
 }

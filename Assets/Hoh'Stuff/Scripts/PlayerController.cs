@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField]
 	private float playerMoveSpeed = 5.0f;
-
 	[SerializeField]
 	private float lookSensitivity = 5.0f;
 
@@ -34,28 +33,16 @@ public class PlayerController : MonoBehaviour {
 
 		// Calculate rotation as a 3D vector (turning around)
 		float _yRot = Input.GetAxis ("Mouse X");
-
-		Vector3 _rotation = new Vector3 (0f, _yRot, 0f) * lookSensitivity;
+		float _rotationY = _yRot * lookSensitivity;
 
 		// Apply rotation
-		motor.Rotate (_rotation);
+		motor.Rotate (_rotationY);
 
 		// Calculate camera rotation as a 3D vector (turning around)
-		float _xrot = Input.GetAxis ("Mouse Y");
-
-		Vector3 _cameraRotation = new Vector3 (_xrot, 0f, 0f) * lookSensitivity;
+		float _xRot = Input.GetAxis ("Mouse Y");
+		float _cameraRotationX = _xRot * lookSensitivity;
 
 		// Apply camera rotation
-		motor.RotateCamera (_cameraRotation);
-
-		//Left Weapon Attack
-		if(Input.GetKeyDown(KeyCode.Mouse0)){
-			
-		}
-
-		//Right Weapon Attack
-		if(Input.GetKeyDown(KeyCode.Mouse1)){
-			
-		}
+		motor.RotateCamera (_cameraRotationX);
 	}
 }

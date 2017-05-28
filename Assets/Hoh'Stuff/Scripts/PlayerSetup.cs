@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerSetup : NetworkBehaviour {
@@ -8,28 +6,55 @@ public class PlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	Behaviour[] componentsToDisable;
 
+	[SerializeField]
+	string remoteLayerName = "RemotePlayer";
+
 	Camera sceneCamera;
 
 	void Start()
 	{
+		// Disable components that should be active on the player that we control
 		if (!isLocalPlayer) 
 		{
-			for (int i = 0; i < componentsToDisable.Length; i++) {
-				componentsToDisable [i].enabled = false;
-			}
+			DisableComponents ();
+			AssignRemoteLayer ();
 		} 
 		else 
 		{
+			// We are the local player: Disable the scene camera
 			sceneCamera = Camera.main;
 			if (sceneCamera != null)
 			{
 				sceneCamera.gameObject.SetActive (false);
 			}
 		}
+
+		RegisterPlayer ();
 	}
 
+	void RegisterPlayer()
+	{
+		string _ID = "Player" + GetComponent<NetworkIdentity> ().netId;
+		transform.name = _ID;
+	}
+
+	void AssignRemoteLayer()
+	{
+		gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
+	}
+
+	void DisableComponents()
+	{
+		for (int i = 0; i < componentsToDisable.Length; i++)
+		{
+			componentsToDisable [i].enabled = false;
+		}
+	}
+
+	// When we are destroyed
 	void OnDisable()
 	{
+		// We enable the scene camera
 		if (sceneCamera != null) 
 		{
 			sceneCamera.gameObject.SetActive (true);
