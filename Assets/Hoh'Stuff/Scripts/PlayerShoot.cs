@@ -25,14 +25,21 @@ public class PlayerShoot : NetworkBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		//if it's not local player, dont do anything
+		if(!isLocalPlayer){
+			return;
+		}
+		//Local player controls below
+
 		if (Input.GetButtonDown ("Fire1")) {
 			Shoot();
 		}
 	}
 
-	[Client]
+//	[Client]
 	void Shoot()
 	{
+		Debug.Log ("Shoot");
 		RaycastHit _hit;
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
 		{

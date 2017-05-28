@@ -8,6 +8,9 @@ public class PlayerStats : MonoBehaviour {
 	private TorsoStats torsoStatsScript;
 
 	[SerializeField]
+	private LegStats legStats;
+
+	[SerializeField]
 	private WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 

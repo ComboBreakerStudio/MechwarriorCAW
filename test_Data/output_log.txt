@@ -2,47 +2,70 @@ Initialize engine version: 5.6.1f1 (2860b30f0b54)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce 940M      (ID=0x1347)
+    Renderer: NVIDIA GeForce GTX 950 (ID=0x1402)
     Vendor:   NVIDIA
-    VRAM:     1995 MB
-    Driver:   10.18.13.6191
+    VRAM:     1970 MB
+    Driver:   10.18.13.5906
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
-Loading C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.152 seconds
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Hoh Yu Onn\Documents\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
-desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.023 seconds
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.342100 ms
+UnloadTime: 1.191472 ms
 MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2460 -> priority: 1 
-  Thread -> id: 206c -> priority: 1 
-MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+  Thread -> id: 22b0 -> priority: 1 
+  Thread -> id: b98 -> priority: 1 
+Create Room : da 
+Room Size : 10 player(s)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient Create :https://mm.unet.unity3d.com/json/reply/CreateMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 8.471339 ms
+UnloadTime: 8.132673 ms
 
-Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 448.
-Total: 0.567006 ms (FindLiveObjects: 0.033755 ms CreateObjectMapping: 0.042728 ms MarkObjects: 0.453348 ms  DeleteObjects: 0.036319 ms)
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 554.
+Total: 0.364263 ms (FindLiveObjects: 0.027154 ms CreateObjectMapping: 0.017882 ms MarkObjects: 0.294390 ms  DeleteObjects: 0.024504 ms)
 
-Pause
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.77.65.224:9999}
+ServerDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.77.65.224:9999}
+Attempt to send to not connected connection {1}
+ 
+(Filename:  Line: 359)
+
+Failed to send internal buffer channel:1 bytesToSend:55
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Send Error: WrongConnection channel:1 bytesToSend:55
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ServerDisconnected due to error: Timeout
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
