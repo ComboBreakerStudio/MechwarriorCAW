@@ -19,9 +19,10 @@ public class PlayerStats : NetworkBehaviour {
 	private WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 	[SyncVar]
-	private int torso_Health, leg_Health, leftWeaponSystem_Health, rightWeaponSystem_Health;
+	public int torso_Health, leg_Health, leftWeaponSystem_Health, rightWeaponSystem_Health;
 
 	void Start(){
+		ResetStats ();
 	}
 
 	void Update(){
