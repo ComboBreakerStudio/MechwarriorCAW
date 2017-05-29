@@ -24,7 +24,7 @@ public class WeaponSystemStats : MonoBehaviour {
 	//Stats
 	[Header("Stats")]
 
-	public int currentHealth, maxHealth;
+	public int maxHealth;
 
 	public int weight,
 				damage,
@@ -36,5 +36,9 @@ public class WeaponSystemStats : MonoBehaviour {
 	public void Attack(){
 		//RayCast
 		//if hit object find Tag (Left Weapon / torso / right Weapon), then get respective component from PlayerStats, deal damage accordingly;
+	}
+
+	public void ResetStats(){
+		
 	}
 }

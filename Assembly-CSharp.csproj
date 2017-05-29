@@ -57,6 +57,8 @@
      <Compile Include="Assets\Scripts\MainStat\SubStat\LegStats.cs" />
      <Compile Include="Assets\Scripts\MainStat\SubStat\TorsoStats.cs" />
      <Compile Include="Assets\Scripts\MainStat\SubStat\WeaponSystemStats.cs" />
+     <Compile Include="Assets\Scripts\Managers\MatchManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\TeamManager.cs" />
      <Compile Include="Assets\Scripts\Network\HostGame.cs" />
      <Compile Include="Assets\Scripts\Network\JoinGame.cs" />
      <Compile Include="Assets\Scripts\Network\RoomListItem.cs" />

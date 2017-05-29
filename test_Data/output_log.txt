@@ -17,6 +17,90 @@ Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine
 Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.021 seconds
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.966690 ms
+Initialize engine version: 5.6.1f1 (2860b30f0b54)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 950 (ID=0x1402)
+    Vendor:   NVIDIA
+    VRAM:     1970 MB
+    Driver:   10.18.13.5906
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.032 seconds
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Initialize engine version: 5.6.1f1 (2860b30f0b54)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 950 (ID=0x1402)
+    Vendor:   NVIDIA
+    VRAM:     1970 MB
+    Driver:   10.18.13.5906
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 19e0 -> priority: 1 
+  Thread -> id: 1734 -> priority: 1 
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.031 seconds
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Initialize engine version: 5.6.1f1 (2860b30f0b54)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 950 (ID=0x1402)
+    Vendor:   NVIDIA
+    VRAM:     1970 MB
+    Driver:   10.18.13.5906
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
 - Completed reload, in  0.023 seconds
 Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
@@ -24,31 +108,229 @@ desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.191472 ms
+UnloadTime: 1.917018 ms
+<RI> Initialized touch support.
 MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 22b0 -> priority: 1 
-  Thread -> id: b98 -> priority: 1 
-Create Room : da 
-Room Size : 10 player(s)
+  Thread -> id: c10 -> priority: 1 
+  Thread -> id: 1f64 -> priority: 1 
+UnloadTime: 1.895824 ms
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-MatchMakingClient Create :https://mm.unet.unity3d.com/json/reply/CreateMatchRequest
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 2128 -> priority: 1 
+  Thread -> id: 20dc -> priority: 1 
+<RI> Initialized touch support.
+UnloadTime: 1.573617 ms
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 788 -> priority: 1 
+  Thread -> id: 21e8 -> priority: 1 
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Network configuration mismatch detected. The number of networked scripts on the client does not match the number of networked scripts on the server. This could be caused by lazy loading of scripts on the client. This warning can be disabled by the checkbox in NetworkManager Script CRC Check.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump MatchManager : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump MatchManager : 0
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 8.132673 ms
+UnloadTime: 4.801983 ms
+DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
+ 
+(Filename:  Line: 462)
 
-Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 554.
-Total: 0.364263 ms (FindLiveObjects: 0.027154 ms CreateObjectMapping: 0.017882 ms MarkObjects: 0.294390 ms  DeleteObjects: 0.024504 ms)
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 459.
+Total: 0.379827 ms (FindLiveObjects: 0.022849 ms CreateObjectMapping: 0.017550 ms MarkObjects: 0.313597 ms  DeleteObjects: 0.025829 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Network configuration mismatch detected. The number of networked scripts on the client does not match the number of networked scripts on the server. This could be caused by lazy loading of scripts on the client. This warning can be disabled by the checkbox in NetworkManager Script CRC Check.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump MatchManager : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump MatchManager : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerStats : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.473815 ms
+DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
+ 
+(Filename:  Line: 462)
+
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 459.
+Total: 0.349361 ms (FindLiveObjects: 0.021524 ms CreateObjectMapping: 0.017550 ms MarkObjects: 0.281145 ms  DeleteObjects: 0.028147 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Network configuration mismatch detected. The number of networked scripts on the client does not match the number of networked scripts on the server. This could be caused by lazy loading of scripts on the client. This warning can be disabled by the checkbox in NetworkManager Script CRC Check.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+InvalidOperationException: out of sync
+  at System.Collections.Generic.Dictionary`2+Enumerator[System.String,System.Int32].VerifyState () [0x00000] in <filename unknown>:0 
+  at System.Collections.Generic.Dictionary`2+Enumerator[System.String,System.Int32].MoveNext () [0x00000] in <filename unknown>:0 
+  at System.Collections.Generic.Dictionary`2+KeyCollection+Enumerator[System.String,System.Int32].MoveNext () [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkCRC.Dump (UnityEngine.Networking.NetworkSystem.CRCMessageEntry[] remoteScripts) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkCRC.ValidateInternal (UnityEngine.Networking.NetworkSystem.CRCMessageEntry[] remoteScripts, Int32 numChannels) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkCRC.Validate (UnityEngine.Networking.NetworkSystem.CRCMessageEntry[] scripts, Int32 numChannels) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkClient.OnCRC (UnityEngine.Networking.NetworkMessage netMsg) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkConnection.HandleReader (UnityEngine.Networking.NetworkReader reader, Int32 receivedSize, Int32 channelId) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkConnection.HandleBytes (System.Byte[] buffer, Int32 receivedSize, Int32 channelId) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkConnection.TransportReceive (System.Byte[] bytes, Int32 numBytes, Int32 channelId) [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkClient.Update () [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkClient.UpdateClients () [0x00000] in <filename unknown>:0 
+  at UnityEngine.Networking.NetworkIdentity.UNetStaticUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 4.421824 ms
+DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
+ 
+(Filename:  Line: 462)
+
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 459.
+Total: 0.347043 ms (FindLiveObjects: 0.022518 ms CreateObjectMapping: 0.018213 ms MarkObjects: 0.279489 ms  DeleteObjects: 0.026491 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Network configuration mismatch detected. The number of networked scripts on the client does not match the number of networked scripts on the server. This could be caused by lazy loading of scripts on the client. This warning can be disabled by the checkbox in NetworkManager Script CRC Check.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump MatchManager : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump MatchManager : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerStats : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.518520 ms
+DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
+ 
+(Filename:  Line: 462)
+
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 459.
+Total: 0.340420 ms (FindLiveObjects: 0.022849 ms CreateObjectMapping: 0.017550 ms MarkObjects: 0.272203 ms  DeleteObjects: 0.027154 ms)
 
 Log: connection {1} has been disconnected by timeout; address {::ffff:52.77.65.224:9999}
-ServerDisconnected due to error: Timeout
+Attempt to send to not connected connection {1}
+ 
+(Filename:  Line: 359)
+
+Failed to send internal buffer channel:1 bytesToSend:29
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Send Error: WrongConnection channel:1 bytesToSend:29
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 0.985828 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 505.
+Total: 0.338102 ms (FindLiveObjects: 0.015232 ms CreateObjectMapping: 0.017882 ms MarkObjects: 0.286443 ms  DeleteObjects: 0.018544 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -57,15 +339,91 @@ Attempt to send to not connected connection {1}
  
 (Filename:  Line: 359)
 
-Failed to send internal buffer channel:1 bytesToSend:55
+Failed to send internal buffer channel:1 bytesToSend:29
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Send Error: WrongConnection channel:1 bytesToSend:55
+Send Error: WrongConnection channel:1 bytesToSend:29
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-ServerDisconnected due to error: Timeout
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.77.65.224:9999}
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Attempt to send to not connected connection {1}
+ 
+(Filename:  Line: 359)
+
+Failed to send internal buffer channel:1 bytesToSend:30
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Send Error: WrongConnection channel:1 bytesToSend:30
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.77.65.224:9999}
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 0.950395 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 505.
+Total: 0.374860 ms (FindLiveObjects: 0.014239 ms CreateObjectMapping: 0.017882 ms MarkObjects: 0.318564 ms  DeleteObjects: 0.023842 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 0.777205 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 505.
+Total: 0.402676 ms (FindLiveObjects: 0.016226 ms CreateObjectMapping: 0.019537 ms MarkObjects: 0.348036 ms  DeleteObjects: 0.018544 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+UnloadTime: 1.079212 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 505.
+Total: 0.378502 ms (FindLiveObjects: 0.017219 ms CreateObjectMapping: 0.017550 ms MarkObjects: 0.324525 ms  DeleteObjects: 0.019206 ms)
+
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 

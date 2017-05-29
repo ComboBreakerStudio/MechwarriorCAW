@@ -1,12 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Hoh'Stuff\Scripts\PlayerShoot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Managers\TeamManager.cs">
     <Files>
-      <File FileName="Assets\Hoh'Stuff\Scripts\PlayerShoot.cs" Line="42" Column="20" />
-      <File FileName="Assets\Hoh'Stuff\Scripts\PlayerSetup.cs" Line="7" Column="14" />
-      <File FileName="Assets\Scripts\MainStat\SubStat\TorsoStats.cs" Line="12" Column="6" />
-      <File FileName="Assets\Scripts\MainStat\SubStat\LegStats.cs" Line="8" Column="32" />
-      <File FileName="Assets\Scripts\MainStat\PlayerStats.cs" Line="11" Column="28" />
+      <File FileName="Assets\Hoh'Stuff\Scripts\PlayerShoot.cs" Line="11" Column="21" />
+      <File FileName="Assets\Hoh'Stuff\Scripts\PlayerSetup.cs" Line="17" Column="57" />
+      <File FileName="Assets\Scripts\MainStat\SubStat\TorsoStats.cs" Line="15" Column="3" />
+      <File FileName="Assets\Scripts\MainStat\SubStat\LegStats.cs" Line="13" Column="22" />
+      <File FileName="Assets\Scripts\MainStat\SubStat\WeaponSystemStats.cs" Line="42" Column="3" />
+      <File FileName="Assets\Scripts\MainStat\PlayerStats.cs" Line="55" Column="3" />
+      <File FileName="Assets\Scripts\Managers\TeamManager.cs" Line="37" Column="16" />
+      <File FileName="Assets\Scripts\Managers\MatchManager.cs" Line="11" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
