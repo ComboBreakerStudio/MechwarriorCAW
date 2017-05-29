@@ -30,7 +30,7 @@ public class TeamManager : MonoBehaviour {
 	}
 
 	public void SetPlayerTeam(){
-
+		Debug.Log ("SetPlayer");
 
 		//Prototype Purpose (Delete after testing)
 		team1.Clear();
@@ -48,15 +48,26 @@ public class TeamManager : MonoBehaviour {
 		}
 		//End of Test
 
-		//Setting team 1
-		for(int i = 0; i < team1.Count; i++){
-			team1 [i].GetComponent<PlayerStats> ().teamID = 1;
+
+
+		if(team1.Count > 0){
+			//Setting team 1
+			Debug.Log ("Set 1");
+
+			for(int i = 0; i < team1.Count; i++){
+				team1 [i].GetComponent<PlayerStats> ().teamID = 1;
+			}
+		}
+		if(team2.Count >0){
+
+			Debug.Log ("Set 2");
+
+			//Setting team 2
+			for(int i = 0; i < team2.Count; i++){
+				team2 [i].GetComponent<PlayerStats> ().teamID = 2;
+			}
 		}
 
-		//Setting team 2
-		for(int i = 0; i < team1.Count; i++){
-			team1 [i].GetComponent<PlayerStats> ().teamID = 2;
-		}
 
 	}
 

@@ -13,9 +13,6 @@ public class PlayerSetup : NetworkBehaviour {
 
 	void Start()
 	{
-		if (isServer) {
-			TeamManager.instance.AddPlayerToList (this.gameObject);
-		}
 		
 		// Disable components that should be active on the player that we control
 		if (!isLocalPlayer) 
