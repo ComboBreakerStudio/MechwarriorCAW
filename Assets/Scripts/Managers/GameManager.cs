@@ -56,6 +56,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 		localPlayer.GetComponent<PlayerStats> ().CmdEnablePlayer (true);
-		localPlayer.GetComponent<PlayerStats> ().ResetStats ();
+		localPlayer.GetComponent<PlayerStats> ().CmdResetStats ();
 	}
 }

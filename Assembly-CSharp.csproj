@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\AI Scripts\TankBehaviour.cs" />
      <Compile Include="Assets\Scripts\AI Scripts\VisionEditor.cs" />
      <Compile Include="Assets\Scripts\MainStat\CrowdControl.cs" />
+     <Compile Include="Assets\Scripts\MainStat\DealDamage.cs" />
      <Compile Include="Assets\Scripts\MainStat\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\MainStat\SubStat\LegStats.cs" />
      <Compile Include="Assets\Scripts\MainStat\SubStat\TorsoStats.cs" />

@@ -13,19 +13,19 @@ public class PlayerStats : NetworkBehaviour {
 	private TorsoStats torsoStatsScript;
 
 	[SerializeField]
-	private LegStats legStats;
+	private LegStats leftLegStats, rightLegStats;
 
 	[SerializeField]
 	private WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 	[SyncVar]
-	public int torso_Health, leg_Health, leftWeaponSystem_Health, rightWeaponSystem_Health;
+	public int torso_Health, leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
 
 	void Start(){
 		if (isServer) {
 			TeamManager.instance.AddPlayerToList (this.gameObject);
 		}
-		ResetStats ();
+		CmdResetStats ();
 		if(isLocalPlayer){
 			GameManager.GM.localPlayer = this.gameObject;
 		}
@@ -54,6 +54,22 @@ public class PlayerStats : NetworkBehaviour {
 			isAlive = false;
 			CmdEnablePlayer (false);
 		}
+
+		if(leftWeaponSystem_Health <= 0){
+			RpcDisableLeftWeaponSystem ();
+		}
+
+		if(rightWeaponSystem_Health <= 0){
+			RpcDisableRightWeaponSystem ();
+		}
+
+		if(leftLeg_Health <= 0){
+			RpcDisableLeftLeg ();
+		}
+
+		if(rightLeg_Health <= 0){
+			RpcDisableRightLeg ();
+		}
 	}
 
 	//Disable in the Server
@@ -67,12 +83,52 @@ public class PlayerStats : NetworkBehaviour {
 	}
 	//End of Disable
 
-	public void ResetStats(){
+	[Command]
+	public void CmdResetStats(){
 		torso_Health += torsoStatsScript.maxHealth;
-		leg_Health = legStats.maxHealth;
+		leftLeg_Health = leftLegStats.maxHealth;
+		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+	}
 
+	[Client]
+	public void RpcDisableLeftWeaponSystem(){
+		leftWeaponSystemStats.gameObject.SetActive (false);
+	}
 
+	[Client]
+	public void RpcDisableRightWeaponSystem(){
+		rightWeaponSystemStats.gameObject.SetActive (false);
+	}
+
+	[Client]
+	public void RpcDisableLeftLeg(){
+		leftLegStats.gameObject.SetActive (false);
+	}
+
+	[Client]
+	public void RpcDisableRightLeg(){
+		rightLegStats.gameObject.SetActive (false);
+	}
+
+	// 0 = torso, 1 = leftWeapon, 2 = RightWeapon, 3 = LeftLeg, 4 = RightLeg
+	[Command]
+	public void CmdApplyDamage(int partsID, int dmg){
+		if(partsID == 0){
+			torso_Health -= dmg;
+		}
+		else if(partsID == 1){
+			leftWeaponSystem_Health -= dmg;
+		}
+		else if(partsID == 2){
+			rightWeaponSystem_Health -= dmg;
+		}
+		else if(partsID == 3){
+			leftLeg_Health -= dmg;
+		}
+		else if(partsID == 4){
+			rightLeg_Health -= dmg;
+		}
 	}
 }

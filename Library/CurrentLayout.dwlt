@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 613, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 55
+  controlID: 101
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 79
+  controlID: 102
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -422,14 +422,14 @@ MonoBehaviour:
     width: 905
     height: 366
   m_SceneLighting: 1
-  lastFramingTime: 7444.427757323844
+  lastFramingTime: 722.2639132741289
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -20.861404, y: 23.857334, z: 14.52846}
+    m_Target: {x: 2.3125286, y: 2.4660542, z: -2.0457826}
     speed: 2
-    m_Value: {x: -20.861404, y: 23.857334, z: 14.52846}
+    m_Value: {x: 2.3125286, y: 2.4660542, z: -2.0457826}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -452,13 +452,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.40241107, y: -0.19688468, z: 0.08906258, w: -0.8895896}
+    m_Target: {x: -0.05957004, y: -0.9336306, z: 0.18470418, w: -0.30111432}
     speed: 2
-    m_Value: {x: -0.40241107, y: -0.19688468, z: 0.08906258, w: -0.8895896}
+    m_Value: {x: -0.05957004, y: -0.9336306, z: 0.18470418, w: -0.30111432}
   m_Size:
-    m_Target: 11.804053
+    m_Target: 7.29988
     speed: 2
-    m_Value: 11.804053
+    m_Value: 7.29988
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -525,7 +525,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: bac7ffff58c8ffff70c9ffff8ec9ffffc2d8ffff6cd9ffff9adaffffb8daffff76f8ffffe6fbffff0000000036280000
+    m_ExpandedIDs: 2488ffffcc88ffffcc89ffffd289ffff20b4ffff5cb4ffffc6c4ffffe2c4fffff8c4ffff34c5ffffb0e1ffffb2e1fffff8e1fffffae1fffffee1ffff00e2ffff28faffff2afaffffe6fbffff0000000000260000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -621,24 +621,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 120}
+    scrollPos: {x: 0, y: 430}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ca240000002500002025000030250000322500003e250000442500004a25000058250000602500006425000078250000822500008a250000d6270000
+    m_ExpandedIDs: 00000000ca240000002500002025000030250000322500003e250000442500004a250000582500005a250000602500006425000078250000822500008a250000d6270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PlayerShoot
-      m_OriginalName: PlayerShoot
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 1590
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 

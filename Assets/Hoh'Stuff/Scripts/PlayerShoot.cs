@@ -44,9 +44,14 @@ public class PlayerShoot : NetworkBehaviour {
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
 		{
 			Debug.Log (_hit.collider.name);
-			if (_hit.collider.tag == PLAYER_TAG)
-			{
-				CmdPlayerShot (_hit.collider.name);
+//			if (_hit.collider.tag == PLAYER_TAG)
+//			{
+//				CmdPlayerShot (_hit.collider.name);
+//			}
+			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage>();
+
+			if(dm != null){
+				dm.ApplyDamage ((int)weapon.damage);
 			}
 		}
 	}
