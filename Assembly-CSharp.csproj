@@ -51,6 +51,11 @@
      <Compile Include="Assets\Hoh&apos;Stuff\Scripts\PlayerSetup.cs" />
      <Compile Include="Assets\Hoh&apos;Stuff\Scripts\PlayerShoot.cs" />
      <Compile Include="Assets\Hoh&apos;Stuff\Scripts\PlayerWeapon.cs" />
+     <Compile Include="Assets\Scripts\AI Scripts\BulletScript.cs" />
+     <Compile Include="Assets\Scripts\AI Scripts\Enums.cs" />
+     <Compile Include="Assets\Scripts\AI Scripts\NetworkSpawnScript.cs" />
+     <Compile Include="Assets\Scripts\AI Scripts\TankBehaviour.cs" />
+     <Compile Include="Assets\Scripts\AI Scripts\VisionEditor.cs" />
      <Compile Include="Assets\Scripts\MainStat\CrowdControl.cs" />
      <Compile Include="Assets\Scripts\MainStat\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\MainStat\SubStat\LegStats.cs" />
