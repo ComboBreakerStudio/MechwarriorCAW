@@ -17,112 +17,87 @@ Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine
 Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading D:\UnityProjects\MechwarriorCAW\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.021 seconds
+- Completed reload, in  0.022 seconds
 Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\UnityProjects\MechwarriorCAW\test_Data\Managed\System.dll (this message is harmless)
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.259026 ms
+UnloadTime: 1.078874 ms
 MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1dac -> priority: 1 
-  Thread -> id: 18e0 -> priority: 1 
+  Thread -> id: 19ec -> priority: 1 
+  Thread -> id: 1d64 -> priority: 1 
 MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Create Room : fwa 
-Room Size : 10 player(s)
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-MatchMakingClient Create :https://mm.unet.unity3d.com/json/reply/CreateMatchRequest
+Network configuration mismatch detected. The number of networked scripts on the client does not match the number of networked scripts on the server. This could be caused by lazy loading of scripts on the client. This warning can be disabled by the checkbox in NetworkManager Script CRC Check.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump PlayerStats : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Local Dump MatchManager : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerShoot : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump PlayerStats : 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+CRC Remote Dump MatchManager : 0
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 7.386927 ms
+UnloadTime: 4.213504 ms
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 487.
+Total: 0.350352 ms (FindLiveObjects: 0.026160 ms CreateObjectMapping: 0.017881 ms MarkObjects: 0.281474 ms  DeleteObjects: 0.024173 ms)
+
 DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
  
 (Filename:  Line: 462)
 
-SetPlayer
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.76.153.37:9999}
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-ArgumentOutOfRangeException: Argument is out of range.
-Parameter name: index
-  at System.Collections.Generic.List`1[UnityEngine.GameObject].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
-  at TeamManager.SetPlayerTeam () [0x00000] in <filename unknown>:0 
-  at TeamManager.AddPlayerToList (UnityEngine.GameObject go) [0x00000] in <filename unknown>:0 
-  at PlayerStats.Start () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-
-Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 598.
-Total: 0.403007 ms (FindLiveObjects: 0.029141 ms CreateObjectMapping: 0.025829 ms MarkObjects: 0.321876 ms  DeleteObjects: 0.025829 ms)
-
-SetPlayer
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Set 2
+ClientDisconnected due to error: Timeout
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Set 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+UnloadTime: 0.833826 ms
 
-Player Respawned
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 516.
+Total: 0.465260 ms (FindLiveObjects: 0.020199 ms CreateObjectMapping: 0.024504 ms MarkObjects: 0.394726 ms  DeleteObjects: 0.025167 ms)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at GameManager.RespawnPlayer () [0x00000] in <filename unknown>:0 
-  at PlayerStats.Start () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Log: connection {1} has been disconnected by timeout; address {::ffff:52.74.191.137:9999}
-ServerDisconnected due to error: Timeout
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-SetPlayer
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Set 2
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Set 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Set 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Player Respawned
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at GameManager.RespawnPlayer () [0x00000] in <filename unknown>:0 
-  at PlayerStats.Start () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Log: connection {1} has been disconnected by timeout; address {::ffff:52.74.191.137:9999}
-ServerDisconnected due to error: Timeout
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
