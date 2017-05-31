@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class HostGame : MonoBehaviour {
 
 	[SerializeField]
-	private uint roomSize = 10; //max players
+	private uint roomSize; //max players
 
 	private string roomName;
 

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class ThirdPersonCamera : MonoBehaviour {
+public class ThirdPersonCamera : NetworkBehaviour {
 
 	[SerializeField]
-	private Camera cam;
+	private GameObject cam;
 	[SerializeField]
 	private bool lockCursor;
 	[SerializeField]
@@ -23,6 +24,10 @@ public class ThirdPersonCamera : MonoBehaviour {
 	float pitch;
 
 	void Start() {
+		if(!isLocalPlayer){
+			return;
+		}
+
 		if (lockCursor) {
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
@@ -30,6 +35,10 @@ public class ThirdPersonCamera : MonoBehaviour {
 	}
 
 	void LateUpdate () {
+		if(!isLocalPlayer){
+			return;
+		}
+
 		if (cam != null)
 		{
 			yaw += Input.GetAxis ("Mouse X") * mouseSensitivity;

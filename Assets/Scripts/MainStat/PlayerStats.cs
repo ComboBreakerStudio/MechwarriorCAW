@@ -53,6 +53,8 @@ public class PlayerStats : NetworkBehaviour {
 		if(torso_Health <= 0){
 			isAlive = false;
 			CmdEnablePlayer (false);
+			CmdResetStats ();
+			CmdEnablePlayer (true);
 		}
 
 		if(leftWeaponSystem_Health <= 0){
@@ -70,10 +72,6 @@ public class PlayerStats : NetworkBehaviour {
 		if(rightLeg_Health <= 0){
 			RpcDisableRightLeg ();
 		}
-	}
-
-	void RespawnPlayer(){
-		
 	}
 
 	//Disable in the Server
@@ -97,22 +95,22 @@ public class PlayerStats : NetworkBehaviour {
 		isAlive = true;
 	}
 
-	[Client]
+	[ClientRpc]
 	public void RpcDisableLeftWeaponSystem(){
 		leftWeaponSystemStats.gameObject.SetActive (false);
 	}
 
-	[Client]
+	[ClientRpc]
 	public void RpcDisableRightWeaponSystem(){
 		rightWeaponSystemStats.gameObject.SetActive (false);
 	}
 
-	[Client]
+	[ClientRpc]
 	public void RpcDisableLeftLeg(){
 		leftLegStats.gameObject.SetActive (false);
 	}
 
-	[Client]
+	[ClientRpc]
 	public void RpcDisableRightLeg(){
 		rightLegStats.gameObject.SetActive (false);
 	}

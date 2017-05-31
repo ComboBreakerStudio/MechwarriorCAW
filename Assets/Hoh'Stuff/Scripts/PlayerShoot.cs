@@ -8,7 +8,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public PlayerWeapon weapon;
 
 	[SerializeField]
-	private Camera cam;
+	private GameObject cam;
 
 	[SerializeField]
 	private LayerMask mask;
@@ -36,29 +36,47 @@ public class PlayerShoot : NetworkBehaviour {
 		}
 	}
 
-//	[Client]
-	void Shoot()
-	{
-		Debug.Log ("Shoot");
+//	[Command]
+	public void Shoot(){
+//		Debug.Log ("Shoot");
 		RaycastHit _hit;
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
 		{
-			Debug.Log (_hit.collider.name);
+//			Debug.Log (_hit.collider.name);
 //			if (_hit.collider.tag == PLAYER_TAG)
 //			{
 //				CmdPlayerShot (_hit.collider.name);
 //			}
+
 			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage>();
 
-			if(dm != null){
-				dm.ApplyDamage ((int)weapon.damage);
-			}
+			if (dm != null) {
+//				dm.ApplyDamage ((int)weapon.damage);
+				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
+//				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
+			} 
+
+
 		}
+
+		RpcShoot ();
+	}
+
+	[Client]
+	public void RpcShoot()
+	{
+		Debug.Log ("Spawn FX");
 	}
 
 	[Command]
-	void CmdPlayerShot ( string _ID)
+	void CmdPlayerShot ( string _ID, int partsID, int dmg)
 	{
-		Debug.Log (_ID + " has been shot.");
+//		Debug.Log (_ID + " has been shot.");
+
+		for(int i = 0; i < TeamManager.instance.players.Count; i++){
+			if(TeamManager.instance.players[i].name == _ID){
+				TeamManager.instance.players [i].GetComponent<PlayerStats> ().CmdApplyDamage (partsID, dmg);
+			}
+		}
 	}
 }
