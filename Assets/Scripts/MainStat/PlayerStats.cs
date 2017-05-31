@@ -28,6 +28,9 @@ public class PlayerStats : NetworkBehaviour {
 		CmdResetStats ();
 		if(isLocalPlayer){
 			GameManager.GM.localPlayer = this.gameObject;
+			GameManager.GM.RespawnPlayer ();
+
+//			RpcRespawnPlayer ();
 		}
 
 		//TestingPurpose
@@ -58,19 +61,19 @@ public class PlayerStats : NetworkBehaviour {
 		}
 
 		if(leftWeaponSystem_Health <= 0){
-			RpcDisableLeftWeaponSystem ();
+			RpcDisableLeftWeaponSystem (true);
 		}
 
 		if(rightWeaponSystem_Health <= 0){
-			RpcDisableRightWeaponSystem ();
+			RpcDisableRightWeaponSystem (true);
 		}
 
 		if(leftLeg_Health <= 0){
-			RpcDisableLeftLeg ();
+			RpcDisableLeftLeg (true);
 		}
 
 		if(rightLeg_Health <= 0){
-			RpcDisableRightLeg ();
+			RpcDisableRightLeg (true);
 		}
 	}
 
@@ -93,26 +96,37 @@ public class PlayerStats : NetworkBehaviour {
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
 		isAlive = true;
+
+		//Enable Parts
+		RpcDisableLeftWeaponSystem(false);
+		RpcDisableRightWeaponSystem(false);
+		RpcDisableLeftLeg(false);
+		RpcDisableRightLeg(false);
 	}
 
 	[ClientRpc]
-	public void RpcDisableLeftWeaponSystem(){
-		leftWeaponSystemStats.gameObject.SetActive (false);
+	public void RpcDisableLeftWeaponSystem(bool t){
+		leftWeaponSystemStats.gameObject.SetActive (!t);
 	}
 
 	[ClientRpc]
-	public void RpcDisableRightWeaponSystem(){
-		rightWeaponSystemStats.gameObject.SetActive (false);
+	public void RpcDisableRightWeaponSystem(bool t){
+		rightWeaponSystemStats.gameObject.SetActive (!t);
 	}
 
 	[ClientRpc]
-	public void RpcDisableLeftLeg(){
-		leftLegStats.gameObject.SetActive (false);
+	public void RpcDisableLeftLeg(bool t){
+		leftLegStats.gameObject.SetActive (!t);
 	}
 
 	[ClientRpc]
-	public void RpcDisableRightLeg(){
-		rightLegStats.gameObject.SetActive (false);
+	public void RpcDisableRightLeg(bool t){
+		rightLegStats.gameObject.SetActive (!t);
+	}
+
+	[ClientRpc]
+	public void RpcRespawnPlayer(){
+		GameManager.GM.RespawnPlayer ();
 	}
 
 	// 0 = torso, 1 = leftWeapon, 2 = RightWeapon, 3 = LeftLeg, 4 = RightLeg

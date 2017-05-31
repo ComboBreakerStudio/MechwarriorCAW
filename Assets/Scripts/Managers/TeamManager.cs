@@ -56,6 +56,7 @@ public class TeamManager : MonoBehaviour {
 
 			for(int i = 0; i < team1.Count; i++){
 				team1 [i].GetComponent<PlayerStats> ().teamID = 1;
+				team1 [i].GetComponent<PlayerStats> ().RpcRespawnPlayer();
 			}
 		}
 		if(team2.Count >0){
@@ -65,8 +66,10 @@ public class TeamManager : MonoBehaviour {
 			//Setting team 2
 			for(int i = 0; i < team2.Count; i++){
 				team2 [i].GetComponent<PlayerStats> ().teamID = 2;
+				team2 [i].GetComponent<PlayerStats> ().RpcRespawnPlayer();
 			}
 		}
+
 
 
 	}
