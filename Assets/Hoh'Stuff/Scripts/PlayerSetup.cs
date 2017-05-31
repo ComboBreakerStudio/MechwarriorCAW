@@ -20,8 +20,11 @@ public class PlayerSetup : NetworkBehaviour {
 			DisableComponents ();
 			AssignRemoteLayer ();
 		} 
-		else 
+		else if(isLocalPlayer)
 		{
+			//Set local player to Game Manager
+			GameManager.GM.localPlayer = this.gameObject;
+
 			// We are the local player: Disable the scene camera
 			sceneCamera = Camera.main;
 			if (sceneCamera != null)

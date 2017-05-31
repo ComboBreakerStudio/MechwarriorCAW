@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour {
 	public KeyCode left{ get; set;}
 	public KeyCode right{ get; set;}
 
+	//Pause
+	public KeyCode menuButton;
+
 	public GameObject localPlayer;
 
 	public GameObject[] respawnPosition_Team1;
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour {
 		backward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
 		left = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
 		right = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
+		menuButton = KeyCode.Escape;
 	}
 
 //	[Command]

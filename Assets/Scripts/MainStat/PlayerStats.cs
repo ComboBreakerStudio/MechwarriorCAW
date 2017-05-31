@@ -72,6 +72,10 @@ public class PlayerStats : NetworkBehaviour {
 		}
 	}
 
+	void RespawnPlayer(){
+		
+	}
+
 	//Disable in the Server
 	[Command]
 	public void CmdEnablePlayer(bool temp){
@@ -90,6 +94,7 @@ public class PlayerStats : NetworkBehaviour {
 		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+		isAlive = true;
 	}
 
 	[Client]
@@ -131,4 +136,6 @@ public class PlayerStats : NetworkBehaviour {
 			rightLeg_Health -= dmg;
 		}
 	}
+
+
 }
