@@ -16,8 +16,8 @@ public class SettingsMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		menuPanel = transform.FindChild ("SMenu");
-		promptPanel = transform.FindChild ("ChangePrompt");
+		menuPanel = transform.Find ("SMenu");
+		promptPanel = transform.Find ("ChangePrompt");
 		promptPanel.gameObject.SetActive (false);
 		Debug.Log ("confirmed false");
 		//menuPanel.gameObject.SetActive (false);
