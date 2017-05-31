@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scene/LanTest.unity
+=======
+- path: Assets/Scene/MainMenu.unity
+>>>>>>> 5508cf2e01afa62e35bf631b2ada51a9d6413d0e
   isLoaded: 1
   isActive: 1
