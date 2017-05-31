@@ -1,0 +1,8 @@
+Library/
+obj/
+.vs/
+Temp/
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+Assembly-UnityScript.unityproj
+Build/
