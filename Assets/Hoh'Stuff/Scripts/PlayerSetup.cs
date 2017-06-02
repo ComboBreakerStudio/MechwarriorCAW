@@ -6,6 +6,8 @@ public class PlayerSetup : NetworkBehaviour {
 	[SerializeField]
 	Behaviour[] componentsToDisable;
 
+	public GameObject[] gameobjectsToDisable;
+
 	[SerializeField]
 	string remoteLayerName = "RemotePlayer";
 
@@ -52,6 +54,11 @@ public class PlayerSetup : NetworkBehaviour {
 		for (int i = 0; i < componentsToDisable.Length; i++)
 		{
 			componentsToDisable [i].enabled = false;
+		}
+
+		for (int i = 0; i < gameobjectsToDisable.Length; i++)
+		{
+			gameobjectsToDisable [i].SetActive (false);
 		}
 	}
 

@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class PlayerShoot : NetworkBehaviour {
 
 	private const string PLAYER_TAG = "Player";
 
-	public PlayerWeapon weapon;
+	public WeaponSystemStats leftWeapon, rightWeapon;
 
 	[SerializeField]
 	private GameObject cam;
@@ -31,18 +32,45 @@ public class PlayerShoot : NetworkBehaviour {
 		}
 		//Local player controls below
 
-		if (Input.GetButtonDown ("Fire1")) {
-			Shoot();
+		
+		//Attack
+		if (Input.GetButton ("Fire1")) {
+			Debug.Log ("Pressed");
+			WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
+		}
+		if(Input.GetButton ("Fire2")){
+			Debug.Log ("Pressed");
+			WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
 		}
 	}
 
+	void WeaponAttack (WeaponSystemStats weapon, string coroutineName){
+		if(weapon.canShoot){
+			if(leftWeapon.isRaycast){
+				RaycastShoot(weapon);
+			}
+			weapon.canShoot = false;
+			StartCoroutine(coroutineName,weapon.fireRate);
+		}
+	}
+
+	IEnumerator ResetLeftWeaponAttack(float t){
+		yield return new WaitForSeconds (t);
+		leftWeapon.canShoot = true;
+	}
+
+	IEnumerator ResetRightWeaponAttack(float t){
+		yield return new WaitForSeconds (t);
+		rightWeapon.canShoot = true;
+	}
+
 //	[Command]
-	public void Shoot(){
-//		Debug.Log ("Shoot");
+	public void RaycastShoot(WeaponSystemStats weapon){
+		Debug.Log ("Shoot");
 		RaycastHit _hit;
-		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
+		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask))
 		{
-//			Debug.Log (_hit.collider.name);
+			Debug.Log (_hit.collider.name);
 //			if (_hit.collider.tag == PLAYER_TAG)
 //			{
 //				CmdPlayerShot (_hit.collider.name);
@@ -52,6 +80,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 			if (dm != null) {
 //				dm.ApplyDamage ((int)weapon.damage);
+				Debug.Log("ApplyDamage");
 				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
 //				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
 			} 
@@ -59,7 +88,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 		}
 
-		RpcShoot ();
+//		RpcShoot ();
 	}
 
 	[Client]
@@ -76,6 +105,7 @@ public class PlayerShoot : NetworkBehaviour {
 		for(int i = 0; i < TeamManager.instance.players.Count; i++){
 			if(TeamManager.instance.players[i].name == _ID){
 				TeamManager.instance.players [i].GetComponent<PlayerStats> ().CmdApplyDamage (partsID, dmg);
+				Debug.Log ("ID " + _ID + " parts: " + partsID + "Dmg " + dmg);
 			}
 		}
 	}
