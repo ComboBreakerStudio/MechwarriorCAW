@@ -8,14 +8,19 @@ public class MatchManager : NetworkBehaviour {
 
 	public static MatchManager instance;
 
-	public int[] teamDeathCount;
-	public int maxDeathCount;
+	[SyncVar]
+	public int team1DeathCount, team2DeathCount;
+	public int winKillCount;
+
+	public bool matchEnd;
+//	public int maxDeathCount;
 
 	public Text gameStatsText;
 
 	// Use this for initialization
 	void Awake () {
 		instance = this;
+		matchEnd = false;
 	}
 	
 	// Update is called once per frame
@@ -23,11 +28,20 @@ public class MatchManager : NetworkBehaviour {
 		if(!isServer){
 			return;
 		}
-		for(int i = 0; i < teamDeathCount.Length; i++){
-			if(teamDeathCount[i] >= maxDeathCount){
-				RpcSetGameStatsText( "Team " + i + " Wins!");
-			}
+
+		if(matchEnd){
+			return;
 		}
+
+		if(team1DeathCount >= winKillCount){
+			RpcSetGameStatsText ("Team 2 Wins");
+			matchEnd = true;
+		}
+		else if(team2DeathCount >= winKillCount){
+			RpcSetGameStatsText ("Team 1 Wins");
+			matchEnd = true;
+		}
+
 	}
 
 	[ClientRpc]
