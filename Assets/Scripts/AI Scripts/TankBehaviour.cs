@@ -2,16 +2,17 @@
 using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class TankBehaviour : NetworkBehaviour {
 
-    UnityEngine.AI.NavMeshAgent agent;
+    NavMeshAgent agent;
 
     public float rangeDistance;
-    public Transform[] points;
 
     public List<Transform> visibleTarget = new List<Transform>();
 
+    [Header("AI Sight")]
     public float viewRadius;
     [Range(0,360)]
     public float viewAngle;
@@ -23,9 +24,14 @@ public class TankBehaviour : NetworkBehaviour {
 
     public AIBehaviour behaviour = AIBehaviour.Wandering;
 
+    [Header("AI wandering Range")]
+    public float timer;
+    public float wanderRadius;
+    float wanderTimer;
 
 
 
+    [Header("AI Shoot")]
     public Transform firingPoint;
     public GameObject bulletPrefab;
 
@@ -82,27 +88,34 @@ public class TankBehaviour : NetworkBehaviour {
             else if (behaviour == AIBehaviour.Wandering)
             {
                 agent.Resume();
-                Wandering();
+
+                wanderTimer += Time.deltaTime;
+                if (wanderTimer >= timer)
+                {
+                    Vector3 newPos = RandomWandering(transform.position, wanderRadius, -1);
+                    agent.SetDestination(newPos);
+                }
+
             }
             
             FindVisibleTarget();
 
-            Wandering();
 
             yield return new WaitForSeconds(0.25f);
         }
     }
 
-
-
-    void Wandering()
+    public static Vector3 RandomWandering(Vector3 origin, float dist, int layermask)
     {
-        if (points.Length == 0)
-            return;
+        Vector3 randomDirection = Random.insideUnitSphere * dist;
 
-        agent.destination = points[destPoint].position;
+        randomDirection += origin;
 
-        destPoint = (destPoint + 1) % points.Length;
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randomDirection, out navHit, dist, layermask);
+
+        return navHit.position;
     }
 
     //I Checking the visible target in the list
