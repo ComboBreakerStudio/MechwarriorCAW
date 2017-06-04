@@ -7,9 +7,17 @@ public class PlayerShoot : NetworkBehaviour {
 	private const string PLAYER_TAG = "Player";
 
 	public WeaponSystemStats leftWeapon, rightWeapon;
+	public Transform gunEnd;
+	public GameObject leftHand;
+	float currentPosition;
+	float recoilPosition;
+	private LineRenderer laserLine;
+	public ParticleSystem muzzleFlash;
+	public GameObject hitEffect;
+	private WaitForSeconds shotDuration = new WaitForSeconds (.5f);
 
 	[SerializeField]
-	private GameObject cam;
+	private Camera cam;
 
 	[SerializeField]
 	private LayerMask mask;
@@ -21,6 +29,9 @@ public class PlayerShoot : NetworkBehaviour {
 			Debug.LogError ("PlayerShoot: No camera reference!");
 			this.enabled = false;
 		}
+		laserLine = GetComponent<LineRenderer> ();
+		currentPosition = leftHand.transform.localPosition.z;
+		recoilPosition = currentPosition - 0.25f;
 	}
 	
 	// Update is called once per frame
@@ -35,12 +46,16 @@ public class PlayerShoot : NetworkBehaviour {
 		
 		//Attack
 		if (Input.GetButton ("Fire1")) {
-			Debug.Log ("Pressed");
+			Debug.Log ("PressedLeft");
 			WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
 		}
 		if(Input.GetButton ("Fire2")){
-			Debug.Log ("Pressed");
+			Debug.Log ("PressedRight");
 			WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
+		}
+		if(leftHand.transform.localPosition.z != currentPosition)
+		{
+			leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, currentPosition), 0.1f);
 		}
 	}
 
@@ -64,10 +79,28 @@ public class PlayerShoot : NetworkBehaviour {
 		rightWeapon.canShoot = true;
 	}
 
+	private IEnumerator ShotEffect()
+	{
+		laserLine.enabled = true;
+		muzzleFlash.Play ();
+		yield return shotDuration;
+		laserLine.enabled = false;
+	}
+
+	void Recoil()
+	{
+		leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, recoilPosition), 0.5f);
+	}
+
 //	[Command]
 	public void RaycastShoot(WeaponSystemStats weapon){
 		Debug.Log ("Shoot");
 		RaycastHit _hit;
+		StartCoroutine (ShotEffect ());
+		Recoil ();
+		Vector3 rayOrigin = cam.ViewportToWorldPoint (new Vector3(0.5f, 0.5f, 0));
+		laserLine.SetPosition (0, gunEnd.position);
+
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask))
 		{
 			Debug.Log (_hit.collider.name);
@@ -84,10 +117,10 @@ public class PlayerShoot : NetworkBehaviour {
 				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
 //				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
 			} 
-
-
 		}
-
+		else {
+			laserLine.SetPosition(1, rayOrigin + (cam.transform.forward * weapon.attackRange));
+		}
 //		RpcShoot ();
 	}
 
@@ -95,6 +128,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public void RpcShoot()
 	{
 		Debug.Log ("Spawn FX");
+
 	}
 
 	[Command]
