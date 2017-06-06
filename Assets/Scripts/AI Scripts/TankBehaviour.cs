@@ -66,6 +66,8 @@ public class TankBehaviour : NetworkBehaviour {
             if (behaviour == AIBehaviour.InSight)
             {
                 agent.Stop();
+                transform.LookAt(targetposition.position);
+
                 if (Distance() > 40f && visibleTarget.Contains(targetposition))
                 {
                     fireInterval -= 0.45f;
@@ -140,7 +142,6 @@ public class TankBehaviour : NetworkBehaviour {
                     if (visibleTarget.Contains(targetposition))
                     {
                         behaviour = AIBehaviour.InSight;
-                        //transform.rotation = Quaternion.LookRotation(targetposition.transform.position);
 
                     }
                     else if(!visibleTarget.Contains(targetposition))
