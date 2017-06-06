@@ -82,7 +82,6 @@ public class PlayerShoot : NetworkBehaviour {
 	private IEnumerator ShotEffect()
 	{
 		laserLine.enabled = true;
-		muzzleFlash.Play ();
 		yield return shotDuration;
 		laserLine.enabled = false;
 	}
@@ -96,6 +95,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public void RaycastShoot(WeaponSystemStats weapon){
 		Debug.Log ("Shoot");
 		RaycastHit _hit;
+		muzzleFlash.Play ();
 		StartCoroutine (ShotEffect ());
 		Recoil ();
 		Vector3 rayOrigin = cam.ViewportToWorldPoint (new Vector3(0.5f, 0.5f, 0));
