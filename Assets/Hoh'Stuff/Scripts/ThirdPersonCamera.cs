@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 public class ThirdPersonCamera : NetworkBehaviour {
 
 	[SerializeField]
+	private GameObject torsoObject;
+	[SerializeField]
 	private GameObject cam;
 	[SerializeField]
 	private bool lockCursor;
@@ -48,6 +50,8 @@ public class ThirdPersonCamera : NetworkBehaviour {
 
 			currentRotation = Vector3.SmoothDamp (currentRotation, new Vector3 (pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
 			cam.transform.localEulerAngles = currentRotation;
+
+			torsoObject.transform.localEulerAngles = new Vector3 (torsoObject.transform.eulerAngles.x, cam.transform.localEulerAngles.y, torsoObject.transform.eulerAngles.z );
 		}
 	}
 

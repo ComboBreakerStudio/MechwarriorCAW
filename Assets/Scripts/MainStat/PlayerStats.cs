@@ -56,6 +56,7 @@ public class PlayerStats : NetworkBehaviour {
 		if(torso_Health <= 0){
 			isAlive = false;
 			CmdEnablePlayer (false);
+			CmdSetMatchKills ();
 			CmdResetStats ();
 			CmdEnablePlayer (true);
 		}
@@ -74,6 +75,16 @@ public class PlayerStats : NetworkBehaviour {
 
 		if(rightLeg_Health <= 0){
 			RpcDisableRightLeg (true);
+		}
+	}
+
+	[Command]
+	void CmdSetMatchKills(){
+		if(teamID == 1){
+			MatchManager.instance.team1DeathCount += 1;
+		}
+		if(teamID == 2){
+			MatchManager.instance.team2DeathCount += 2;
 		}
 	}
 
