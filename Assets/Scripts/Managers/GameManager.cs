@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public KeyCode menuButton;
 
 	public GameObject localPlayer;
+	public PlayerStats localPlayerStatsScript;
 
 	public GameObject[] respawnPosition_Team1;
 	public GameObject[] respawnPosition_Team2;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour {
 //	[ClientRpc]
 	public void RespawnPlayer(){
 
-		Debug.Log ("Player Respawned");
+//		Debug.Log ("Player Respawned");
 
 		if(localPlayer.GetComponent<PlayerStats>().teamID == 1){
 			localPlayer.transform.position = respawnPosition_Team1 [Random.Range (0, respawnPosition_Team1.Length)].transform.position;

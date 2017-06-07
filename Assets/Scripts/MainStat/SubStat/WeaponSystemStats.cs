@@ -17,7 +17,7 @@ public class WeaponSystemStats : MonoBehaviour {
 	//Shoot
 	[Header ("Shooting Method")]
 	public bool isRaycast;
-	public GameObject projectile;
+	public GameObject projectile, raycastVFX;
 
 	public float fireRate,
 	attackRange;

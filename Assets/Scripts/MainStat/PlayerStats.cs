@@ -6,8 +6,13 @@ public class PlayerStats : NetworkBehaviour {
 	[SyncVar]
 	public int teamID;
 
+
+	public MeshRenderer[] meshRenderer;
+
 	[SyncVar]
 	public bool isAlive;
+
+	public GameObject explodeVFX;
 
 	[SerializeField]
 	private TorsoStats torsoStatsScript;
@@ -21,16 +26,36 @@ public class PlayerStats : NetworkBehaviour {
 	[SyncVar]
 	public int torso_Health, leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
 
+	//Test
+	public bool setColor;
+
 	void Start(){
+		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
 		if (isServer) {
 			TeamManager.instance.AddPlayerToList (this.gameObject);
 		}
 		CmdResetStats ();
 		if(isLocalPlayer){
+//			Debug.Log ("AA");
 			GameManager.GM.localPlayer = this.gameObject;
+//			GameManager.GM.localPlayerStatsScript = GameManager.GM.localPlayer.GetComponent<PlayerStats>();
+			GameManager.GM.localPlayerStatsScript = this;
 			GameManager.GM.RespawnPlayer ();
 
 //			RpcRespawnPlayer ();
+		}
+
+		if(!setColor){
+
+			Debug.Log ("Set Team Color");
+			MeshRenderer[] meshRenderer = GetComponentsInChildren<MeshRenderer> ();
+			for(int i = 0; i < meshRenderer.Length; i++){
+				if(teamID == 2){
+					meshRenderer [i].material.color = Color.blue;
+				}
+				setColor = true;
+			}
+
 		}
 
 		//TestingPurpose
@@ -39,26 +64,52 @@ public class PlayerStats : NetworkBehaviour {
 
 	void Update(){
 		//Test
+//		if(!setColor){
+
+//			Debug.Log ("Set Team Color");
+			for(int i = 0; i < meshRenderer.Length; i++){
+				if(teamID == 1){
+					meshRenderer [i].material.color = Color.yellow;
+				}
+				if(teamID == 2){
+					meshRenderer [i].material.color = Color.blue;
+				}
+				//					setColor = true;
+			}
+
+//		}
+		if(!isLocalPlayer){
+			return;
+		}
+
+		//Test
 		if(isLocalPlayer){
 
-
-			//Test
+			//Eject
 			if(Input.GetKeyDown(KeyCode.R)){
-				Debug.Log ("Pressed");
+				Debug.Log ("Eject");
 				GameManager.GM.RespawnPlayer ();
+				CmdSetMatchKills ();
 			}
 		}
 
-		if(!isServer){
+//		if(!isServer){
+//			return;
+//		}
+
+		if(!isAlive){
 			return;
 		}
-		
+
 		if(torso_Health <= 0){
 			isAlive = false;
 			CmdEnablePlayer (false);
-			CmdSetMatchKills ();
+			if(isLocalPlayer){
+				CmdSetMatchKills ();
+			}
 			CmdResetStats ();
 			CmdEnablePlayer (true);
+			GameManager.GM.RespawnPlayer ();
 		}
 
 		if(leftWeaponSystem_Health <= 0){
@@ -77,7 +128,6 @@ public class PlayerStats : NetworkBehaviour {
 			RpcDisableRightLeg (true);
 		}
 	}
-
 	[Command]
 	void CmdSetMatchKills(){
 		if(teamID == 1){
@@ -101,7 +151,7 @@ public class PlayerStats : NetworkBehaviour {
 
 	[Command]
 	public void CmdResetStats(){
-		torso_Health += torsoStatsScript.maxHealth;
+		torso_Health = torsoStatsScript.maxHealth;
 		leftLeg_Health = leftLegStats.maxHealth;
 		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;

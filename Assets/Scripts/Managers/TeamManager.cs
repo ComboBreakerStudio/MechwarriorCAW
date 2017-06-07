@@ -30,7 +30,7 @@ public class TeamManager : MonoBehaviour {
 	}
 
 	public void SetPlayerTeam(){
-		Debug.Log ("SetPlayer");
+//		Debug.Log ("SetPlayer");
 
 		//Prototype Purpose (Delete after testing)
 		team1.Clear();
@@ -58,20 +58,44 @@ public class TeamManager : MonoBehaviour {
 				team1 [i].GetComponent<PlayerStats> ().teamID = 1;
 				team1 [i].GetComponent<PlayerStats> ().RpcRespawnPlayer();
 			}
+			Invoke ("RespawnPlayerTimer", 2.0f);
 		}
 		if(team2.Count >0){
 
-			Debug.Log ("Set 2");
+//			Debug.Log ("Set 2");
 
 			//Setting team 2
 			for(int i = 0; i < team2.Count; i++){
 				team2 [i].GetComponent<PlayerStats> ().teamID = 2;
 				team2 [i].GetComponent<PlayerStats> ().RpcRespawnPlayer();
 			}
+			Invoke ("RespawnPlayerTimer", 2.0f);
 		}
 
 
 
+	}
+
+	void RespawnPlayerTimer(){
+		if(team1.Count > 0){
+			//Setting team 1
+//			Debug.Log ("Set 1");
+
+			for(int i = 0; i < team1.Count; i++){
+//				team1 [i].GetComponent<PlayerStats> ().teamID = 1;
+				team1 [i].GetComponent<PlayerStats> ().RpcRespawnPlayer();
+			}
+		}
+		if(team2.Count >0){
+
+//			Debug.Log ("Set 2");
+
+			//Setting team 2
+			for(int i = 0; i < team2.Count; i++){
+//				team2 [i].GetComponent<PlayerStats> ().teamID = 2;
+				team2 [i].GetComponent<PlayerStats> ().RpcRespawnPlayer();
+			}
+		}
 	}
 
 
