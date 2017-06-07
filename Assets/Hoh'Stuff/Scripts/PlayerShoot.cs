@@ -11,7 +11,6 @@ public class PlayerShoot : NetworkBehaviour {
 	public GameObject leftHand;
 	float currentPosition;
 	float recoilPosition;
-	private LineRenderer laserLine;
 	public ParticleSystem muzzleFlash;
 	public GameObject hitEffect;
 	private WaitForSeconds shotDuration = new WaitForSeconds (.5f);
@@ -29,7 +28,6 @@ public class PlayerShoot : NetworkBehaviour {
 			Debug.LogError ("PlayerShoot: No camera reference!");
 			this.enabled = false;
 		}
-		laserLine = GetComponent<LineRenderer> ();
 		currentPosition = leftHand.transform.localPosition.z;
 		recoilPosition = currentPosition - 0.25f;
 	}
@@ -79,13 +77,6 @@ public class PlayerShoot : NetworkBehaviour {
 		rightWeapon.canShoot = true;
 	}
 
-	private IEnumerator ShotEffect()
-	{
-		laserLine.enabled = true;
-		yield return shotDuration;
-		laserLine.enabled = false;
-	}
-
 	void Recoil()
 	{
 		leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, recoilPosition), 0.5f);
@@ -95,11 +86,8 @@ public class PlayerShoot : NetworkBehaviour {
 	public void RaycastShoot(WeaponSystemStats weapon){
 		Debug.Log ("Shoot");
 		RaycastHit _hit;
-		muzzleFlash.Play ();
-		StartCoroutine (ShotEffect ());
+		RpcShoot ();
 		Recoil ();
-		Vector3 rayOrigin = cam.ViewportToWorldPoint (new Vector3(0.5f, 0.5f, 0));
-		laserLine.SetPosition (0, gunEnd.position);
 
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask))
 		{
@@ -108,6 +96,7 @@ public class PlayerShoot : NetworkBehaviour {
 //			{
 //				CmdPlayerShot (_hit.collider.name);
 //			}
+			CmdOnHit(_hit.point, _hit.normal);
 
 			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage>();
 
@@ -118,17 +107,14 @@ public class PlayerShoot : NetworkBehaviour {
 //				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
 			} 
 		}
-		else {
-			laserLine.SetPosition(1, rayOrigin + (cam.transform.forward * weapon.attackRange));
-		}
-//		RpcShoot ();
+//		
 	}
 
 	[Client]
 	public void RpcShoot()
 	{
 		Debug.Log ("Spawn FX");
-
+		muzzleFlash.Play ();
 	}
 
 	[Command]
@@ -142,5 +128,18 @@ public class PlayerShoot : NetworkBehaviour {
 				Debug.Log ("ID " + _ID + " parts: " + partsID + "Dmg " + dmg);
 			}
 		}
+	}
+
+	[Command]
+	void CmdOnHit(Vector3 _pos, Vector3 _normal)
+	{
+		RpcDoHitEffect (_pos, _normal);
+	}
+
+	[Client]
+	void RpcDoHitEffect(Vector3 _pos, Vector3 _normal)
+	{
+		GameObject _hitEffect = (GameObject)Instantiate (hitEffect, _pos, Quaternion.LookRotation(_normal));
+		Destroy (_hitEffect, 2f);
 	}
 }
