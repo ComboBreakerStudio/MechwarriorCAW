@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class TankBehaviour : NetworkBehaviour {
 
+	public AIStats statsScript;
+
     NavMeshAgent agent;
 
     public float rangeDistance;
@@ -139,7 +141,13 @@ public class TankBehaviour : NetworkBehaviour {
                 {
                     visibleTarget.Add(targetposition);
 
-                    if (visibleTarget.Contains(targetposition))
+					for (int e  = 0; e < visibleTarget.Count; e++){
+						if(visibleTarget[e].GetComponent<PlayerStats>().teamID == statsScript.teamID){
+							visibleTarget.Remove (visibleTarget [e]);
+						}
+					}
+
+					if (visibleTarget.Contains(targetposition))
                     {
                         behaviour = AIBehaviour.InSight;
 
