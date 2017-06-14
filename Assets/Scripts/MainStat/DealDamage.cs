@@ -6,7 +6,8 @@ public class DealDamage : MonoBehaviour {
 
 	// 0 = torso, 1 = leftWeapon, 2 = RightWeapon, 3 = LeftLeg, 4 = RightLeg
 	public PlayerStats playerStats;
-	public bool torsoHit, leftWeaponHit, rightWeaponHit, leftLegHit, rightLegHit;
+	public bool frontTorsoHit, backTorsoHit, leftTorsoHit, rightTorsoHit, 
+	leftWeaponHit, rightWeaponHit, leftLegHit, rightLegHit;
 	public int partsID;
 
 //	public void ApplyDamage(int dmg){

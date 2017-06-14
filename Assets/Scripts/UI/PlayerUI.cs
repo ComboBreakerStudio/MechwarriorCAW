@@ -20,7 +20,7 @@ public class PlayerUI : MonoBehaviour {
 	}
 
 	private void TogglePauseMenu(){
-		Debug.Log ("Pause");
+//		Debug.Log ("Pause");
 		pauseMenu.SetActive (!pauseMenu.activeSelf);
 		PauseMenu.IsOn = pauseMenu.activeSelf;
 	}

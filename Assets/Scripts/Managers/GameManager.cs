@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public KeyCode menuButton;
 
 	public GameObject localPlayer;
+	public PlayerStats localPlayerStatsScript;
 
 	public GameObject[] respawnPosition_Team1;
 	public GameObject[] respawnPosition_Team2;
@@ -42,6 +43,9 @@ public class GameManager : MonoBehaviour {
 		menuButton = KeyCode.Escape;
 	}
 
+	void Start(){
+	}
+
 //	[Command]
 //	public void CmdRespawnPlayer (){
 //		RpcRespawnPlayer ();
@@ -49,15 +53,21 @@ public class GameManager : MonoBehaviour {
 
 //	[ClientRpc]
 	public void RespawnPlayer(){
+//		localPlayerStatsScript = localPlayer.GetComponent<PlayerStats> ();
+		localPlayer.GetComponent<PlayerLoadout> ().LoadParts ();
+		localPlayerStatsScript.StartStuff ();
 
-		Debug.Log ("Player Respawned");
+//		Debug.Log ("Player Respawned");
 
-		if(localPlayer.GetComponent<PlayerStats>().teamID == 1){
+
+//		do {
+		if (localPlayerStatsScript.teamID == 1) {
 			localPlayer.transform.position = respawnPosition_Team1 [Random.Range (0, respawnPosition_Team1.Length)].transform.position;
 		}
-		if(localPlayer.GetComponent<PlayerStats>().teamID == 2){
+		if (localPlayerStatsScript.teamID == 2) {
 			localPlayer.transform.position = respawnPosition_Team2 [Random.Range (0, respawnPosition_Team2.Length)].transform.position;
 		}
+//		} while (localPlayerStatsScript.teamID != 1 || localPlayerStatsScript.teamID != 2);
 
 		localPlayer.GetComponent<PlayerStats> ().CmdEnablePlayer (true);
 		localPlayer.GetComponent<PlayerStats> ().CmdResetStats ();
