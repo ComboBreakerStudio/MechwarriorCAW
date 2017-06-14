@@ -26,6 +26,14 @@ public class ThirdPersonCamera : NetworkBehaviour {
 	float pitch;
 
 	void Start() {
+		//Find Torso Object
+		Transform[] _childObject = GetComponentsInChildren<Transform>();
+		for(int i = 0; i < _childObject.Length; i++){
+			if(_childObject[i].name == "TorsoPivot"){
+				torsoObject = _childObject [i].gameObject;
+			}
+		}
+
 		if(!isLocalPlayer){
 			return;
 		}
@@ -34,6 +42,7 @@ public class ThirdPersonCamera : NetworkBehaviour {
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
+
 	}
 
 	void LateUpdate () {

@@ -17,7 +17,8 @@ public class WeaponSystemStats : MonoBehaviour {
 	//Shoot
 	[Header ("Shooting Method")]
 	public bool isRaycast;
-	public GameObject projectile, raycastVFX;
+	public GameObject projectile, raycastVFX, parentObject;
+	public Transform gunEnd;
 
 	public float fireRate,
 	attackRange;
@@ -37,6 +38,7 @@ public class WeaponSystemStats : MonoBehaviour {
 
 	void Start(){
 		ResetStats ();
+		parentObject = this.gameObject.transform.parent.gameObject;
 	}
 
 	void Update(){
@@ -63,9 +65,9 @@ public class WeaponSystemStats : MonoBehaviour {
 
 	//Stat Reset
 	public void ResetStats (){
-		canShoot = true;
+//		canShoot = true;
 		isOverHeat = false;
-		canCool = true;
+//		canCool = true;
 		currentAmmo = maxAmmo;
 	}
 

@@ -6,8 +6,9 @@ public class PlayerShoot : NetworkBehaviour {
 
 	private const string PLAYER_TAG = "Player";
 
+	public PlayerStats playerStatsScript;
 	public WeaponSystemStats leftWeapon, rightWeapon;
-	public Transform gunEnd;
+	public Transform leftGunEnd, rightGunEnd;
 	public GameObject leftHand;
 	float currentPosition;
 	float recoilPosition;
@@ -30,6 +31,22 @@ public class PlayerShoot : NetworkBehaviour {
 		}
 		currentPosition = leftHand.transform.localPosition.z;
 		recoilPosition = currentPosition - 0.25f;
+
+
+	}
+
+	public void SetWeapon(){
+		//Set weapon
+		playerStatsScript = GetComponent<PlayerStats>();
+		leftWeapon = playerStatsScript.leftWeaponSystemStats;
+		rightWeapon = playerStatsScript.rightWeaponSystemStats;
+
+		if(leftWeapon.gunEnd != null){
+			leftGunEnd = leftWeapon.gunEnd;
+		}
+		if(rightWeapon.gunEnd != null){
+			rightGunEnd = rightWeapon.gunEnd;
+		}
 	}
 	
 	// Update is called once per frame
@@ -44,12 +61,16 @@ public class PlayerShoot : NetworkBehaviour {
 		
 		//Attack
 		if (Input.GetButton ("Fire1")) {
-			Debug.Log ("PressedLeft");
-			WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
+			if(leftWeapon.canShoot){
+				Debug.Log ("PressedLeft");
+				WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
+			}
 		}
 		if(Input.GetButton ("Fire2")){
-			Debug.Log ("PressedRight");
-			WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
+			if(rightWeapon.canShoot){
+				Debug.Log ("PressedRight");
+				WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
+			}
 		}
 		if(leftHand.transform.localPosition.z != currentPosition)
 		{
@@ -59,7 +80,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 	void WeaponAttack (WeaponSystemStats weapon, string coroutineName){
 		if(weapon.canShoot){
-			if(leftWeapon.isRaycast){
+			if(weapon.isRaycast){
 				RaycastShoot(weapon);
 			}
 			weapon.canShoot = false;
@@ -87,7 +108,6 @@ public class PlayerShoot : NetworkBehaviour {
 		Debug.Log ("Shoot");
 		RaycastHit _hit;
 //		RpcShoot ();
-		Recoil ();
 
 		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask))
 		{
@@ -105,7 +125,7 @@ public class PlayerShoot : NetworkBehaviour {
 				Debug.Log("ApplyDamage");
 				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
 //				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
-			} 
+			}
 
 			if(weapon == leftWeapon){
 				CmdOnHit (_hit.point, true);
@@ -114,6 +134,8 @@ public class PlayerShoot : NetworkBehaviour {
 				CmdOnHit (_hit.point, false);
 			}
 		}
+
+		Recoil ();
 //		
 	}
 
@@ -148,7 +170,7 @@ public class PlayerShoot : NetworkBehaviour {
 	{
 
 		Debug.Log ("Spawn FX");
-		muzzleFlash.Play ();
+//		muzzleFlash.Play ();
 		if (isLeftWeapon) {
 			GameObject ga = Instantiate (leftWeapon.raycastVFX, hitPosition, Quaternion.identity);
 			NetworkServer.Spawn (ga);

@@ -6,8 +6,9 @@ public class PlayerStats : NetworkBehaviour {
 	[SyncVar]
 	public int teamID;
 
-
 	public MeshRenderer[] meshRenderer;
+//	public Transform[] _childObject;
+	public PlayerLoadout playerLoadoutScript;
 
 	[SyncVar]
 	public bool isAlive;
@@ -15,35 +16,53 @@ public class PlayerStats : NetworkBehaviour {
 	public GameObject explodeVFX;
 
 	[SerializeField]
-	private TorsoStats torsoStatsScript;
+	public TorsoStats torsoStatsScript;
 
 	[SerializeField]
-	private LegStats leftLegStats, rightLegStats;
+	public LegStats leftLegStats, rightLegStats;
 
 	[SerializeField]
-	private WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
+	public WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 	[SyncVar]
 	public int torso_Health, leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
 
+
 	//Test
 	public bool setColor;
 
+//	public void respawn(int id){
+//		GameManager.GM.RespawnPlayer ();
+//	}
+
 	void Start(){
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
+
+
+		//Add player to TeamManager
 		if (isServer) {
 			TeamManager.instance.AddPlayerToList (this.gameObject);
+			StartStuff ();
 		}
-		CmdResetStats ();
+
+		//		CmdResetStats ();
+
+
 		if(isLocalPlayer){
-//			Debug.Log ("AA");
+			//			Debug.Log ("AA");
 			GameManager.GM.localPlayer = this.gameObject;
-//			GameManager.GM.localPlayerStatsScript = GameManager.GM.localPlayer.GetComponent<PlayerStats>();
+			//			GameManager.GM.localPlayerStatsScript = GameManager.GM.localPlayer.GetComponent<PlayerStats>();
 			GameManager.GM.localPlayerStatsScript = this;
 			GameManager.GM.RespawnPlayer ();
 
-//			RpcRespawnPlayer ();
+
+			//			RpcRespawnPlayer ();
 		}
+		else if(!isLocalPlayer){
+			Debug.Log ("Not Local Player");
+		}
+
+
 
 		if(!setColor){
 
@@ -78,10 +97,13 @@ public class PlayerStats : NetworkBehaviour {
 			}
 
 //		}
-		if(!isLocalPlayer){
+//		if(!isLocalPlayer){
+//			return;
+//		}
+
+		if(!isAlive){
 			return;
 		}
-
 		//Test
 		if(isLocalPlayer){
 
@@ -93,14 +115,13 @@ public class PlayerStats : NetworkBehaviour {
 			}
 		}
 
-//		if(!isServer){
-//			return;
-//		}
-
-		if(!isAlive){
+		if(!isServer){
 			return;
 		}
-
+//		if(isServer){
+//			Debug.Log (this.gameObject.name);
+//		}
+//
 		if(torso_Health <= 0){
 			isAlive = false;
 			CmdEnablePlayer (false);
@@ -128,6 +149,85 @@ public class PlayerStats : NetworkBehaviour {
 			RpcDisableRightLeg (true);
 		}
 	}
+
+
+	public void StartStuff(){
+		//Set Stats Reference
+		//		playerLoadoutScript.LoadParts ();
+		playerLoadoutScript.Display();
+		bool setLeft = true;
+		for(int i = 0; i < playerLoadoutScript.enabledObject.Count; i++){
+			if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.torsoName){
+				torsoStatsScript = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+			}
+			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.leftWeaponSystemName && setLeft){
+				leftWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
+				setLeft = false;
+			}
+			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.rightWeaponSystemName && !setLeft){
+				rightWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
+			}
+			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.legName){
+				LegStats[] childgo = GetComponentsInChildren<LegStats> ();
+				for(int i2 = 0; i2 < childgo.Length; i2++){
+					if(childgo[i2].gameObject.name == "LeftLeg"){
+						leftLegStats = childgo [i2];
+					}
+					else if(childgo[i2].gameObject.name == "RightLeg"){
+						rightLegStats = childgo [i2];
+					}
+				}
+			}
+		}
+
+
+		GetComponent<PlayerShoot> ().SetWeapon();
+//		CmdResetStats ();
+		if(isServer){
+			RpcStartStuff ();
+		}
+	}
+
+	[ClientRpc]
+	public void RpcStartStuff(){
+		//Set Stats Reference
+		//		playerLoadoutScript.LoadParts ();
+		playerLoadoutScript.Display();
+		bool setLeft = true;
+		for(int i = 0; i < playerLoadoutScript.enabledObject.Count; i++){
+			if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.torsoName){
+				torsoStatsScript = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+			}
+			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.leftWeaponSystemName && setLeft){
+				leftWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
+				setLeft = false;
+			}
+			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.rightWeaponSystemName && !setLeft){
+				rightWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
+			}
+			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.legName){
+				LegStats[] childgo = GetComponentsInChildren<LegStats> ();
+				for(int i2 = 0; i2 < childgo.Length; i2++){
+					if(childgo[i2].gameObject.name == "LeftLeg"){
+						leftLegStats = childgo [i2];
+					}
+					else if(childgo[i2].gameObject.name == "RightLeg"){
+						rightLegStats = childgo [i2];
+					}
+				}
+			}
+		}
+
+
+		GetComponent<PlayerShoot> ().SetWeapon();
+		CmdResetStats ();
+	}
+
+
+	void OnDestroy(){
+		TeamManager.instance.RemovePlayer(this.gameObject, teamID);
+	}
+
 	[Command]
 	void CmdSetMatchKills(){
 		if(teamID == 1){
@@ -188,6 +288,7 @@ public class PlayerStats : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcRespawnPlayer(){
 		GameManager.GM.RespawnPlayer ();
+
 	}
 
 	// 0 = torso, 1 = leftWeapon, 2 = RightWeapon, 3 = LeftLeg, 4 = RightLeg
