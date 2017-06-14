@@ -8,13 +8,22 @@ public class PlayerUI : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject pauseMenu;
+	private GameObject minimap;
+	private Image heatBar;
+	private Text leftAmmo;
+	private Text rightAmmo;
 
-	[Client]
-	GameObject minimap;
+	bool isLocalPlayer;
 
 	// Use this for initialization
 	void Start () {
 		PauseMenu.IsOn = false;
+		isLocalPlayer = true;
+		leftAmmo = GetComponent<Text> ();
+		Debug.Log ("Found Left Ammo?");
+		//rightAmmo = GameObject.Find ("RightAmmo").GetComponentInChildren<Text> ();
+		leftAmmo.text = "8";
+		heatBar.fillAmount = GetComponent<WeaponSystemStats> ().currentHeat;
 	}
 	
 	// Update is called once per frame
@@ -29,4 +38,13 @@ public class PlayerUI : MonoBehaviour {
 		pauseMenu.SetActive (!pauseMenu.activeSelf);
 		PauseMenu.IsOn = pauseMenu.activeSelf;
 	}
+
+	/*[Client]
+	void mapDisplay ()
+	{
+		if(!isLocalPlayer)
+		{
+			//set minimap something idk
+		}
+	}*/
 }
