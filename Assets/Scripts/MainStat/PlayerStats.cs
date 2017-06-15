@@ -68,7 +68,7 @@ public class PlayerStats : NetworkBehaviour {
 		if(!setColor){
 
 			Debug.Log ("Set Team Color");
-			MeshRenderer[] meshRenderer = GetComponentsInChildren<MeshRenderer> ();
+			//MeshRenderer[] meshRenderer = GetComponentsInChildren<MeshRenderer> ();
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
