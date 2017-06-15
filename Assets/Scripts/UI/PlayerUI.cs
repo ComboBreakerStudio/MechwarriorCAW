@@ -8,22 +8,39 @@ public class PlayerUI : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject pauseMenu;
+
+	[SerializeField]
 	private GameObject minimap;
+
+	[SerializeField]
 	private Image heatBar;
-	private Text leftAmmo;
-	private Text rightAmmo;
+
+	[SerializeField]
+	private GameObject Health;
 
 	bool isLocalPlayer;
+
+	private GameObject HeadHealth;
+	private GameObject TorsoHealth;
+	private GameObject LeftTorsoHealth;
+	private GameObject LeftArmHealth;
+	private GameObject LeftLegHealth;
+	private GameObject RightTorsoHealth;
+	private GameObject RightArmHealth;
+	private GameObject RightLegHealth;
 
 	// Use this for initialization
 	void Start () {
 		PauseMenu.IsOn = false;
 		isLocalPlayer = true;
-		leftAmmo = GetComponent<Text> ();
+		//heatBar = 
 		Debug.Log ("Found Left Ammo?");
 		//rightAmmo = GameObject.Find ("RightAmmo").GetComponentInChildren<Text> ();
-		leftAmmo.text = "8";
-		heatBar.fillAmount = GetComponent<WeaponSystemStats> ().currentHeat;
+		//heatBar.fillAmount = GetComponent<WeaponSystemStats> ().currentHeat;
+		heatBar.fillAmount = 0;
+		foreach (Transform img in Health.transform) {
+			img.gameObject.SetActive (false);
+		}
 	}
 	
 	// Update is called once per frame
@@ -39,12 +56,11 @@ public class PlayerUI : MonoBehaviour {
 		PauseMenu.IsOn = pauseMenu.activeSelf;
 	}
 
-	/*[Client]
+	//[Client]
 	void mapDisplay ()
 	{
-		if(!isLocalPlayer)
-		{
-			//set minimap something idk
+		if (isLocalPlayer == true) {
+			minimap.SetActive (true);
 		}
-	}*/
+	}
 }
