@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 
 	private bool onMenu;
 
+	public PlayerStats playerStatsScript;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -24,14 +26,18 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetKey (GameManager.GM.forward))
-			transform.Translate(Vector3.forward * playerMoveSpeed * Time.deltaTime);
-		else if (Input.GetKey (GameManager.GM.backward))
-			transform.Translate(Vector3.back * playerMoveSpeed * Time.deltaTime);
-		if (Input.GetKey (GameManager.GM.left)) 
-			transform.Rotate (0,-playerRotateSpeed * Time.deltaTime,0);
-		else if(Input.GetKey(GameManager.GM.right))
-			transform.Rotate (0,playerRotateSpeed * Time.deltaTime,0);
+		if(playerStatsScript.canMove){
+			//Forward and backward
+			if (Input.GetKey (GameManager.GM.forward))
+				transform.Translate(Vector3.forward * playerMoveSpeed * Time.deltaTime);
+			else if (Input.GetKey (GameManager.GM.backward))
+				transform.Translate(Vector3.back * playerMoveSpeed * Time.deltaTime);
+			//Rotate
+			if (Input.GetKey (GameManager.GM.left)) 
+				transform.Rotate (0,-playerRotateSpeed * Time.deltaTime,0);
+			else if(Input.GetKey(GameManager.GM.right))
+				transform.Rotate (0,playerRotateSpeed * Time.deltaTime,0);
+		}
 
 		if(Input.GetKeyDown(GameManager.GM.menuButton)){
 			if (onMenu) {

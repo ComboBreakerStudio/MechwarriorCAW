@@ -15,19 +15,21 @@ public class PlayerStats : NetworkBehaviour {
 
 	public GameObject explodeVFX;
 
-	[SerializeField]
+//	[SerializeField]
 	public TorsoStats frontTorsoStats, backTorsoStats, leftTorsoStats, rightTorsoStats;
 
-	[SerializeField]
+//	[SerializeField]
 	public LegStats leftLegStats, rightLegStats;
 
-	[SerializeField]
+//	[SerializeField]
 	public WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 	[SyncVar]
 	public int frontTorso_Health, backTorso_Health, leftTorso_Health, rightTorso_Health,
 	leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
 
+	[SyncVar]
+	public bool canMove;
 
 	//Test
 	public bool setColor;
@@ -123,6 +125,11 @@ public class PlayerStats : NetworkBehaviour {
 //			Debug.Log (this.gameObject.name);
 //		}
 //
+
+		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+			canMove = false;
+		}
+
 		if(frontTorso_Health <= 0 || backTorso_Health <=0){
 			isAlive = false;
 			CmdEnablePlayer (false);
@@ -151,7 +158,6 @@ public class PlayerStats : NetworkBehaviour {
 		}
 	}
 
-
 	public void StartStuff(){
 		//Set Stats Reference
 		//		playerLoadoutScript.LoadParts ();
@@ -159,7 +165,26 @@ public class PlayerStats : NetworkBehaviour {
 		bool setLeft = true;
 		for(int i = 0; i < playerLoadoutScript.enabledObject.Count; i++){
 			if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.torsoName){
-				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+
+//				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+
+				TorsoStats[] childTorsoStats = playerLoadoutScript.enabledObject [i].GetComponentsInChildren<TorsoStats> ();
+
+				for(int i2 = 0; i2 < childTorsoStats.Length; i2++){
+					if(childTorsoStats[i2].gameObject.name == "FrontTorso"){
+//						Debug.Log (childTorsoStats[i2].gameObject.name);
+						frontTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "BackTorso"){
+						backTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "LeftTorso"){
+						leftTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "RightTorso"){
+						rightTorsoStats = childTorsoStats [i2];
+					}
+				}
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.leftWeaponSystemName && setLeft){
 				leftWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
@@ -197,7 +222,25 @@ public class PlayerStats : NetworkBehaviour {
 		bool setLeft = true;
 		for(int i = 0; i < playerLoadoutScript.enabledObject.Count; i++){
 			if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.torsoName){
-				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+//				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+
+				TorsoStats[] childTorsoStats = playerLoadoutScript.enabledObject [i].GetComponentsInChildren<TorsoStats> ();
+
+				for(int i2 = 0; i2 < childTorsoStats.Length; i2++){
+					if(childTorsoStats[i2].gameObject.name == "FrontTorso"){
+//						Debug.Log (childTorsoStats[i2].gameObject.name);
+						frontTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "BackTorso"){
+						backTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "LeftTorso"){
+						leftTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "RightTorso"){
+						rightTorsoStats = childTorsoStats [i2];
+					}
+				}
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.leftWeaponSystemName && setLeft){
 				leftWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
@@ -261,6 +304,7 @@ public class PlayerStats : NetworkBehaviour {
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
 		isAlive = true;
+		canMove = true;
 
 		//Enable Parts
 		RpcDisableLeftWeaponSystem(false);
