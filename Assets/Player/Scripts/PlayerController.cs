@@ -24,16 +24,16 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetKey (GameManager.GM.forward))
+		if (Input.GetKey (KeybindManager.KBM.Forward))
 			transform.Translate(Vector3.forward * playerMoveSpeed * Time.deltaTime);
-		else if (Input.GetKey (GameManager.GM.backward))
+		else if (Input.GetKey (KeybindManager.KBM.Backward))
 			transform.Translate(Vector3.back * playerMoveSpeed * Time.deltaTime);
-		if (Input.GetKey (GameManager.GM.left)) 
+		if (Input.GetKey (KeybindManager.KBM.Left)) 
 			transform.Rotate (0,-playerRotateSpeed * Time.deltaTime,0);
-		else if(Input.GetKey(GameManager.GM.right))
+		else if(Input.GetKey(KeybindManager.KBM.Right))
 			transform.Rotate (0,playerRotateSpeed * Time.deltaTime,0);
 
-		if(Input.GetKeyDown(GameManager.GM.menuButton)){
+		if(Input.GetKeyDown(KeybindManager.KBM.menuButton)){
 			if (onMenu) {
 				Cursor.lockState = CursorLockMode.Locked;
 				Cursor.visible = false;
