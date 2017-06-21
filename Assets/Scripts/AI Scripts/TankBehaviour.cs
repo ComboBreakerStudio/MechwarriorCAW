@@ -29,86 +29,86 @@ public class TankBehaviour : NetworkBehaviour {
     [Header("AI wandering Range")]
     public float timer;
     public float wanderRadius;
-    float wanderTimer;
+    public float wanderTimer;
 
 
 
     [Header("AI Shoot")]
     public Transform firingPoint;
     public GameObject bulletPrefab;
+    public float minimumRange;
 
-    private int destPoint = 0;
 
-    float fireInterval = 2.0f;
+
+
+    [Header("Update Time")]
+    public float timeInterval;
+    public float fireInterval;
 
 
 	// Use this for initialization
     public override void OnStartServer()
     {
         //Debug.Log("SERVER STARTED");
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+
 
         StartCoroutine(AITankBehaviour());
 	}
 
+	/* For Debugging Purpose only
     void Update()
     {
         Debug.Log(Distance());
     }
+	*/
 
     IEnumerator AITankBehaviour()
     {
         while (true)
         {
-            
-
-
-            //Debug.Log("player " + Distance().ToString() + "Target " + targetposition);
-            //I Check the distance and the position of the target to start firing
-            if (behaviour == AIBehaviour.InSight)
-            {
-                agent.Stop();
-                transform.LookAt(targetposition.position);
-
-                if (Distance() > 40f && visibleTarget.Contains(targetposition))
-                {
-                    fireInterval -= 0.45f;
-                    if (fireInterval <= 0f)
-                    {
-                        CmdSpawn();
-                        fireInterval = 2.0f;
-                    }
-                }
-                else if (Distance() < 40f && Distance() > 0f)
-                {
-                    Vector3 Position = targetposition.transform.position.normalized * -3f;
-                    agent.destination = Position;
-                }
-                else
-                {
-                    behaviour = AIBehaviour.Wandering;
-                }
-            }
-            else if (behaviour == AIBehaviour.Wandering)
-            {
-                agent.Resume();
-
-                wanderTimer += Time.deltaTime;
-                if (wanderTimer >= timer)
-                {
-                    Vector3 newPos = RandomWandering(transform.position, wanderRadius, -1);
-                    agent.SetDestination(newPos);
-                }
-
-            }
-            
             FindVisibleTarget();
 
 
-            yield return new WaitForSeconds(0.25f);
+            //Debug.Log("player " + Distance().ToString() + "Target " + targetposition);
+
+
+            //I Check the distance and the position of the target to start firing
+            if (check(targetposition) != null)
+            {
+                Firing();
+            }
+            else if (check(targetposition) == null)
+            {
+                Wandering();
+            }
+
+            yield return new WaitForSeconds(timeInterval);
         }
     }
 
+    //I Checking to change behavior
+    Transform check(Transform target)
+    {
+        return target;
+    }
+
+    //I Wandering
+    void Wandering()
+    {
+        behaviour = AIBehaviour.Wandering;
+
+        wanderTimer += Time.deltaTime;
+        if (wanderTimer >= timer)
+        {
+            Vector3 newPos = RandomWandering(transform.position, wanderRadius, -1);
+            agent.SetDestination(newPos);
+            wanderTimer = 0f;
+        }
+    }
+
+
+	//I For random Wandering by using navmesh sphere
     public static Vector3 RandomWandering(Vector3 origin, float dist, int layermask)
     {
         Vector3 randomDirection = Random.insideUnitSphere * dist;
@@ -122,10 +122,44 @@ public class TankBehaviour : NetworkBehaviour {
         return navHit.position;
     }
 
+
+    //I AI Insight
+    void Firing()
+    {
+        behaviour = AIBehaviour.InSight;
+
+        Vector3 direction = targetposition.position;
+        direction.y = 0;
+
+        transform.LookAt(direction);
+
+        if (Distance() > minimumRange)
+        {
+            fireInterval -= 0.45f;
+            if (fireInterval <= 0f)
+            {
+                //Debug.Log("Firing");
+                //CmdSpawn();
+                fireInterval = 2.0f;
+            }
+        }
+        else if (Distance() < minimumRange && Distance() > minimumRange)
+        {
+            Vector3 Position = targetposition.transform.position.normalized * -20f;
+            agent.destination = Position;
+        }
+        else
+        {
+            behaviour = AIBehaviour.Wandering;
+        }
+    }
+
     //I Checking the visible target in the list
     void FindVisibleTarget()
     {
         visibleTarget.Clear();
+        targetposition = null;
+
 
         Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -141,22 +175,15 @@ public class TankBehaviour : NetworkBehaviour {
                 {
                     visibleTarget.Add(targetposition);
 
+
+                    /* For now I comment this part since I don't know what it does but it give me errors
 					for (int e  = 0; e < visibleTarget.Count; e++){
 						if(visibleTarget[e].GetComponent<PlayerStats>().teamID == statsScript.teamID){
 							visibleTarget.Remove (visibleTarget [e]);
 						}
 					}
+                    */
 
-					if (visibleTarget.Contains(targetposition))
-                    {
-                        behaviour = AIBehaviour.InSight;
-
-                    }
-                    else if(!visibleTarget.Contains(targetposition))
-                    {
-                        targetposition = null;
-                        behaviour = AIBehaviour.Wandering;
-                    }
                 }
             }
         }
@@ -173,12 +200,15 @@ public class TankBehaviour : NetworkBehaviour {
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 
+
     //I Checking Distance
     private float Distance()
     {
           return Vector3.Distance(this.transform.position, targetposition.position);
     }
 
+
+    //I I comment this part for now since this is for testing part
     [Command]
     void CmdSpawn()
     {
