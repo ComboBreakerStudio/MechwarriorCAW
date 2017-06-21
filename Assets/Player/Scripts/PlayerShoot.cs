@@ -64,7 +64,7 @@ public class PlayerShoot : NetworkBehaviour {
 		
 		//Attack
 		if (Input.GetButton ("Fire1")) {
-			if(leftWeapon.canShoot){
+			if(leftWeapon.canShoot && leftWeapon.gameObject.activeSelf){
 				Debug.Log ("PressedLeft");
 				WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
 				//if it's melee
@@ -74,7 +74,7 @@ public class PlayerShoot : NetworkBehaviour {
 			}
 		}
 		if(Input.GetButton ("Fire2")){
-			if(rightWeapon.canShoot){
+			if(rightWeapon.canShoot && rightWeapon.gameObject.activeSelf){
 				Debug.Log ("PressedRight");
 				WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
 				//if it's melee
@@ -156,7 +156,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 				CmdOnHit (weapon.gunEnd.transform.position, true);
 			} else if (weapon == rightWeapon) {
-				CmdOnHit (weapon.gunEnd.transform.position, true);
+				CmdOnHit (weapon.gunEnd.transform.position, false);
 			}
 		}
 	}
@@ -188,6 +188,7 @@ public class PlayerShoot : NetworkBehaviour {
 			GameObject ga = Instantiate (leftWeapon.projectile);
 			ga.GetComponent<BulletStats> ().playerName = playerName;
 			ga.GetComponent<BulletStats> ().damage = dmg;
+			ga.GetComponent<BulletStats> ().canDamage = true;
 			ga.transform.position = shootPosition;
 //			ga.transform.rotation = shootRotation;
 			ga.transform.LookAt(lookPosition);
@@ -198,6 +199,7 @@ public class PlayerShoot : NetworkBehaviour {
 			GameObject ga = Instantiate (rightWeapon.projectile);
 			ga.GetComponent<BulletStats> ().playerName = playerName;
 			ga.GetComponent<BulletStats> ().damage = dmg;
+			ga.GetComponent<BulletStats> ().canDamage = true;
 			ga.transform.position = shootPosition;
 //			ga.transform.rotation = shootRotation;
 			ga.transform.LookAt(lookPosition);
@@ -260,8 +262,8 @@ public class PlayerShoot : NetworkBehaviour {
 		}
 	}
 
-	[Command]
-	public void CmdDebug(){
-		Debug.Log("Hii " + this.gameObject.name);
-	}
+//	[Command]
+//	public void CmdDebug(){
+//		Debug.Log("Hii " + this.gameObject.name);
+//	}
 }

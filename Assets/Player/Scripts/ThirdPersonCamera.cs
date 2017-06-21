@@ -63,14 +63,19 @@ public class ThirdPersonCamera : NetworkBehaviour {
 			pitch = Mathf.Clamp (pitch, pitchMinMax.x, pitchMinMax.y);
 
 			currentRotation = Vector3.SmoothDamp (currentRotation, new Vector3 (pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
-			cam.transform.localEulerAngles = currentRotation;
 
+			cam.transform.localEulerAngles = currentRotation;
 			if(!isMelee){
-				torsoObject.transform.localEulerAngles = new Vector3 (torsoObject.transform.eulerAngles.x, cam.transform.localEulerAngles.y, torsoObject.transform.eulerAngles.z );
+
+				torsoObject.transform.localEulerAngles = new Vector3 (0, cam.transform.localEulerAngles.y, 0 );
+//
+//				leftWeaponPivot.transform.localEulerAngles = new Vector3 (cam.transform.eulerAngles.x, cam.transform.localEulerAngles.y, cam.transform.eulerAngles.z );
+//				rightWeaponPivot.transform.localEulerAngles = new Vector3 (cam.transform.eulerAngles.x, cam.transform.localEulerAngles.y, cam.transform.eulerAngles.z );
 			}
 
-			leftWeaponPivot.transform.localEulerAngles = new Vector3 (cam.transform.eulerAngles.x, cam.transform.localEulerAngles.y, cam.transform.eulerAngles.z );
-			rightWeaponPivot.transform.localEulerAngles = new Vector3 (cam.transform.eulerAngles.x, cam.transform.localEulerAngles.y, cam.transform.eulerAngles.z );
+
+			leftWeaponPivot.transform.localEulerAngles = currentRotation;
+			rightWeaponPivot.transform.localEulerAngles = currentRotation;
 		}
 	}
 

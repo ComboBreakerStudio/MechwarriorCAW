@@ -156,6 +156,13 @@ public class PlayerStats : NetworkBehaviour {
 		}
 		//End of Death
 
+		if(leftTorso_Health <= 0){
+			RpcDisableLeftTorso (true);
+		}
+		if(rightTorso_Health <= 0){
+			RpcDisableRightTorso (true);
+		}
+
 		if(leftWeaponSystem_Health <= 0 || leftTorso_Health <=0){
 			RpcDisableLeftWeaponSystem (true);
 		}
@@ -347,6 +354,16 @@ public class PlayerStats : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcDisableRightLeg(bool t){
 		rightLegStats.gameObject.SetActive (!t);
+	}
+
+	[ClientRpc]
+	public void RpcDisableLeftTorso(bool t){
+		leftTorsoStats.gameObject.SetActive (!t);
+	}
+
+	[ClientRpc]
+	public void RpcDisableRightTorso(bool t){
+		rightTorsoStats.gameObject.SetActive (!t);
 	}
 
 	[ClientRpc]
