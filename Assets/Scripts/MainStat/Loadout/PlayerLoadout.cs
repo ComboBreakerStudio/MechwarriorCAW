@@ -21,7 +21,7 @@ public class PlayerLoadout : NetworkBehaviour {
 		for(int i = 0; i < playerChild.Length; i++){
 			//Set TorsoObjects
 			if(playerChild[i].name == "TorsoPivot"){
-				TorsoStats[] torsoObjects = playerChild [i].GetComponentsInChildren<TorsoStats> ();
+				Torso[] torsoObjects = playerChild [i].GetComponentsInChildren<Torso> ();
 				for(int i2 = 0; i2 < torsoObjects.Length; i2++){
 					torsoParts.Add (torsoObjects[i2].gameObject);
 				}

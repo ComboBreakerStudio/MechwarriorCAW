@@ -29,6 +29,8 @@ public class PlayerUI : MonoBehaviour {
 	private GameObject RightArmHealth;
 	private GameObject RightLegHealth;
 
+	public PlayerStats playerStatScript;
+
 	// Use this for initialization
 	void Start () {
 		PauseMenu.IsOn = false;
@@ -47,6 +49,58 @@ public class PlayerUI : MonoBehaviour {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			TogglePauseMenu ();
+		}
+
+		if(playerStatScript != null){
+			//Front
+			if (playerStatScript.frontTorso_Health <= 0) {
+				TorsoHealth.SetActive (false);
+			} 
+			else {
+				TorsoHealth.SetActive (true);
+			}
+			//left torso
+			if (playerStatScript.leftTorso_Health <= 0) {
+				LeftTorsoHealth.SetActive (false);
+			} 
+			else {
+				LeftTorsoHealth.SetActive (true);
+			}
+			//Right Torso
+			if (playerStatScript.rightTorso_Health <= 0) {
+				RightTorsoHealth.SetActive (false);
+			} 
+			else {
+				RightTorsoHealth.SetActive (true);
+			}
+			//Left Weapon
+			if (playerStatScript.leftWeaponSystem_Health <= 0) {
+				LeftArmHealth.SetActive (false);
+			} 
+			else {
+				LeftArmHealth.SetActive (true);
+			}
+			//Right Weapon
+			if (playerStatScript.rightWeaponSystem_Health <= 0) {
+				RightArmHealth.SetActive (false);
+			} 
+			else {
+				RightArmHealth.SetActive (true);
+			}
+			//Left Leg
+			if (playerStatScript.leftLeg_Health <= 0) {
+				LeftLegHealth.SetActive (false);
+			} 
+			else {
+				LeftLegHealth.SetActive (true);
+			}
+			//Right Leg
+			if (playerStatScript.rightTorso_Health <= 0) {
+				RightLegHealth.SetActive (false);
+			} 
+			else {
+				RightLegHealth.SetActive (true);
+			}
 		}
 	}
 

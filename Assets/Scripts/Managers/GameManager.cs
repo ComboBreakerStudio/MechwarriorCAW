@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] respawnPosition_Team1;
 	public GameObject[] respawnPosition_Team2;
 
+	public PlayerUI playerUIScript;
+
 	void Awake()
 	{
 		if (GM == null) 
@@ -54,8 +56,10 @@ public class GameManager : MonoBehaviour {
 //	[ClientRpc]
 	public void RespawnPlayer(){
 //		localPlayerStatsScript = localPlayer.GetComponent<PlayerStats> ();
+
 		localPlayer.GetComponent<PlayerLoadout> ().LoadParts ();
 		localPlayerStatsScript.StartStuff ();
+//		playerUIScript.playerStatScript = localPlayerStatsScript;
 
 //		Debug.Log ("Player Respawned");
 
