@@ -125,7 +125,7 @@ public class PlayerStats : NetworkBehaviour {
 //			Debug.Log (this.gameObject.name);
 //		}
 //
-
+		//Death
 		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
 			canMove = false;
 		}
@@ -133,13 +133,28 @@ public class PlayerStats : NetworkBehaviour {
 		if(frontTorso_Health <= 0 || backTorso_Health <=0){
 			isAlive = false;
 			CmdEnablePlayer (false);
-			if(isLocalPlayer){
+//			if(isLocalPlayer){
 				CmdSetMatchKills ();
-			}
+//			}
 			CmdResetStats ();
 			CmdEnablePlayer (true);
-			GameManager.GM.RespawnPlayer ();
+			RpcRespawnPlayer ();
+//			if(isLocalPlayer){
+//				GameManager.GM.RespawnPlayer ();
+//			}
 		}
+
+		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+			isAlive = false;
+			CmdEnablePlayer (false);
+			//			if(isLocalPlayer){
+			CmdSetMatchKills ();
+			//			}
+			CmdResetStats ();
+			CmdEnablePlayer (true);
+			RpcRespawnPlayer ();
+		}
+		//End of Death
 
 		if(leftWeaponSystem_Health <= 0 || leftTorso_Health <=0){
 			RpcDisableLeftWeaponSystem (true);
@@ -149,13 +164,13 @@ public class PlayerStats : NetworkBehaviour {
 			RpcDisableRightWeaponSystem (true);
 		}
 
-		if(leftLeg_Health <= 0){
-			RpcDisableLeftLeg (true);
-		}
-
-		if(rightLeg_Health <= 0){
-			RpcDisableRightLeg (true);
-		}
+//		if(leftLeg_Health <= 0){
+//			RpcDisableLeftLeg (true);
+//		}
+//
+//		if(rightLeg_Health <= 0){
+//			RpcDisableRightLeg (true);
+//		}
 	}
 
 	public void StartStuff(){
@@ -278,8 +293,9 @@ public class PlayerStats : NetworkBehaviour {
 			MatchManager.instance.team1DeathCount += 1;
 		}
 		if(teamID == 2){
-			MatchManager.instance.team2DeathCount += 2;
+			MatchManager.instance.team2DeathCount += 1;
 		}
+		Debug.Log ("Match kills");
 	}
 
 	//Disable in the Server
@@ -335,7 +351,9 @@ public class PlayerStats : NetworkBehaviour {
 
 	[ClientRpc]
 	public void RpcRespawnPlayer(){
-		GameManager.GM.RespawnPlayer ();
+		if(GameManager.GM.localPlayer == this.gameObject){
+			GameManager.GM.RespawnPlayer ();
+		}
 
 	}
 
@@ -367,6 +385,4 @@ public class PlayerStats : NetworkBehaviour {
 			rightLeg_Health -= dmg;
 		}
 	}
-
-
 }

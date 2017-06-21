@@ -3,21 +3,24 @@
 public class PlayerController : MonoBehaviour {
 	
 	[SerializeField]
-	private float playerMoveSpeed = 10.0f;
+	private float playerMoveSpeed, playerCurrentSpeed, playerMaxSpeed, decelerationRate;
 	[SerializeField]
-	private float playerRotateSpeed = 10.0f;
+	private float playerRotateSpeed;
 	[SerializeField]
 	private Rigidbody rb;
 
 	private bool onMenu;
 
 	public PlayerStats playerStatsScript;
+	public PlayerUI playerUIScript;
 
 	// Use this for initialization
 	void Start () 
 	{
 		onMenu = false;
 		rb = GetComponent<Rigidbody> ();
+
+		playerUIScript = GameObject.Find ("PlayerUI_Canvas").GetComponent<PlayerUI>();
 
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
@@ -28,15 +31,44 @@ public class PlayerController : MonoBehaviour {
 	{
 		if(playerStatsScript.canMove){
 			//Forward and backward
-			if (Input.GetKey (GameManager.GM.forward))
-				transform.Translate(Vector3.forward * playerMoveSpeed * Time.deltaTime);
-			else if (Input.GetKey (GameManager.GM.backward))
-				transform.Translate(Vector3.back * playerMoveSpeed * Time.deltaTime);
+			if (Input.GetKey (GameManager.GM.forward)) {
+				playerCurrentSpeed += playerMoveSpeed * Time.deltaTime;
+				if(playerCurrentSpeed >= playerMaxSpeed){
+					playerCurrentSpeed = playerMaxSpeed;
+				}
+				ShakeScreen ();
+			} 
+			else if (Input.GetKey (GameManager.GM.backward)) {
+				playerCurrentSpeed -= playerMoveSpeed * Time.deltaTime;
+				if(playerCurrentSpeed <= -playerMaxSpeed/2){
+					playerCurrentSpeed = -playerMaxSpeed/2;
+				}
+				ShakeScreen ();
+			}
+			else if(!Input.GetKey(GameManager.GM.forward) && !Input.GetKey(GameManager.GM.backward)){
+
+				if(playerCurrentSpeed >= 0f){
+					playerCurrentSpeed -= decelerationRate * Time.deltaTime;
+					if(playerCurrentSpeed <= 0){
+						playerCurrentSpeed = 0;
+					}
+				}
+				else if(playerCurrentSpeed <= 0f){
+					playerCurrentSpeed += decelerationRate * Time.deltaTime;
+					if(playerCurrentSpeed >= 0){
+						playerCurrentSpeed = 0;
+					}
+				}
+			}
 			//Rotate
-			if (Input.GetKey (GameManager.GM.left)) 
+			if (Input.GetKey (GameManager.GM.left)) {
 				transform.Rotate (0,-playerRotateSpeed * Time.deltaTime,0);
-			else if(Input.GetKey(GameManager.GM.right))
+				ShakeScreen ();
+			}
+			else if(Input.GetKey(GameManager.GM.right)){
 				transform.Rotate (0,playerRotateSpeed * Time.deltaTime,0);
+				ShakeScreen ();
+			}
 		}
 
 		if(Input.GetKeyDown(GameManager.GM.menuButton)){
@@ -51,5 +83,11 @@ public class PlayerController : MonoBehaviour {
 				onMenu = !onMenu;
 			}
 		}
+
+		transform.Translate (Vector3.forward * playerCurrentSpeed * Time.deltaTime);
+	}
+
+	void ShakeScreen(){
+		playerUIScript.shakeScreen ();
 	}
 }

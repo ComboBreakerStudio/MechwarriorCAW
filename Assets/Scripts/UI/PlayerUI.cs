@@ -31,8 +31,14 @@ public class PlayerUI : MonoBehaviour {
 
 	public PlayerStats playerStatScript;
 
+	//ShakeScreen
+	public bool canShakeScreen;
+	public float shakeScreenTime;
+	public float shakePower;
+
 	// Use this for initialization
 	void Start () {
+		canShakeScreen = true;
 		PauseMenu.IsOn = false;
 		isLocalPlayer = true;
 		//heatBar = 
@@ -116,5 +122,29 @@ public class PlayerUI : MonoBehaviour {
 		if (isLocalPlayer == true) {
 			minimap.SetActive (true);
 		}
+	}
+
+	public void shakeScreen(){
+		if(canShakeScreen){
+			Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+			StartCoroutine ("ShakeScreenUITimer", 0.05f);
+			canShakeScreen = false;
+		}
+	}
+
+	IEnumerator ShakeScreenUITimer(float t){
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y - shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y - shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y - shakePower);
+
+		yield return new WaitForSeconds (shakeScreenTime);
+		canShakeScreen = true;
 	}
 }

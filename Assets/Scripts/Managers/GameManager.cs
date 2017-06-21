@@ -19,11 +19,13 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject localPlayer;
 	public PlayerStats localPlayerStatsScript;
+	public PlayerShoot localPlayerShootScript;
 
 	public GameObject[] respawnPosition_Team1;
 	public GameObject[] respawnPosition_Team2;
 
 	public PlayerUI playerUIScript;
+
 
 	void Awake()
 	{
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour {
 
 		localPlayer.GetComponent<PlayerLoadout> ().LoadParts ();
 		localPlayerStatsScript.StartStuff ();
+		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
 //		playerUIScript.playerStatScript = localPlayerStatsScript;
 
 //		Debug.Log ("Player Respawned");

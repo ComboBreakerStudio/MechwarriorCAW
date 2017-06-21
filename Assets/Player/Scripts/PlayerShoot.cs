@@ -9,12 +9,15 @@ public class PlayerShoot : NetworkBehaviour {
 	public PlayerStats playerStatsScript;
 	public WeaponSystemStats leftWeapon, rightWeapon;
 	public Transform leftGunEnd, rightGunEnd;
-	public GameObject leftHand;
-	float currentPosition;
-	float recoilPosition;
-	public ParticleSystem muzzleFlash;
-	public GameObject hitEffect;
+	public Transform target;
+//	public GameObject leftHand;
+//	float currentPosition;
+//	float recoilPosition;
 	private WaitForSeconds shotDuration = new WaitForSeconds (.5f);
+
+	public Transform camObject;
+
+	public ThirdPersonCamera camScript;
 
 	[SerializeField]
 	private Camera cam;
@@ -29,8 +32,8 @@ public class PlayerShoot : NetworkBehaviour {
 			Debug.LogError ("PlayerShoot: No camera reference!");
 			this.enabled = false;
 		}
-		currentPosition = leftHand.transform.localPosition.z;
-		recoilPosition = currentPosition - 0.25f;
+//		currentPosition = leftHand.transform.localPosition.z;
+//		recoilPosition = currentPosition - 0.25f;
 
 
 	}
@@ -64,24 +67,40 @@ public class PlayerShoot : NetworkBehaviour {
 			if(leftWeapon.canShoot){
 				Debug.Log ("PressedLeft");
 				WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
+				//if it's melee
+				if(leftWeapon.isMelee){
+					camScript.isMelee = true;
+				}
 			}
 		}
 		if(Input.GetButton ("Fire2")){
 			if(rightWeapon.canShoot){
 				Debug.Log ("PressedRight");
 				WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
+				//if it's melee
+				if(rightWeapon.isMelee){
+					camScript.isMelee = true;
+					Debug.Log ("Melee");
+				}
 			}
 		}
-		if(leftHand.transform.localPosition.z != currentPosition)
-		{
-			leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, currentPosition), 0.1f);
+		//Key Up
+		if(!Input.GetButton("Fire1") && !Input.GetButton("Fire2")){
+			camScript.isMelee = false;
 		}
+//		if(leftHand.transform.localPosition.z != currentPosition)
+//		{
+//			leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, currentPosition), 0.1f);
+//		}
 	}
 
 	void WeaponAttack (WeaponSystemStats weapon, string coroutineName){
 		if(weapon.canShoot){
 			if(weapon.isRaycast){
 				RaycastShoot(weapon);
+			}
+			else if(!weapon.isRaycast){
+				ProjectileShoot (weapon);
 			}
 			weapon.canShoot = false;
 			StartCoroutine(coroutineName,weapon.fireRate);
@@ -98,10 +117,10 @@ public class PlayerShoot : NetworkBehaviour {
 		rightWeapon.canShoot = true;
 	}
 
-	void Recoil()
-	{
-		leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, recoilPosition), 0.5f);
-	}
+//	void Recoil()
+//	{
+//		leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, recoilPosition), 0.5f);
+//	}
 
 //	[Command]
 	public void RaycastShoot(WeaponSystemStats weapon){
@@ -109,8 +128,7 @@ public class PlayerShoot : NetworkBehaviour {
 		RaycastHit _hit;
 //		RpcShoot ();
 
-		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask))
-		{
+		if (Physics.Raycast (weapon.gunEnd.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask)) {
 			Debug.Log (_hit.collider.name);
 //			if (_hit.collider.tag == PLAYER_TAG)
 //			{
@@ -118,29 +136,97 @@ public class PlayerShoot : NetworkBehaviour {
 //			}
 //			CmdOnHit(_hit.point, _hit.normal);
 
-			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage>();
+			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage> ();
 
 			if (dm != null) {
 //				dm.ApplyDamage ((int)weapon.damage);
-				Debug.Log("ApplyDamage");
+				Debug.Log ("ApplyDamage");
 				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
 //				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
 			}
 
-			if(weapon == leftWeapon){
+			if (weapon == leftWeapon) {
 				CmdOnHit (_hit.point, true);
-			}
-			else if(weapon == rightWeapon){
+			} else if (weapon == rightWeapon) {
 				CmdOnHit (_hit.point, false);
 			}
 		}
+		else {
+			if (weapon == leftWeapon) {
 
-		Recoil ();
-//		
+				CmdOnHit (weapon.gunEnd.transform.position, true);
+			} else if (weapon == rightWeapon) {
+				CmdOnHit (weapon.gunEnd.transform.position, true);
+			}
+		}
+	}
+
+	public void ProjectileShoot(WeaponSystemStats weapon){
+//		GameObject ga = Instantiate (weapon.projectile);
+
+//		RaycastHit _hit;
+//		if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask)){
+
+			GameObject ga = weapon.projectile;
+			ga.transform.position = weapon.gunEnd.transform.position;
+//			ga.transform.rotation = camObject.rotation;
+
+			if(weapon == leftWeapon){
+				CmdProjectileShoot (ga.transform.position, target.transform.position, true, playerStatsScript.gameObject.name, weapon.damage);
+			}
+			else if(weapon == rightWeapon){
+				CmdProjectileShoot (ga.transform.position, target.transform.position, false, playerStatsScript.gameObject.name, weapon.damage);
+			}
+//		}
 	}
 
 	[Command]
-	void CmdPlayerShot ( string _ID, int partsID, int dmg)
+	public void CmdProjectileShoot (Vector3 shootPosition, Vector3 lookPosition, bool isLeft, string playerName, int dmg){
+//		RpcProjectileShoot (shootPosition, shootRotation, isLeft);
+
+		if(isLeft){
+			GameObject ga = Instantiate (leftWeapon.projectile);
+			ga.GetComponent<BulletStats> ().playerName = playerName;
+			ga.GetComponent<BulletStats> ().damage = dmg;
+			ga.transform.position = shootPosition;
+//			ga.transform.rotation = shootRotation;
+			ga.transform.LookAt(lookPosition);
+
+			NetworkServer.Spawn (ga);
+		}
+		else if(!isLeft){
+			GameObject ga = Instantiate (rightWeapon.projectile);
+			ga.GetComponent<BulletStats> ().playerName = playerName;
+			ga.GetComponent<BulletStats> ().damage = dmg;
+			ga.transform.position = shootPosition;
+//			ga.transform.rotation = shootRotation;
+			ga.transform.LookAt(lookPosition);
+
+			NetworkServer.Spawn (ga);
+		}
+	}
+
+	[ClientRpc]
+	public void RpcProjectileShoot(Vector3 shootPosition, Quaternion shootRotation, bool isLeft){
+		if(isLeft){
+			GameObject ga = Instantiate (leftWeapon.projectile);
+			ga.transform.position = shootPosition;
+			ga.transform.rotation = shootRotation;
+
+//			NetworkServer.Spawn (ga);
+		}
+		else if(!isLeft){
+			GameObject ga = Instantiate (rightWeapon.projectile);
+			ga.transform.position = shootPosition;
+			ga.transform.rotation = shootRotation;
+
+//			NetworkServer.Spawn (ga);
+		}
+	}
+
+
+	[Command]
+	public void CmdPlayerShot ( string _ID, int partsID, int dmg)
 	{
 //		Debug.Log (_ID + " has been shot.");
 
@@ -157,13 +243,6 @@ public class PlayerShoot : NetworkBehaviour {
 	{
 		RpcDoHitEffect (_pos, isLeftWeapon);
 	}
-//
-//	[Client]
-//	void RpcDoHitEffect(Vector3 _pos, Vector3 _normal)
-//	{
-//		GameObject _hitEffect = (GameObject)Instantiate (hitEffect, _pos, Quaternion.LookRotation(_normal));
-//		Destroy (_hitEffect, 2f);
-	//	}
 
 	[ClientRpc]
 	public void RpcDoHitEffect(Vector3 hitPosition, bool isLeftWeapon)
@@ -179,5 +258,10 @@ public class PlayerShoot : NetworkBehaviour {
 			GameObject ga = Instantiate (rightWeapon.raycastVFX, hitPosition, Quaternion.identity);
 			NetworkServer.Spawn (ga);
 		}
+	}
+
+	[Command]
+	public void CmdDebug(){
+		Debug.Log("Hii " + this.gameObject.name);
 	}
 }
