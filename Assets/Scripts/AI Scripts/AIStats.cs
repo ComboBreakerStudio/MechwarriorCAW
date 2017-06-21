@@ -7,4 +7,6 @@ public class AIStats : MonoBehaviour {
 	public int teamID;
 	public int curHealth, maxHealth;
 
+
+
 }

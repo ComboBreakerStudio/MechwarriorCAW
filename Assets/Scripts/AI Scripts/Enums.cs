@@ -3,3 +3,9 @@
     InSight,
     Wandering
 }
+
+public enum AISetupBehaviour
+{
+    Setup,
+    NotSetup
+}
