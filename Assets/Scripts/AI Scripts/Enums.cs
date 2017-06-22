@@ -1,7 +1,9 @@
-﻿public enum AIBehaviour
+﻿public enum AIState
 {
     InSight,
-    Wandering
+    Wandering,
+    Idle,
+    GoToPoint
 }
 
 public enum AISetupBehaviour

@@ -9,21 +9,20 @@ public class SniperBehavior : NetworkBehaviour {
 
     NavMeshAgent agent;
 
-    public float rangeDistance;
-
     public List<Transform> visibleTarget = new List<Transform>();
 
     [Header("AI Sight")]
     public float viewRadius;
-    [Range(0,360)]
-    public float viewAngle;
+    //[Range(0,360)]
+    //public float viewAngle;
     public Transform targetposition;
+    public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
 
     float firingInterval;
 
-    public AIBehaviour behaviour = AIBehaviour.Wandering;
+    public AIState behaviour = AIState.Wandering;
     public AISetupBehaviour setupbehaviour = AISetupBehaviour.NotSetup;
 
 
@@ -45,7 +44,11 @@ public class SniperBehavior : NetworkBehaviour {
     public float fireInterval;
 
 
+    public bool PlayerCommandToWander;
 
+
+    public float SettingTimer;
+    public float setupTimer;
 
     // Use this for initialization
     public override void OnStartServer()
@@ -57,6 +60,67 @@ public class SniperBehavior : NetworkBehaviour {
         StartCoroutine(AISniper());
     }
 
+    void Update()
+    {
+        // Determine what to do if there is a target inside the List
+        if (visibleTarget.Contains(targetposition))
+        {
+
+            if (setupbehaviour == AISetupBehaviour.NotSetup)
+            {
+                behaviour = AIState.InSight;
+            }
+            else if (setupbehaviour == AISetupBehaviour.Setup)
+            {
+                behaviour = AIState.InSight;
+            }
+        }
+
+        else if (!visibleTarget.Contains(targetposition))
+        {
+            
+            if (PlayerCommandToWander == false)
+                behaviour = AIState.Idle;
+            else if (PlayerCommandToWander == true)
+                behaviour = AIState.Wandering;
+        }
+
+
+        if (behaviour == AIState.Idle)
+        {
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (setupbehaviour == AISetupBehaviour.Setup)
+                {
+                    setupbehaviour = AISetupBehaviour.NotSetup;
+                }
+                else if (setupbehaviour == AISetupBehaviour.NotSetup)
+                {
+                    GoToPoint();
+                } 
+            }
+        }
+
+        if (behaviour == AIState.Wandering)
+        {
+            //Debug.Log("Wandering");
+            if (setupbehaviour == AISetupBehaviour.Setup)
+            {
+               setupbehaviour = AISetupBehaviour.NotSetup;
+            }
+
+            else if (setupbehaviour == AISetupBehaviour.NotSetup)
+            {
+                Wandering();
+            }
+        }
+    }
+
+    void GoToPoint()
+    {
+      agent.SetDestination(AIpoint.position);
+    }
 
     IEnumerator AISniper()
     {
@@ -64,54 +128,14 @@ public class SniperBehavior : NetworkBehaviour {
         {
             FindVisibleTarget();
 
-            if (check(targetposition) != null)
-            {
-
-                behaviour = AIBehaviour.InSight;
-
-                if (this.setupbehaviour == AISetupBehaviour.NotSetup)
-                {
-
-                    //Debug.Log("Unsetting Up");
-                    setupbehaviour = AISetupBehaviour.Setup;
-
-                    //Insight(targetposition);
-                    if (this.setupbehaviour == AISetupBehaviour.Setup)
-                    {
-                        Firing();
-                    }
-                }
-
-                else if (this.setupbehaviour == AISetupBehaviour.Setup)
-                {
-                    Firing();
-                }
-            }
-            else if (check(targetposition) == null)
-            {
-                behaviour = AIBehaviour.Wandering;
-
-                if (this.setupbehaviour == AISetupBehaviour.Setup)
-                {
-                    setupbehaviour = AISetupBehaviour.NotSetup;
-
-                    Wandering();
-                }
-                else if (this.setupbehaviour == AISetupBehaviour.NotSetup)
-                {
-                    Wandering();
-                }
-            }
 
             yield return new WaitForSeconds(timeInterval);
         }
     }
 
-    //I Checking to change behaviour correctly, dependant on is there a transform inside the targetposition part
-    Transform check(Transform target)
-    {
-        return target;
-    }
+
+
+
 
     //I For random Wandering by using navmesh sphere
     public static Vector3 RandomWandering(Vector3 origin, float dist, int layermask)
@@ -141,6 +165,7 @@ public class SniperBehavior : NetworkBehaviour {
         }
     }
 
+
     void Firing()
     {
 
@@ -149,7 +174,7 @@ public class SniperBehavior : NetworkBehaviour {
 
         transform.LookAt(direction);
 
-        if (Distance() > minimumRange)
+        if (Distance() > minimumRange && Distance() < viewRadius)
         {
             fireInterval -= 0.45f;
             if (fireInterval <= 0f)
@@ -159,9 +184,9 @@ public class SniperBehavior : NetworkBehaviour {
                 fireInterval = 2.0f;
             }
         }
-        else if (Distance() < minimumRange && Distance() > minimumRange)
+        else if (Distance() < minimumRange)
         {
-            Vector3 Position = targetposition.transform.position.normalized * -3f;
+            Vector3 Position = targetposition.transform.position.normalized * -0.5f;
             agent.destination = Position;
         }
     }
@@ -179,44 +204,23 @@ public class SniperBehavior : NetworkBehaviour {
             targetposition = targetInViewRadius[i].transform;
 
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
+            if (Vector3.Angle(transform.position,dirToTarget) < 360)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
                     visibleTarget.Add(targetposition);
-
-
-
-                    /*For now I comment this part
-                    for (int e  = 0; e < visibleTarget.Count; e++){
-                        if(visibleTarget[e].GetComponent<PlayerStats>().teamID == statsScript.teamID){
-                            visibleTarget.Remove (visibleTarget [e]);
-                        }
-                    }*/
-
                 }
             }
         }
     }
-
-    //I To keep track where the object facing towards of sight
-    public Vector3 DirecFromAngle(float angleInDegrees, bool angleIsGlobal)
-    {
-        if (!angleIsGlobal)
-        {
-            angleInDegrees += transform.eulerAngles.y;
-
-        }
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
-    }
-
 
     //I Checking Distance
     private float Distance()
     {
         return Vector3.Distance(this.transform.position, targetposition.position);
     }
+
 
     [Command]
     void CmdSpawn()
