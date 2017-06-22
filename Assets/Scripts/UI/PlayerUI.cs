@@ -20,14 +20,16 @@ public class PlayerUI : MonoBehaviour {
 
 	bool isLocalPlayer;
 
-	private GameObject HeadHealth;
-	private GameObject TorsoHealth;
-	private GameObject LeftTorsoHealth;
-	private GameObject LeftArmHealth;
-	private GameObject LeftLegHealth;
-	private GameObject RightTorsoHealth;
-	private GameObject RightArmHealth;
-	private GameObject RightLegHealth;
+	//public
+
+	public Transform HeadHealth;
+	public Transform TorsoHealth;
+	public Transform LeftTorsoHealth;
+	public Transform LeftArmHealth;
+	public Transform LeftLegHealth;
+	public Transform RightTorsoHealth;
+	public Transform RightArmHealth;
+	public Transform RightLegHealth;
 
 	// Use this for initialization
 	void Start () {
@@ -38,9 +40,40 @@ public class PlayerUI : MonoBehaviour {
 		//rightAmmo = GameObject.Find ("RightAmmo").GetComponentInChildren<Text> ();
 		//heatBar.fillAmount = GetComponent<WeaponSystemStats> ().currentHeat;
 		heatBar.fillAmount = 0;
-		foreach (Transform img in Health.transform) {
+
+		foreach (Transform img in HeadHealth.transform) {
 			img.gameObject.SetActive (false);
 		}
+		foreach (Transform img in TorsoHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+		foreach (Transform img in LeftTorsoHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+		foreach (Transform img in LeftArmHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+		foreach (Transform img in LeftLegHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+		foreach (Transform img in RightTorsoHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+		foreach (Transform img in RightArmHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+		foreach (Transform img in RightLegHealth.transform) {
+			img.gameObject.SetActive (false);
+		}
+
+		HeadHealth.Find ("HeadGreen").gameObject.SetActive (true);
+		TorsoHealth.Find ("BodyGreen").gameObject.SetActive (true);
+		LeftTorsoHealth.Find ("LeftTorsoGreen").gameObject.SetActive (true);
+		LeftArmHealth.Find ("LeftArmGreen").gameObject.SetActive (true);
+		LeftLegHealth.Find ("LeftLegGreen").gameObject.SetActive (true);
+		RightTorsoHealth.Find ("RightTorsoGreen").gameObject.SetActive (true);
+		RightArmHealth.Find ("RightArmGreen").gameObject.SetActive (true);
+		RightLegHealth.Find ("RightLegGreen").gameObject.SetActive (true);
 	}
 	
 	// Update is called once per frame
