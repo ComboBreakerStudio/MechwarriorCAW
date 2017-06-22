@@ -3,6 +3,17 @@ using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using AIEnums;
+
+
+/// <summary>
+/// Tank behaviour.
+/// If some of the part is not understandable, do specify which part. I'm not going to comment everything and detailed
+/// since I already named all the variables correctly. Just inform me if some are weird, too complex or not even correct.
+/// For The Sniper Part, they are basically the same as this, except only have setup behaviour part which need an animation
+/// to check if the code is correct or need more implementation. And yes, I did check unity asset store to use, but
+/// there is none I can use. If you found any, do inform me.
+/// </summary>
 
 public class TankBehaviour : NetworkBehaviour {
 
@@ -49,7 +60,6 @@ public class TankBehaviour : NetworkBehaviour {
 	// Use this for initialization
     public override void OnStartServer()
     {
-        //Debug.Log("SERVER STARTED");
         agent = GetComponent<NavMeshAgent>();
 
 
@@ -58,12 +68,26 @@ public class TankBehaviour : NetworkBehaviour {
 
     void Update()
     {
+        //I Change this keycode if you guys decide to change to something
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (PlayerCommandToWander == false)
+            {
+                PlayerCommandToWander = true;
+            }
+            else if (PlayerCommandToWander == true)
+            {
+                PlayerCommandToWander = false;
+            }
+        }
+        //I Check if there is a target visible within the sight radius
         if (visibleTarget.Contains(targetposition))
         {
             agent.isStopped = true;
 
             Firing();
         }
+        //I IF there is no target, basically the AI go Idle, then the player can command to wander or move them.
         else if (!visibleTarget.Contains(targetposition))
         {
             agent.isStopped = false;
@@ -75,19 +99,22 @@ public class TankBehaviour : NetworkBehaviour {
                 behaviour = AIState.Wandering;
         }
 
+        //I This is when the player can command what the AI to move somewhere.
         if (behaviour == AIState.Idle)
         {
             float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
 
+            //I If the AI is within the destination, the AI will not move if there is no command.
             if (distToTarget < 20f)
             {
                 agent.isStopped = true;
             }
 
-
-            if (Input.GetKeyDown(KeyCode.A))
+            //I Change this keycode if you guys decide to change to something
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 //Debug.Log("Button Pressed");
+                //If the AI is not within the destination specified, the AI will not even move.
                 if (distToTarget > 20f)
                 {
                     agent.isStopped = false;
@@ -96,6 +123,7 @@ public class TankBehaviour : NetworkBehaviour {
             }
                 
         }
+
 
         else if (behaviour == AIState.Wandering)
         {
@@ -124,8 +152,10 @@ public class TankBehaviour : NetworkBehaviour {
 
 
         wanderTimer += Time.deltaTime;
+
         if (wanderTimer >= timer)
         {
+            //I Refer to random wandering part if you want to understand this.
             Vector3 newPos = RandomWandering(transform.position, wanderRadius, ground);
             agent.SetDestination(newPos);
             wanderTimer = 0f;
@@ -138,12 +168,14 @@ public class TankBehaviour : NetworkBehaviour {
 	//I For random Wandering by using navmesh sphere
     public static Vector3 RandomWandering(Vector3 origin, float dist, LayerMask ground)
     {
+        //I Making sure the area is within the wander Radius variable only.
         Vector3 randomDirection = Random.insideUnitSphere * dist;
 
         randomDirection += origin;
 
         NavMeshHit navHit;
 
+        //I Basically if there is a path for navmesh to move, then it will move in that position only.
         NavMesh.SamplePosition(randomDirection, out navHit, dist, ground);
 
         return navHit.position;
@@ -166,6 +198,8 @@ public class TankBehaviour : NetworkBehaviour {
           fireInterval -= 0.45f;
           if (fireInterval <= 0f)
             {
+                //I This part I comment first, since I don't know either you want to keep spawning bullet or using object pooling
+
               //Debug.Log("Firing");
               //CmdSpawn();
               fireInterval = 2.0f;
@@ -178,7 +212,6 @@ public class TankBehaviour : NetworkBehaviour {
     void FindVisibleTarget()
     {
         visibleTarget.Clear();
-        targetposition = null;
 
         Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -187,6 +220,7 @@ public class TankBehaviour : NetworkBehaviour {
             targetposition = targetInViewRadius[i].transform;
 
             //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
+            //I The code is basically from sebastian lague, except I don't make it cone of vision style.
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
             if (Vector3.Angle(transform.position,dirToTarget) < 360)
             {

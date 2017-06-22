@@ -3,7 +3,14 @@ using System.Collections;
 using UnityEngine.Networking;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using AIEnums;
 
+
+/// <summary>
+/// Sniper behavior.
+/// All the code is basically the same as tank, except this part have the setup behaviour, which needs animation
+/// to even demonstrate it or test if it's working or not
+/// </summary>
 
 public class SniperBehavior : NetworkBehaviour {
 
@@ -13,8 +20,6 @@ public class SniperBehavior : NetworkBehaviour {
 
     [Header("AI Sight")]
     public float viewRadius;
-    //[Range(0,360)]
-    //public float viewAngle;
     public Transform targetposition;
     public Transform AIpoint;
     public LayerMask targetMask;
@@ -64,6 +69,19 @@ public class SniperBehavior : NetworkBehaviour {
 
     void Update()
     {
+        
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            if (PlayerCommandToWander == false)
+            {
+                PlayerCommandToWander = true;
+            }
+            else if (PlayerCommandToWander == true)
+            {
+                PlayerCommandToWander = false;
+            }
+        }
+
         // Determine what to do if there is a target inside the List
         if (visibleTarget.Contains(targetposition))
         {
