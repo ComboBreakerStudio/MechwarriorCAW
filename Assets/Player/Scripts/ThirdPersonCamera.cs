@@ -23,9 +23,10 @@ public class ThirdPersonCamera : NetworkBehaviour {
 	Vector3 currentRotation;
 
 	//Body Control
-	public GameObject leftWeaponPivot, rightWeaponPivot;
+	public GameObject leftWeaponPivot, rightWeaponPivot, targetPosition;
 	//Melee
 	public bool isMelee;
+
 
 	float yaw;
 	float pitch;
@@ -65,17 +66,19 @@ public class ThirdPersonCamera : NetworkBehaviour {
 			currentRotation = Vector3.SmoothDamp (currentRotation, new Vector3 (pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
 
 			cam.transform.localEulerAngles = currentRotation;
-			if(!isMelee){
+//			if(!isMelee){
 
 				torsoObject.transform.localEulerAngles = new Vector3 (0, cam.transform.localEulerAngles.y, 0 );
 //
 //				leftWeaponPivot.transform.localEulerAngles = new Vector3 (cam.transform.eulerAngles.x, cam.transform.localEulerAngles.y, cam.transform.eulerAngles.z );
 //				rightWeaponPivot.transform.localEulerAngles = new Vector3 (cam.transform.eulerAngles.x, cam.transform.localEulerAngles.y, cam.transform.eulerAngles.z );
-			}
+//			}
 
 
-			leftWeaponPivot.transform.localEulerAngles = currentRotation;
-			rightWeaponPivot.transform.localEulerAngles = currentRotation;
+//			leftWeaponPivot.transform.localEulerAngles = currentRotation;
+//			rightWeaponPivot.transform.localEulerAngles = currentRotation;
+			leftWeaponPivot.transform.LookAt(targetPosition.transform);
+			rightWeaponPivot.transform.LookAt(targetPosition.transform);
 		}
 	}
 

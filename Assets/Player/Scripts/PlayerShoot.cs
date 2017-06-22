@@ -32,10 +32,6 @@ public class PlayerShoot : NetworkBehaviour {
 			Debug.LogError ("PlayerShoot: No camera reference!");
 			this.enabled = false;
 		}
-//		currentPosition = leftHand.transform.localPosition.z;
-//		recoilPosition = currentPosition - 0.25f;
-
-
 	}
 
 	public void SetWeapon(){
@@ -88,10 +84,6 @@ public class PlayerShoot : NetworkBehaviour {
 		if(!Input.GetButton("Fire1") && !Input.GetButton("Fire2")){
 			camScript.isMelee = false;
 		}
-//		if(leftHand.transform.localPosition.z != currentPosition)
-//		{
-//			leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, currentPosition), 0.1f);
-//		}
 	}
 
 	void WeaponAttack (WeaponSystemStats weapon, string coroutineName){
@@ -116,11 +108,6 @@ public class PlayerShoot : NetworkBehaviour {
 		yield return new WaitForSeconds (t);
 		rightWeapon.canShoot = true;
 	}
-
-//	void Recoil()
-//	{
-//		leftHand.transform.localPosition = Vector3.Lerp(leftHand.transform.localPosition, new Vector3(leftHand.transform.localPosition.x, leftHand.transform.localPosition.y, recoilPosition), 0.5f);
-//	}
 
 //	[Command]
 	public void RaycastShoot(WeaponSystemStats weapon){
@@ -249,8 +236,6 @@ public class PlayerShoot : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcDoHitEffect(Vector3 hitPosition, bool isLeftWeapon)
 	{
-
-		Debug.Log ("Spawn FX");
 //		muzzleFlash.Play ();
 		if (isLeftWeapon) {
 			GameObject ga = Instantiate (leftWeapon.raycastVFX, hitPosition, Quaternion.identity);
@@ -261,9 +246,4 @@ public class PlayerShoot : NetworkBehaviour {
 			NetworkServer.Spawn (ga);
 		}
 	}
-
-//	[Command]
-//	public void CmdDebug(){
-//		Debug.Log("Hii " + this.gameObject.name);
-//	}
 }

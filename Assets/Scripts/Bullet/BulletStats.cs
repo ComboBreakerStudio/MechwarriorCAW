@@ -44,6 +44,13 @@ public class BulletStats : NetworkBehaviour {
 		}
 	}
 
+	void OnCollisionEnter(Collision coll){
+		if (coll.gameObject.CompareTag("Terrain")) {
+			Destroy (this.gameObject);
+			CmdSpawnFX (transform.position);
+		}
+	}
+
 	[Command]
 	public void CmdSpawnFX(Vector3 position){
 		GameObject ga = Instantiate (explodeFX);
