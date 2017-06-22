@@ -52,6 +52,7 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//minimap.GetComponentInChildren<RawImage>().texture = 
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			TogglePauseMenu ();
 		}
@@ -116,12 +117,12 @@ public class PlayerUI : MonoBehaviour {
 	}
 
 	//[Client]
-	void mapDisplay ()
+	/*void mapDisplay ()
 	{
 		if (isLocalPlayer == true) {
 			minimap.SetActive (true);
 		}
-	}
+	}*/
 
 	public void shakeScreen(){
 		if(canShakeScreen){

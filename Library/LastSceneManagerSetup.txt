@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/MainScene/LoadoutScene.unity
+- path: Assets/Scene/SetupScene/LanTest.unity
   isLoaded: 1
   isActive: 1
