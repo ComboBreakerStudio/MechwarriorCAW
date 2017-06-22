@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scene/MainScene/LoadoutScene.unity
-=======
-- path: Assets/Scene/SetupScene/Test.unity
->>>>>>> DevRichard-UI
   isLoaded: 1
   isActive: 1
