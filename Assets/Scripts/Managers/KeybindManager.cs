@@ -16,6 +16,17 @@ public class KeybindManager : MonoBehaviour {
 
 	void Awake()
 	{
+		if (KBM == null) 
+		{
+			DontDestroyOnLoad (gameObject);
+			KBM = this;
+		} 
+
+		else if (KBM != this)
+		{
+			Destroy (gameObject);
+		}
+
 		Forward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "W"));
 		Backward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
 		Left = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));

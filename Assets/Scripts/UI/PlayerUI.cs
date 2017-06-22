@@ -63,4 +63,9 @@ public class PlayerUI : MonoBehaviour {
 			minimap.SetActive (true);
 		}
 	}
+
+	void healthDisplay()
+	{
+		
+	}
 }
