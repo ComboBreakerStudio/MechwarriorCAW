@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+<<<<<<< HEAD
 		if(playerStatsScript.canMove){
 			//Forward and backward
 			if (Input.GetKey (GameManager.GM.forward)) {
@@ -70,8 +71,18 @@ public class PlayerController : MonoBehaviour {
 				ShakeScreen ();
 			}
 		}
+=======
+		if (Input.GetKey (KeybindManager.KBM.Forward))
+			transform.Translate(Vector3.forward * playerMoveSpeed * Time.deltaTime);
+		else if (Input.GetKey (KeybindManager.KBM.Backward))
+			transform.Translate(Vector3.back * playerMoveSpeed * Time.deltaTime);
+		if (Input.GetKey (KeybindManager.KBM.Left)) 
+			transform.Rotate (0,-playerRotateSpeed * Time.deltaTime,0);
+		else if(Input.GetKey(KeybindManager.KBM.Right))
+			transform.Rotate (0,playerRotateSpeed * Time.deltaTime,0);
+>>>>>>> DevRichard-UI
 
-		if(Input.GetKeyDown(GameManager.GM.menuButton)){
+		if(Input.GetKeyDown(KeybindManager.KBM.menuButton)){
 			if (onMenu) {
 				Cursor.lockState = CursorLockMode.Locked;
 				Cursor.visible = false;

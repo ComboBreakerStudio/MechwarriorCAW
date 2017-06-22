@@ -29,6 +29,7 @@ public class PlayerUI : MonoBehaviour {
 	private GameObject RightArmHealth;
 	private GameObject RightLegHealth;
 
+<<<<<<< HEAD
 	public PlayerStats playerStatScript;
 
 	//ShakeScreen
@@ -36,6 +37,8 @@ public class PlayerUI : MonoBehaviour {
 	public float shakeScreenTime;
 	public float shakePower;
 
+=======
+>>>>>>> DevRichard-UI
 	// Use this for initialization
 	void Start () {
 		canShakeScreen = true;
@@ -124,6 +127,7 @@ public class PlayerUI : MonoBehaviour {
 		}
 	}
 
+<<<<<<< HEAD
 	public void shakeScreen(){
 		if(canShakeScreen){
 			Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
@@ -146,5 +150,10 @@ public class PlayerUI : MonoBehaviour {
 
 		yield return new WaitForSeconds (shakeScreenTime);
 		canShakeScreen = true;
+=======
+	void healthDisplay()
+	{
+		
+>>>>>>> DevRichard-UI
 	}
 }
