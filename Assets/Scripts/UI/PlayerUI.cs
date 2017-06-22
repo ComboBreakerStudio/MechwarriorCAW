@@ -20,14 +20,14 @@ public class PlayerUI : MonoBehaviour {
 
 	bool isLocalPlayer;
 
-	private GameObject HeadHealth;
-	private GameObject TorsoHealth;
-	private GameObject LeftTorsoHealth;
-	private GameObject LeftArmHealth;
-	private GameObject LeftLegHealth;
-	private GameObject RightTorsoHealth;
-	private GameObject RightArmHealth;
-	private GameObject RightLegHealth;
+	public GameObject HeadHealth;
+	public GameObject TorsoHealth;
+	public GameObject LeftTorsoHealth;
+	public GameObject LeftArmHealth;
+	public GameObject LeftLegHealth;
+	public GameObject RightTorsoHealth;
+	public GameObject RightArmHealth;
+	public GameObject RightLegHealth;
 
 	public PlayerStats playerStatScript;
 

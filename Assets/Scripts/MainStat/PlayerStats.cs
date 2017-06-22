@@ -13,20 +13,30 @@ public class PlayerStats : NetworkBehaviour {
 	[SyncVar]
 	public bool isAlive;
 
+	//MechParts
+	[SyncVar]
+	public bool leftTorsoDown, rightTorsoDown, leftWeaponDown, rightWeaponDown, leftLegDown, rightLegDown;
+
 	public GameObject explodeVFX;
 
+	//Torso
 //	[SerializeField]
 	public TorsoStats frontTorsoStats, backTorsoStats, leftTorsoStats, rightTorsoStats;
 
+	//Legs
 //	[SerializeField]
 	public LegStats leftLegStats, rightLegStats;
+	public Legs legs;
 
 //	[SerializeField]
 	public WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 	[SyncVar]
 	public int frontTorso_Health, backTorso_Health, leftTorso_Health, rightTorso_Health,
-	leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
+				leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
+
+	[SyncVar]
+	public float playerMoveSpeed, playerMaxSpeed, decelerationRate;
 
 	[SyncVar]
 	public bool canMove;
@@ -154,30 +164,58 @@ public class PlayerStats : NetworkBehaviour {
 			CmdEnablePlayer (true);
 			RpcRespawnPlayer ();
 		}
+
+		if(!isAlive){
+			return;
+		}
 		//End of Death
 
-		if(leftTorso_Health <= 0){
-			RpcDisableLeftTorso (true);
-		}
-		if(rightTorso_Health <= 0){
-			RpcDisableRightTorso (true);
-		}
-
-		if(leftWeaponSystem_Health <= 0 || leftTorso_Health <=0){
-			RpcDisableLeftWeaponSystem (true);
+		if(!leftTorsoDown){
+			if(leftTorso_Health <= 0){
+				RpcDisableLeftTorso (true);
+				RpcDisableLeftWeaponSystem (true);
+				leftTorsoDown = true;
+			}
 		}
 
-		if(rightWeaponSystem_Health <= 0 || rightTorso_Health <=0){
-			RpcDisableRightWeaponSystem (true);
+		if(!rightTorsoDown){
+			if(rightTorso_Health <= 0){
+				RpcDisableRightTorso (true);
+				RpcDisableRightWeaponSystem (true);
+				rightTorsoDown = true;
+			}
 		}
 
-//		if(leftLeg_Health <= 0){
-//			RpcDisableLeftLeg (true);
-//		}
-//
-//		if(rightLeg_Health <= 0){
-//			RpcDisableRightLeg (true);
-//		}
+		if(!leftWeaponDown){
+			if(leftWeaponSystem_Health <= 0 || leftTorso_Health <=0){
+				RpcDisableLeftWeaponSystem (true);
+				leftWeaponDown = true;
+			}
+		}
+
+		if(!rightWeaponDown){
+			if(rightWeaponSystem_Health <= 0 || rightTorso_Health <=0){
+				RpcDisableRightWeaponSystem (true);
+				rightWeaponDown = true;
+			}
+		}
+
+		if(!leftLegDown){
+			if(leftLeg_Health <= 0){
+				RpcDisableLeftLeg (true);
+				leftLegDown = true;
+				CmdChangeMaxSpeed (playerMaxSpeed/2);
+			}
+		}
+
+		if(!rightLegDown){
+
+			if(rightLeg_Health <= 0){
+				RpcDisableRightLeg (true);
+				rightLegDown = true;
+				CmdChangeMaxSpeed (playerMaxSpeed/2);
+			}
+		}
 	}
 
 	public void StartStuff(){
@@ -216,6 +254,7 @@ public class PlayerStats : NetworkBehaviour {
 				rightWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.legName){
+				legs = playerLoadoutScript.enabledObject [i].GetComponent<Legs> ();
 				LegStats[] childgo = GetComponentsInChildren<LegStats> ();
 				for(int i2 = 0; i2 < childgo.Length; i2++){
 					if(childgo[i2].gameObject.name == "LeftLeg"){
@@ -272,6 +311,7 @@ public class PlayerStats : NetworkBehaviour {
 				rightWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.legName){
+				legs = playerLoadoutScript.enabledObject [i].GetComponent<Legs> ();
 				LegStats[] childgo = GetComponentsInChildren<LegStats> ();
 				for(int i2 = 0; i2 < childgo.Length; i2++){
 					if(childgo[i2].gameObject.name == "LeftLeg"){
@@ -292,6 +332,11 @@ public class PlayerStats : NetworkBehaviour {
 
 	void OnDestroy(){
 		TeamManager.instance.RemovePlayer(this.gameObject, teamID);
+	}
+
+	[Command]
+	void CmdChangeMaxSpeed(float maxSpeed){
+		playerMaxSpeed = maxSpeed;
 	}
 
 	[Command]
@@ -326,8 +371,22 @@ public class PlayerStats : NetworkBehaviour {
 		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+
+		//Movement
+		playerMoveSpeed = legs.playerMoveSpeed;
+		playerMaxSpeed = legs.playerMaxSpeed;
+		decelerationRate = legs.decelerationRate;
+
 		isAlive = true;
 		canMove = true;
+
+		//MechParts
+		leftTorsoDown = false;
+		rightTorsoDown = false;
+		leftWeaponDown = false;
+		rightWeaponDown = false;
+		leftLegDown = false;
+		rightLegDown = false;
 
 		//Enable Parts
 		RpcDisableLeftWeaponSystem(false);

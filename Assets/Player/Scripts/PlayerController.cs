@@ -3,7 +3,7 @@
 public class PlayerController : MonoBehaviour {
 	
 	[SerializeField]
-	private float playerMoveSpeed, playerCurrentSpeed, playerMaxSpeed, decelerationRate;
+	private float playerCurrentSpeed;
 	[SerializeField]
 	private float playerRotateSpeed;
 	[SerializeField]
@@ -31,16 +31,16 @@ public class PlayerController : MonoBehaviour {
 	{
 		if(playerStatsScript.canMove){
 			if (Input.GetKey (KeybindManager.KBM.Forward)){
-				playerCurrentSpeed += playerMoveSpeed * Time.deltaTime;
-				if(playerCurrentSpeed >= playerMaxSpeed){
-					playerCurrentSpeed = playerMaxSpeed;
+				playerCurrentSpeed += playerStatsScript.playerMoveSpeed * Time.deltaTime;
+				if(playerCurrentSpeed >= playerStatsScript.playerMaxSpeed){
+					playerCurrentSpeed = playerStatsScript.playerMaxSpeed;
 				}
 				ShakeScreen ();
 			} 
 			else if (Input.GetKey (KeybindManager.KBM.Backward)){
-				playerCurrentSpeed -= playerMoveSpeed * Time.deltaTime;
-				if(playerCurrentSpeed <= -playerMaxSpeed/2){
-					playerCurrentSpeed = -playerMaxSpeed/2;
+				playerCurrentSpeed -= playerStatsScript.playerMoveSpeed * Time.deltaTime;
+				if(playerCurrentSpeed <= -playerStatsScript.playerMaxSpeed/2){
+					playerCurrentSpeed = -playerStatsScript.playerMaxSpeed/2;
 				}
 				ShakeScreen ();
 			}
@@ -51,6 +51,21 @@ public class PlayerController : MonoBehaviour {
 			else if(Input.GetKey(KeybindManager.KBM.Right)){
 				transform.Rotate (0,playerRotateSpeed * Time.deltaTime,0);
 				ShakeScreen ();
+			}
+
+			if(!Input.GetKey (KeybindManager.KBM.Forward) && !Input.GetKey (KeybindManager.KBM.Backward)){
+				if(playerCurrentSpeed > 0){
+					playerCurrentSpeed -= playerStatsScript.decelerationRate * Time.deltaTime;
+					if(playerCurrentSpeed <= 0){
+						playerCurrentSpeed = 0;
+					}
+				}
+				else if(playerCurrentSpeed < 0){
+					playerCurrentSpeed += playerStatsScript.decelerationRate * Time.deltaTime;
+					if(playerCurrentSpeed >= 0){
+						playerCurrentSpeed = 0;
+					}
+				}
 			}
 		}
 

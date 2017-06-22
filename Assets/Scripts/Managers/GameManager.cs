@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
 		localPlayer.GetComponent<PlayerLoadout> ().LoadParts ();
 		localPlayerStatsScript.StartStuff ();
 		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
-//		playerUIScript.playerStatScript = localPlayerStatsScript;
+		playerUIScript.playerStatScript = localPlayerStatsScript;
 
 //		Debug.Log ("Player Respawned");
 
