@@ -19,6 +19,8 @@ public class SniperBehavior : NetworkBehaviour {
     public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
+    public LayerMask ground;
+
 
     float firingInterval;
 
@@ -65,10 +67,13 @@ public class SniperBehavior : NetworkBehaviour {
         // Determine what to do if there is a target inside the List
         if (visibleTarget.Contains(targetposition))
         {
+            agent.isStopped = true;
+
 
             if (setupbehaviour == AISetupBehaviour.NotSetup)
             {
                 behaviour = AIState.InSight;
+                setupbehaviour = AISetupBehaviour.Setup;
             }
             else if (setupbehaviour == AISetupBehaviour.Setup)
             {
@@ -78,7 +83,8 @@ public class SniperBehavior : NetworkBehaviour {
 
         else if (!visibleTarget.Contains(targetposition))
         {
-            
+            agent.isStopped = false;
+
             if (PlayerCommandToWander == false)
                 behaviour = AIState.Idle;
             else if (PlayerCommandToWander == true)
@@ -88,6 +94,13 @@ public class SniperBehavior : NetworkBehaviour {
 
         if (behaviour == AIState.Idle)
         {
+            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
+
+            if (distToTarget < 10f)
+            {
+                agent.isStopped = true;
+
+            }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -97,30 +110,33 @@ public class SniperBehavior : NetworkBehaviour {
                 }
                 else if (setupbehaviour == AISetupBehaviour.NotSetup)
                 {
-                    GoToPoint();
+                    if (distToTarget > 10f)
+                    {
+                        agent.isStopped = false;
+
+                        agent.SetDestination(AIpoint.position);
+                    }
                 } 
             }
         }
-
-        if (behaviour == AIState.Wandering)
+        else if (behaviour == AIState.Wandering)
         {
             //Debug.Log("Wandering");
             if (setupbehaviour == AISetupBehaviour.Setup)
             {
-               setupbehaviour = AISetupBehaviour.NotSetup;
+                setupbehaviour = AISetupBehaviour.NotSetup;
             }
-
             else if (setupbehaviour == AISetupBehaviour.NotSetup)
             {
                 Wandering();
             }
         }
+        else if (behaviour == AIState.InSight)
+        {
+            Firing();
+        }
     }
 
-    void GoToPoint()
-    {
-      agent.SetDestination(AIpoint.position);
-    }
 
     IEnumerator AISniper()
     {
@@ -138,7 +154,7 @@ public class SniperBehavior : NetworkBehaviour {
 
 
     //I For random Wandering by using navmesh sphere
-    public static Vector3 RandomWandering(Vector3 origin, float dist, int layermask)
+    public static Vector3 RandomWandering(Vector3 origin, float dist, int ground)
     {
         Vector3 randomDirection = Random.insideUnitSphere * dist;
 
@@ -146,7 +162,7 @@ public class SniperBehavior : NetworkBehaviour {
 
         NavMeshHit navHit;
 
-        NavMesh.SamplePosition(randomDirection, out navHit, dist, layermask);
+        NavMesh.SamplePosition(randomDirection, out navHit, dist, ground);
 
         return navHit.position;
     }
@@ -158,7 +174,7 @@ public class SniperBehavior : NetworkBehaviour {
 
         if (wanderTimer >= timer)
         {
-            Vector3 newPos = RandomWandering(transform.position, wanderRadius, -1);
+            Vector3 newPos = RandomWandering(transform.position, wanderRadius,ground);
             agent.SetDestination(newPos);
 
             wanderTimer = 0f;

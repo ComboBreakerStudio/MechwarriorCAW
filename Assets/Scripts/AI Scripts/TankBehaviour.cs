@@ -60,11 +60,15 @@ public class TankBehaviour : NetworkBehaviour {
     {
         if (visibleTarget.Contains(targetposition))
         {
+            agent.isStopped = true;
+
             Firing();
         }
         else if (!visibleTarget.Contains(targetposition))
         {
-            
+            agent.isStopped = false;
+
+
             if (PlayerCommandToWander == false)
                 behaviour = AIState.Idle;
             else if (PlayerCommandToWander == true)
@@ -73,21 +77,31 @@ public class TankBehaviour : NetworkBehaviour {
 
         if (behaviour == AIState.Idle)
         {
+            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
+
+            if (distToTarget < 20f)
+            {
+                agent.isStopped = true;
+            }
+
+
             if (Input.GetKeyDown(KeyCode.A))
             {
                 //Debug.Log("Button Pressed");
-                GoToPoint();
-                behaviour = AIState.GoToPoint;
+                if (distToTarget > 20f)
+                {
+                    agent.isStopped = false;
+                    agent.SetDestination(AIpoint.position);
+                }
             }
+                
         }
+
         else if (behaviour == AIState.Wandering)
         {
             //Debug.Log("Wandering");
+            agent.isStopped = false;
             Wandering();
-        }
-        else if (behaviour == AIState.GoToPoint)
-        {
-            //Debug.Log("Go to point");
         }
     }
 
@@ -100,16 +114,6 @@ public class TankBehaviour : NetworkBehaviour {
 
 
             yield return new WaitForSeconds(timeInterval);
-        }
-    }
-
-    void GoToPoint()
-    {
-        float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
-
-        if (distToTarget > 2f)
-        {
-            agent.SetDestination(AIpoint.position);
         }
     }
 

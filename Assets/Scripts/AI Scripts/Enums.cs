@@ -2,8 +2,7 @@
 {
     InSight,
     Wandering,
-    Idle,
-    GoToPoint
+    Idle
 }
 
 public enum AISetupBehaviour
