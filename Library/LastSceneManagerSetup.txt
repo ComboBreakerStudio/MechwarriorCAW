@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scene/LanTest.unity
+=======
+- path: Assets/Scene/MainScene/LoadoutScene.unity
+>>>>>>> f86f8d4390b09eef537550f413f91a7b2e8589d7
   isLoaded: 1
   isActive: 1

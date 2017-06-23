@@ -36,6 +36,8 @@ public class WeaponSystemStats : MonoBehaviour {
 				recoilRate,
 				AreaOfEffect;
 
+	public bool isMelee;
+
 	void Start(){
 		ResetStats ();
 		parentObject = this.gameObject.transform.parent.gameObject;

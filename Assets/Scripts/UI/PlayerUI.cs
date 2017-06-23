@@ -20,6 +20,7 @@ public class PlayerUI : MonoBehaviour {
 
 	bool isLocalPlayer;
 
+<<<<<<< HEAD
 	//public
 
 	public Transform HeadHealth;
@@ -30,9 +31,26 @@ public class PlayerUI : MonoBehaviour {
 	public Transform RightTorsoHealth;
 	public Transform RightArmHealth;
 	public Transform RightLegHealth;
+=======
+	public GameObject HeadHealth;
+	public GameObject TorsoHealth;
+	public GameObject LeftTorsoHealth;
+	public GameObject LeftArmHealth;
+	public GameObject LeftLegHealth;
+	public GameObject RightTorsoHealth;
+	public GameObject RightArmHealth;
+	public GameObject RightLegHealth;
+>>>>>>> f86f8d4390b09eef537550f413f91a7b2e8589d7
 
+	public PlayerStats playerStatScript;
+
+	//ShakeScreen
+	public bool canShakeScreen;
+	public float shakeScreenTime;
+	public float shakePower;
 	// Use this for initialization
 	void Start () {
+		canShakeScreen = true;
 		PauseMenu.IsOn = false;
 		isLocalPlayer = true;
 		//heatBar = 
@@ -78,8 +96,61 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//minimap.GetComponentInChildren<RawImage>().texture = 
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			TogglePauseMenu ();
+		}
+
+		if(playerStatScript != null){
+			//Front
+			if (playerStatScript.frontTorso_Health <= 0) {
+				TorsoHealth.SetActive (false);
+			} 
+			else {
+				TorsoHealth.SetActive (true);
+			}
+			//left torso
+			if (playerStatScript.leftTorso_Health <= 0) {
+				LeftTorsoHealth.SetActive (false);
+			} 
+			else {
+				LeftTorsoHealth.SetActive (true);
+			}
+			//Right Torso
+			if (playerStatScript.rightTorso_Health <= 0) {
+				RightTorsoHealth.SetActive (false);
+			} 
+			else {
+				RightTorsoHealth.SetActive (true);
+			}
+			//Left Weapon
+			if (playerStatScript.leftWeaponSystem_Health <= 0) {
+				LeftArmHealth.SetActive (false);
+			} 
+			else {
+				LeftArmHealth.SetActive (true);
+			}
+			//Right Weapon
+			if (playerStatScript.rightWeaponSystem_Health <= 0) {
+				RightArmHealth.SetActive (false);
+			} 
+			else {
+				RightArmHealth.SetActive (true);
+			}
+			//Left Leg
+			if (playerStatScript.leftLeg_Health <= 0) {
+				LeftLegHealth.SetActive (false);
+			} 
+			else {
+				LeftLegHealth.SetActive (true);
+			}
+			//Right Leg
+			if (playerStatScript.rightTorso_Health <= 0) {
+				RightLegHealth.SetActive (false);
+			} 
+			else {
+				RightLegHealth.SetActive (true);
+			}
 		}
 	}
 
@@ -90,13 +161,37 @@ public class PlayerUI : MonoBehaviour {
 	}
 
 	//[Client]
-	void mapDisplay ()
+	/*void mapDisplay ()
 	{
 		if (isLocalPlayer == true) {
 			minimap.SetActive (true);
 		}
+	}*/
+
+	public void shakeScreen(){
+		if(canShakeScreen){
+			Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+			StartCoroutine ("ShakeScreenUITimer", 0.05f);
+			canShakeScreen = false;
+		}
 	}
 
+	IEnumerator ShakeScreenUITimer(float t){
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y - shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y - shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+		yield return new WaitForSeconds (t);
+		Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y - shakePower);
+
+		yield return new WaitForSeconds (shakeScreenTime);
+		canShakeScreen = true;
+
+	}
 	void healthDisplay()
 	{
 		
