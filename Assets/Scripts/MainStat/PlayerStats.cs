@@ -43,9 +43,18 @@ public class PlayerStats : NetworkBehaviour {
 
 	//Test
 	public bool setColor;
+<<<<<<< HEAD
 	Transform team1Marker;
 	Transform team2Marker;
 	public Transform mapMarker;
+=======
+<<<<<<< .merge_file_a14980
+=======
+	Transform team1Marker;
+	Transform team2Marker;
+	public Transform mapMarker;
+>>>>>>> .merge_file_a03160
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 
 //	public void respawn(int id){
 //		GameManager.GM.RespawnPlayer ();
@@ -53,8 +62,16 @@ public class PlayerStats : NetworkBehaviour {
 
 	void Start(){
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
+<<<<<<< HEAD
 		foreach (Transform marker in mapMarker.transform)
 			marker.gameObject.SetActive (false);
+=======
+<<<<<<< .merge_file_a14980
+=======
+		foreach (Transform marker in mapMarker.transform)
+			marker.gameObject.SetActive (false);
+>>>>>>> .merge_file_a03160
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 
 
 		//Add player to TeamManager
@@ -89,7 +106,14 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
+<<<<<<< HEAD
 					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
+=======
+<<<<<<< .merge_file_a14980
+=======
+					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
+>>>>>>> .merge_file_a03160
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 				}
 				setColor = true;
 			}
@@ -108,11 +132,25 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 1){
 					meshRenderer [i].material.color = Color.yellow;
+<<<<<<< HEAD
 					mapMarker.Find ("RedMapMarker").gameObject.SetActive (true);
 				}
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
 					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
+=======
+<<<<<<< .merge_file_a14980
+				}
+				if(teamID == 2){
+					meshRenderer [i].material.color = Color.blue;
+=======
+					mapMarker.Find ("RedMapMarker").gameObject.SetActive (true);
+				}
+				if(teamID == 2){
+					meshRenderer [i].material.color = Color.blue;
+					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
+>>>>>>> .merge_file_a03160
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 				}
 				//					setColor = true;
 			}

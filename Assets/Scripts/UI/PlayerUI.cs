@@ -18,7 +18,15 @@ public class PlayerUI : MonoBehaviour {
 	[SerializeField]
 	private GameObject Health;
 
+<<<<<<< HEAD
 	//bool isLocalPlayer;
+=======
+<<<<<<< .merge_file_a18160
+	bool isLocalPlayer;
+=======
+	//bool isLocalPlayer;
+>>>>>>> .merge_file_a17040
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 
 	public Transform HeadHealth;
 	public Transform TorsoHealth;
@@ -29,7 +37,22 @@ public class PlayerUI : MonoBehaviour {
 	public Transform RightArmHealth;
 	public Transform RightLegHealth;
 
+<<<<<<< HEAD
 	public Text ammoCount;
+=======
+<<<<<<< .merge_file_a18160
+	/*public GameObject HeadHealth;
+	public GameObject TorsoHealth;
+	public GameObject LeftTorsoHealth;
+	public GameObject LeftArmHealth;
+	public GameObject LeftLegHealth;
+	public GameObject RightTorsoHealth;
+	public GameObject RightArmHealth;
+	public GameObject RightLegHealth;*/
+=======
+	public Text ammoCount;
+>>>>>>> .merge_file_a17040
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 
 	public PlayerStats playerStatScript;
 
@@ -41,9 +64,21 @@ public class PlayerUI : MonoBehaviour {
 	void Start () {
 		canShakeScreen = true;
 		PauseMenu.IsOn = false;
+<<<<<<< HEAD
 		//isLocalPlayer = true;
 		//heatBar = 
 		//Debug.Log ("Found Left Ammo?");
+=======
+<<<<<<< .merge_file_a18160
+		isLocalPlayer = true;
+		//heatBar = 
+		Debug.Log ("Found Left Ammo?");
+=======
+		//isLocalPlayer = true;
+		//heatBar = 
+		//Debug.Log ("Found Left Ammo?");
+>>>>>>> .merge_file_a17040
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 		//rightAmmo = GameObject.Find ("RightAmmo").GetComponentInChildren<Text> ();
 		//heatBar.fillAmount = GetComponent<WeaponSystemStats> ().currentHeat;
 		heatBar.fillAmount = 0;
@@ -89,8 +124,68 @@ public class PlayerUI : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			TogglePauseMenu ();
 		}
+<<<<<<< HEAD
 		healthDisplay ();
 
+=======
+<<<<<<< .merge_file_a18160
+
+		if(playerStatScript != null){
+			//Front
+			if (playerStatScript.frontTorso_Health <= 0) {
+				TorsoHealth.gameObject.SetActive (false);
+			} 
+			else {
+				TorsoHealth.gameObject.SetActive (true);
+			}
+			//left torso
+			if (playerStatScript.leftTorso_Health <= 0) {
+				LeftTorsoHealth.gameObject.SetActive (false);
+			} 
+			else {
+				LeftTorsoHealth.gameObject.SetActive (true);
+			}
+			//Right Torso
+			if (playerStatScript.rightTorso_Health <= 0) {
+				RightTorsoHealth.gameObject.SetActive (false);
+			} 
+			else {
+				RightTorsoHealth.gameObject.SetActive (true);
+			}
+			//Left Weapon
+			if (playerStatScript.leftWeaponSystem_Health <= 0) {
+				LeftArmHealth.gameObject.SetActive (false);
+			} 
+			else {
+				LeftArmHealth.gameObject.SetActive (true);
+			}
+			//Right Weapon
+			if (playerStatScript.rightWeaponSystem_Health <= 0) {
+				RightArmHealth.gameObject.SetActive (false);
+			} 
+			else {
+				RightArmHealth.gameObject.SetActive (true);
+			}
+			//Left Leg
+			if (playerStatScript.leftLeg_Health <= 0) {
+				LeftLegHealth.gameObject.SetActive (false);
+			} 
+			else {
+				LeftLegHealth.gameObject.SetActive (true);
+			}
+			//Right Leg
+			if (playerStatScript.rightTorso_Health <= 0) {
+				RightLegHealth.gameObject.SetActive (false);
+			} 
+			else {
+				RightLegHealth.gameObject.SetActive (true);
+			}
+		}
+=======
+		healthDisplay ();
+
+>>>>>>> .merge_file_a17040
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 	}
 
 	private void TogglePauseMenu(){
@@ -133,6 +228,12 @@ public class PlayerUI : MonoBehaviour {
 	}
 	void healthDisplay()
 	{
+<<<<<<< HEAD
+=======
+<<<<<<< .merge_file_a18160
+		
+=======
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 		if(playerStatScript != null){
 			//Front
 			if (playerStatScript.frontTorso_Health <= 0) {
@@ -231,5 +332,9 @@ public class PlayerUI : MonoBehaviour {
 				RightLegHealth.Find ("RightLegRed").gameObject.SetActive (true);
 			}
 		}
+<<<<<<< HEAD
+=======
+>>>>>>> .merge_file_a17040
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 	}
 }

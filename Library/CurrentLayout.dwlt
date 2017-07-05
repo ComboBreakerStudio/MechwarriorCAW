@@ -25,7 +25,11 @@ MonoBehaviour:
 =======
   m_RootView: {fileID: 9}
   m_MinSize: {x: 950, y: 521}
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -59,7 +63,11 @@ MonoBehaviour:
   - {fileID: 18}
   m_Selected: 0
   m_LastSelected: 0
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -91,7 +99,11 @@ MonoBehaviour:
   m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
   controlID: 79
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -124,7 +136,11 @@ MonoBehaviour:
   - {fileID: 14}
   m_Selected: 0
   m_LastSelected: 0
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -159,7 +175,11 @@ MonoBehaviour:
   m_MaxSize: {x: 10004, y: 14021}
   vertical: 1
   controlID: 11
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +213,11 @@ MonoBehaviour:
   - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -231,7 +255,11 @@ MonoBehaviour:
   m_MaxSize: {x: 18008, y: 14021}
   vertical: 0
   controlID: 9
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -258,7 +286,11 @@ MonoBehaviour:
     width: 316
     height: 947
   m_MinSize: {x: 277, y: 71}
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
@@ -375,7 +407,11 @@ MonoBehaviour:
   m_MaxSize: {x: 14006, y: 14021}
   vertical: 0
   controlID: 10
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -603,7 +639,11 @@ MonoBehaviour:
   m_Selected: 1
   m_LastSelected: 0
 --- !u!114 &14
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -635,7 +675,11 @@ MonoBehaviour:
     y: 488
     width: 317
     height: 530
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
   m_SearchFilter:
     m_NameFilter: 
     m_ClassNames: []
@@ -665,7 +709,11 @@ MonoBehaviour:
     m_SelectedIDs: 74250000
     m_LastClickedID: 9588
     m_ExpandedIDs: 000000001a270000562700008e270000b2270000242800007228000096280000b0280000d0280000d8280000fe28000006290000162900003029000096290000ba290000162a00001c2a00001e2a0000282a00003c2a00004c2a0000d22a00006430000066300000
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -701,7 +749,11 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: 000000001a270000562700008e270000b2270000b4270000162800002428000072280000b0280000d0280000d8280000fe28000006290000162900003029000096290000ba290000162a00001c2a00001e2a0000282a00003c2a0000d22a00006430000066300000
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -790,7 +842,11 @@ MonoBehaviour:
     y: 92
     width: 314
     height: 926
+<<<<<<< HEAD
 >>>>>>> Minimap marker reimplementation, data stat implementation to health and ammo count UI
+=======
+>>>>>>> DevRichard-UI
+>>>>>>> fa41a64fc2b96f27bf74039ef660f7e2354a4cec
   m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
