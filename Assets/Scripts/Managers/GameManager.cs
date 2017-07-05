@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour {
 	public PlayerUI playerUIScript;
 
 
+	public bool isPlanningPhase;
+
+	public GameObject uiObject,planningPhaseUI;
+
 	void Awake()
 	{
 		if (GM == null) 
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start(){
+//		uiObject.SetActive (false);
 	}
 
 //	[Command]
@@ -48,6 +53,9 @@ public class GameManager : MonoBehaviour {
 		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
 		playerUIScript.playerStatScript = localPlayerStatsScript;
 
+		if(isPlanningPhase){
+			uiObject.SetActive (false);
+		}
 //		Debug.Log ("Player Respawned");
 
 
@@ -62,5 +70,20 @@ public class GameManager : MonoBehaviour {
 
 		localPlayer.GetComponent<PlayerStats> ().CmdEnablePlayer (true);
 		localPlayer.GetComponent<PlayerStats> ().CmdResetStats ();
+
+	}
+
+	public void SetPlanningPhase(bool phase){
+		isPlanningPhase = phase;
+		uiObject.SetActive (true);
+		StartCoroutine ("disableObjects",1f);
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	IEnumerator disableObjects(float t){
+		yield return new WaitForSeconds (t);
+		planningPhaseUI.SetActive (false);
 	}
 }

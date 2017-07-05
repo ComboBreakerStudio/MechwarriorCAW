@@ -20,7 +20,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public ThirdPersonCamera camScript;
 
 	[SerializeField]
-	private Camera cam;
+	public Camera cam;
 
 	[SerializeField]
 	private LayerMask mask;
