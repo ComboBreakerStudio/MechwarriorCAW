@@ -2,31 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
-
-public class AmmoUI : NetworkBehaviour {
-//public class AmmoUI : MonoBehaviour {
+public class AmmoUI : MonoBehaviour {
 
 	[SerializeField]
-	private Text leftAmmo;
+	private GameObject leftAmmo;
 
 	[SerializeField]
-	private Text rightAmmo;
-
-	//[SyncVar]
-	public WeaponSystemStats leftWeaponAmmo, rightWeaponAmmo;
-
-	public PlayerStats playerStats;
+	private GameObject rightAmmo;
 
 	// Use this for initialization
 	void Start () {
-		playerStats.StartStuff ();
-		Debug.Log ("Weapon system data acquired");
-		rightAmmo.gameObject.SetActive (false);
-		Debug.Log ("right side disabled");
-		leftAmmo.text = playerStats.leftWeaponSystemStats.currentAmmo.ToString ();
-		Debug.Log ("ammo data acquired");
+		leftAmmo.GetComponentInChildren<Text>().text = "9";
+		rightAmmo.SetActive (false);
 	}
 	
 	// Update is called once per frame

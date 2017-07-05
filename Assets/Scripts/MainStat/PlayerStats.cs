@@ -43,9 +43,6 @@ public class PlayerStats : NetworkBehaviour {
 
 	//Test
 	public bool setColor;
-	Transform team1Marker;
-	Transform team2Marker;
-	public Transform mapMarker;
 
 //	public void respawn(int id){
 //		GameManager.GM.RespawnPlayer ();
@@ -53,8 +50,6 @@ public class PlayerStats : NetworkBehaviour {
 
 	void Start(){
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
-		foreach (Transform marker in mapMarker.transform)
-			marker.gameObject.SetActive (false);
 
 
 		//Add player to TeamManager
@@ -89,7 +84,6 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
-					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
 				}
 				setColor = true;
 			}
@@ -108,11 +102,9 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 1){
 					meshRenderer [i].material.color = Color.yellow;
-					mapMarker.Find ("RedMapMarker").gameObject.SetActive (true);
 				}
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
-					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
 				}
 				//					setColor = true;
 			}
