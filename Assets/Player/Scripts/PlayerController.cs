@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour {
 
 		playerUIScript = GameObject.Find ("PlayerUI_Canvas").GetComponent<PlayerUI>();
 
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+//		Cursor.lockState = CursorLockMode.Locked;
+//		Cursor.visible = false;
 	}
 
 	// Update is called once per frame
