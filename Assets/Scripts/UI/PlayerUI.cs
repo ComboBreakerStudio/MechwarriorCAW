@@ -20,9 +20,6 @@ public class PlayerUI : MonoBehaviour {
 
 	bool isLocalPlayer;
 
-<<<<<<< HEAD
-	//public
-
 	public Transform HeadHealth;
 	public Transform TorsoHealth;
 	public Transform LeftTorsoHealth;
@@ -31,16 +28,15 @@ public class PlayerUI : MonoBehaviour {
 	public Transform RightTorsoHealth;
 	public Transform RightArmHealth;
 	public Transform RightLegHealth;
-=======
-	public GameObject HeadHealth;
+
+	/*public GameObject HeadHealth;
 	public GameObject TorsoHealth;
 	public GameObject LeftTorsoHealth;
 	public GameObject LeftArmHealth;
 	public GameObject LeftLegHealth;
 	public GameObject RightTorsoHealth;
 	public GameObject RightArmHealth;
-	public GameObject RightLegHealth;
->>>>>>> f86f8d4390b09eef537550f413f91a7b2e8589d7
+	public GameObject RightLegHealth;*/
 
 	public PlayerStats playerStatScript;
 
@@ -104,52 +100,52 @@ public class PlayerUI : MonoBehaviour {
 		if(playerStatScript != null){
 			//Front
 			if (playerStatScript.frontTorso_Health <= 0) {
-				TorsoHealth.SetActive (false);
+				TorsoHealth.gameObject.SetActive (false);
 			} 
 			else {
-				TorsoHealth.SetActive (true);
+				TorsoHealth.gameObject.SetActive (true);
 			}
 			//left torso
 			if (playerStatScript.leftTorso_Health <= 0) {
-				LeftTorsoHealth.SetActive (false);
+				LeftTorsoHealth.gameObject.SetActive (false);
 			} 
 			else {
-				LeftTorsoHealth.SetActive (true);
+				LeftTorsoHealth.gameObject.SetActive (true);
 			}
 			//Right Torso
 			if (playerStatScript.rightTorso_Health <= 0) {
-				RightTorsoHealth.SetActive (false);
+				RightTorsoHealth.gameObject.SetActive (false);
 			} 
 			else {
-				RightTorsoHealth.SetActive (true);
+				RightTorsoHealth.gameObject.SetActive (true);
 			}
 			//Left Weapon
 			if (playerStatScript.leftWeaponSystem_Health <= 0) {
-				LeftArmHealth.SetActive (false);
+				LeftArmHealth.gameObject.SetActive (false);
 			} 
 			else {
-				LeftArmHealth.SetActive (true);
+				LeftArmHealth.gameObject.SetActive (true);
 			}
 			//Right Weapon
 			if (playerStatScript.rightWeaponSystem_Health <= 0) {
-				RightArmHealth.SetActive (false);
+				RightArmHealth.gameObject.SetActive (false);
 			} 
 			else {
-				RightArmHealth.SetActive (true);
+				RightArmHealth.gameObject.SetActive (true);
 			}
 			//Left Leg
 			if (playerStatScript.leftLeg_Health <= 0) {
-				LeftLegHealth.SetActive (false);
+				LeftLegHealth.gameObject.SetActive (false);
 			} 
 			else {
-				LeftLegHealth.SetActive (true);
+				LeftLegHealth.gameObject.SetActive (true);
 			}
 			//Right Leg
 			if (playerStatScript.rightTorso_Health <= 0) {
-				RightLegHealth.SetActive (false);
+				RightLegHealth.gameObject.SetActive (false);
 			} 
 			else {
-				RightLegHealth.SetActive (true);
+				RightLegHealth.gameObject.SetActive (true);
 			}
 		}
 	}
