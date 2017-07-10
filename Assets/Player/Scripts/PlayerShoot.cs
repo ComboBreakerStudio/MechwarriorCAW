@@ -20,7 +20,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public ThirdPersonCamera camScript;
 
 	[SerializeField]
-	private Camera cam;
+	public Camera cam;
 
 	[SerializeField]
 	private LayerMask mask;
@@ -116,20 +116,26 @@ public class PlayerShoot : NetworkBehaviour {
 //		RpcShoot ();
 
 		if (Physics.Raycast (weapon.gunEnd.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask)) {
-			Debug.Log (_hit.collider.name);
+			Debug.Log ("Tag " + _hit.collider.gameObject.tag);
 //			if (_hit.collider.tag == PLAYER_TAG)
 //			{
-//				CmdPlayerShot (_hit.collider.name);
+//				CmdPlayerShot (_hit.collider.name);aa
 //			}
 //			CmdOnHit(_hit.point, _hit.normal);
 
-			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage> ();
+			if(_hit.collider.gameObject.tag == "Player"){
+				Debug.Log ("MeleePlayer");
+				DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage> ();
 
-			if (dm != null) {
-//				dm.ApplyDamage ((int)weapon.damage);
-				Debug.Log ("ApplyDamage");
-				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
-//				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
+				if (dm != null) {
+					//				dm.ApplyDamage ((int)weapon.damage);
+					Debug.Log ("ApplyDamage");
+					CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
+					//				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
+				}
+			}
+			else if(_hit.collider.CompareTag("AI")){
+				playerStatsScript.CmdDamageAI (_hit.collider.name, (int)weapon.damage);
 			}
 
 			if (weapon == leftWeapon) {

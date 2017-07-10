@@ -12,6 +12,8 @@ public class PlayerSetup : NetworkBehaviour {
 	string remoteLayerName = "RemotePlayer";
 
 	Camera sceneCamera;
+	[SyncVar]
+	public string idName;
 
 	void Start()
 	{
@@ -42,14 +44,23 @@ public class PlayerSetup : NetworkBehaviour {
 	{
 		string _ID = "Player" + GetComponent<NetworkIdentity> ().netId;
 		transform.name = _ID;
+		idName = _ID;
+		CmdChangeName (idName);
+	}
+
+	void ChangeName(string ID){
+		transform.name = ID;
 	}
 
 	void AssignRemoteLayer()
 	{
 		Transform[] go = GetComponentsInChildren<Transform> ();
-//		gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
+		gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
 		for(int i = 0; i < go.Length; i++){
-			go [i].gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
+			if(go[i].gameObject.layer != LayerMask.NameToLayer("Minimap")){
+				go [i].gameObject.layer = LayerMask.NameToLayer (remoteLayerName);
+			}
+
 		}
 	}
 
@@ -74,6 +85,20 @@ public class PlayerSetup : NetworkBehaviour {
 		{
 			sceneCamera.gameObject.SetActive (true);
 		}
+	}
+
+	[Command]
+	public void CmdChangeName(string name){
+		idName = name;
+	}
+
+	void Update(){
+		if(transform.name != idName){
+			transform.name = idName;
+		}
+//		if(transform.name == name){
+//			this.enabled = false;
+//		}
 	}
 		/*
 	[SyncVar] // Only sync Float int string etc normal variable - not GameObject

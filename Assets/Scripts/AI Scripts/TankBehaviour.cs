@@ -26,7 +26,7 @@ public class TankBehaviour : NetworkBehaviour {
     [Header("AI Sight")]
     public float viewRadius;
     public Transform targetposition;
-    public Transform AIpoint;
+	public Vector3 AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -50,6 +50,10 @@ public class TankBehaviour : NetworkBehaviour {
 
 
 
+    [Header("AI Circle Around")]
+    public Transform childTarget;
+    public Transform TargetRoot;
+
 
     [Header("Update Time for it to see target")]
     public float timeInterval;
@@ -68,6 +72,8 @@ public class TankBehaviour : NetworkBehaviour {
 
     void Update()
     {
+        
+
         //I Change this keycode if you guys decide to change to something
         if (Input.GetKeyDown(KeyCode.F2))
         {
@@ -80,18 +86,10 @@ public class TankBehaviour : NetworkBehaviour {
                 PlayerCommandToWander = false;
             }
         }
-        //I Check if there is a target visible within the sight radius
-        if (visibleTarget.Contains(targetposition))
-        {
-            agent.isStopped = true;
 
-            Firing();
-        }
         //I IF there is no target, basically the AI go Idle, then the player can command to wander or move them.
-        else if (!visibleTarget.Contains(targetposition))
+        if (!visibleTarget.Contains(targetposition))
         {
-            agent.isStopped = false;
-
 
             if (PlayerCommandToWander == false)
                 behaviour = AIState.Idle;
@@ -99,28 +97,51 @@ public class TankBehaviour : NetworkBehaviour {
                 behaviour = AIState.Wandering;
         }
 
+        //I Check if there is a target visible within the sight radius
+        else if (visibleTarget.Contains(targetposition))
+        {
+            //I I just want to avoid null error
+            if (TargetRoot != null)
+            {
+                if (childTarget == null)
+                {
+                    childTarget = GameObject.FindWithTag("Target").transform;
+                }
+
+            }
+
+            //I If there is a child target that rotate, the tank will do the circling
+            if(childTarget!=null)
+            {
+                agent.SetDestination(childTarget.transform.position);
+            }
+
+            Firing();
+        }
+
         //I This is when the player can command what the AI to move somewhere.
         if (behaviour == AIState.Idle)
         {
-            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
+            float distToTarget = Vector3.Distance(transform.position, AIpoint);
 
             //I If the AI is within the destination, the AI will not move if there is no command.
             if (distToTarget < 20f)
             {
                 agent.isStopped = true;
+				behaviour = AIState.Wandering;
             }
 
             //I Change this keycode if you guys decide to change to something
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                //Debug.Log("Button Pressed");
-                //If the AI is not within the destination specified, the AI will not even move.
-                if (distToTarget > 20f)
-                {
-                    agent.isStopped = false;
-                    agent.SetDestination(AIpoint.position);
-                }
-            }
+//            if (Input.GetKeyDown(KeyCode.F1))
+//            {
+//                //Debug.Log("Button Pressed");
+//                //If the AI is not within the destination specified, the AI will not even move.
+//                if (distToTarget > 20f)
+//                {
+//                    agent.isStopped = false;
+//                    agent.SetDestination(AIpoint);
+//                }
+//            }
                 
         }
 
@@ -188,7 +209,7 @@ public class TankBehaviour : NetworkBehaviour {
         behaviour = AIState.InSight;
 
         Vector3 direction = targetposition.position;
-        direction.y = 0;
+        //direction.y = 0;
 
         tankHead.transform.LookAt(direction);
 
@@ -201,7 +222,7 @@ public class TankBehaviour : NetworkBehaviour {
                 //I This part I comment first, since I don't know either you want to keep spawning bullet or using object pooling
 
               //Debug.Log("Firing");
-              //CmdSpawn();
+              CmdSpawn();
               fireInterval = 2.0f;
              }
         }
@@ -219,6 +240,7 @@ public class TankBehaviour : NetworkBehaviour {
         {
             targetposition = targetInViewRadius[i].transform;
 
+
             //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
             //I The code is basically from sebastian lague, except I don't make it cone of vision style.
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
@@ -227,6 +249,13 @@ public class TankBehaviour : NetworkBehaviour {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
+                    
+
+                    if (GameObject.Find("RotateRoot(Clone)") == null)
+                    {
+                        CreateTargetRoot();
+                    }
+
                     visibleTarget.Add(targetposition);
                 }
             }
@@ -239,13 +268,28 @@ public class TankBehaviour : NetworkBehaviour {
           return Vector3.Distance(this.transform.position, targetposition.position);
     }
 
+    void CreateTargetRoot()
+    {
+        Transform childObject = Instantiate(TargetRoot);
+        //I Reposition the target root
+        if ((TargetRoot.position - targetposition.position).sqrMagnitude<=0.2f*0.2f)
+        {
+            TargetRoot.position = targetposition.position;
+        }
+        childObject.transform.parent = targetposition;
+    }
 
     //I I comment this part for now since this is for testing part
     [Command]
     void CmdSpawn()
     {
-        GameObject go = (GameObject)Instantiate(bulletPrefab, firingPoint.position,Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(bulletPrefab, firingPoint.position,tankHead.transform.rotation);
         NetworkServer.Spawn(go);
     }
 
+	public void SetAIPoint(Vector3 positon){
+		Debug.Log ("AIPoint : " + positon);
+		behaviour = AIState.Idle;
+		AIpoint = positon;
+	}
 }

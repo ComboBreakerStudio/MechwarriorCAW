@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: dfc3230307146f44d8963d4c3ef4b93b
+timeCreated: 1499364613
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box010
+    100002: CannonBarrel
+    100004: Canon_Recoil_Controller
+    100006: Line009
+    100008: //RootNode
+    100010: AutoCannon
+    100012: Bone002(mirrored)
+    100014: Bone002(mirrored)001
+    100016: Bone003(mirrored)
+    100018: Bone003(mirrored)001
+    100020: Hydraulic_Wire
+    100022: Left_Arm
+    100024: Left_Arm 1
+    400000: Box010
+    400002: CannonBarrel
+    400004: Canon_Recoil_Controller
+    400006: Line009
+    400008: //RootNode
+    400010: AutoCannon
+    400012: Bone002(mirrored)
+    400014: Bone002(mirrored)001
+    400016: Bone003(mirrored)
+    400018: Bone003(mirrored)001
+    400020: Hydraulic_Wire
+    400022: Left_Arm
+    400024: Left_Arm 1
+    2300000: Box010
+    2300002: CannonBarrel
+    2300004: Line009
+    2300006: AutoCannon
+    2300008: Hydraulic_Wire
+    2300010: Left_Arm 1
+    3300000: Box010
+    3300002: CannonBarrel
+    3300004: Line009
+    3300006: AutoCannon
+    3300008: Hydraulic_Wire
+    3300010: Left_Arm 1
+    4300000: Box010
+    4300002: CannonBarrel
+    4300004: Line009
+    4300006: AutoCannon
+    4300008: Hydraulic_Wire
+    4300010: Left_Arm
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

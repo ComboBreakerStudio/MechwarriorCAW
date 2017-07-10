@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour {
 
 	public PlayerUI playerUIScript;
 
+	public bool isPlanningPhase;
+
+	public GameObject uiObject,planningPhaseUI;
+
+	public SlotRegionUI[] slotRegionUIScript;
+
 
 	void Awake()
 	{
@@ -32,6 +38,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start(){
+//		uiObject.SetActive (false);
 	}
 
 //	[Command]
@@ -48,6 +55,9 @@ public class GameManager : MonoBehaviour {
 		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
 		playerUIScript.playerStatScript = localPlayerStatsScript;
 
+		if(isPlanningPhase){
+			uiObject.SetActive (false);
+		}
 //		Debug.Log ("Player Respawned");
 
 
@@ -62,5 +72,39 @@ public class GameManager : MonoBehaviour {
 
 		localPlayer.GetComponent<PlayerStats> ().CmdEnablePlayer (true);
 		localPlayer.GetComponent<PlayerStats> ().CmdResetStats ();
+
 	}
+
+	public void SetPlanningPhase(bool phase){
+		isPlanningPhase = phase;
+		uiObject.SetActive (true);
+		StartCoroutine ("disableObjects",1f);
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	IEnumerator disableObjects(float t){
+		yield return new WaitForSeconds (t);
+		planningPhaseUI.SetActive (false);
+	}
+
+	#region AI Region
+
+
+	//1 = High, 2 = Low, 3 = midHigh, 4 = midRight, 5 = midMid, 6 = midLeft
+	public void SetAIPosition(int unitType, int spawnPointType){
+//		GameObject[] ai;
+
+//		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+//			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == localPlayer.name){
+//				aiObject.Add (AIManager.instance.AIUnits[i]);
+//			}
+//		}
+
+		localPlayerStatsScript.CmdSetUnitPosition (unitType, spawnPointType);
+//		localPlayerStatsScript.CmdAddUnit ();
+	}
+
+	#endregion
 }

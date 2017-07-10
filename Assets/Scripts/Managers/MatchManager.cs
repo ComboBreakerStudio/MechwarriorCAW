@@ -17,6 +17,7 @@ public class MatchManager : NetworkBehaviour {
 
 	public Text gameStatsText;
 
+
 	// Use this for initialization
 	void Awake () {
 		instance = this;

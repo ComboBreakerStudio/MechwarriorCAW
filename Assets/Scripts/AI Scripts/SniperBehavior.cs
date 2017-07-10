@@ -21,7 +21,7 @@ public class SniperBehavior : NetworkBehaviour {
     [Header("AI Sight")]
     public float viewRadius;
     public Transform targetposition;
-    public Transform AIpoint;
+	public Vector3 AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -32,6 +32,8 @@ public class SniperBehavior : NetworkBehaviour {
     public AIState behaviour = AIState.Wandering;
     public AISetupBehaviour setupbehaviour = AISetupBehaviour.NotSetup;
 
+    [Header("Laser")]
+    public LineRenderer lineRenderer;
 
     [Header("AI wandering Range")]
     public float timer;
@@ -101,6 +103,11 @@ public class SniperBehavior : NetworkBehaviour {
 
         else if (!visibleTarget.Contains(targetposition))
         {
+            if (lineRenderer.enabled)
+            {
+                lineRenderer.enabled = false;
+            }
+
             agent.isStopped = false;
 
             if (PlayerCommandToWander == false)
@@ -112,15 +119,16 @@ public class SniperBehavior : NetworkBehaviour {
 
         if (behaviour == AIState.Idle)
         {
-            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
+            float distToTarget = Vector3.Distance(transform.position, AIpoint);
 
             if (distToTarget < 10f)
-            {
-                agent.isStopped = true;
+			{
+				agent.isStopped = true;
+				behaviour = AIState.Wandering;
 
             }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 if (setupbehaviour == AISetupBehaviour.Setup)
                 {
@@ -132,7 +140,7 @@ public class SniperBehavior : NetworkBehaviour {
                     {
                         agent.isStopped = false;
 
-                        agent.SetDestination(AIpoint.position);
+                        agent.SetDestination(AIpoint);
                     }
                 } 
             }
@@ -202,6 +210,10 @@ public class SniperBehavior : NetworkBehaviour {
 
     void Firing()
     {
+        if (!lineRenderer.enabled)
+        {
+            lineRenderer.enabled = true;
+        }
 
         Vector3 direction = targetposition.position;
         direction.y = 0;
@@ -215,6 +227,8 @@ public class SniperBehavior : NetworkBehaviour {
             {
                 //Debug.Log("FIRING");
                 //CmdSpawn();
+                lineRenderer.SetPosition(0,firingPoint.position);
+                lineRenderer.SetPosition(1, targetposition.position);
                 fireInterval = 2.0f;
             }
         }
@@ -263,4 +277,9 @@ public class SniperBehavior : NetworkBehaviour {
         NetworkServer.Spawn(go);
     }
 
+	public void SetAIPoint(Vector3 positon){
+		Debug.Log ("AIPoint : " + positon);
+		behaviour = AIState.Idle;
+		AIpoint = positon;
+	}
 }

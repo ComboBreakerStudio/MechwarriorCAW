@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 
 public class PlayerStats : NetworkBehaviour {
@@ -16,6 +17,9 @@ public class PlayerStats : NetworkBehaviour {
 	//MechParts
 	[SyncVar]
 	public bool leftTorsoDown, rightTorsoDown, leftWeaponDown, rightWeaponDown, leftLegDown, rightLegDown;
+
+	//Check LocalPlayer
+	public bool isLocal;
 
 	public GameObject explodeVFX;
 
@@ -43,18 +47,133 @@ public class PlayerStats : NetworkBehaviour {
 
 	//Test
 	public bool setColor;
-	Transform team1Marker;
-	Transform team2Marker;
-	public Transform mapMarker;
+
+	//UI
+	public AmmoUI ammoUIScript;
 
 //	public void respawn(int id){
 //		GameManager.GM.RespawnPlayer ();
-//	}
+	//	}
+
+	#region AI region ================================================================================================
+
+	public List<GameObject> aiObject;
+
+	[Command]
+	public void CmdSpawnUnits(string ownerName, int unitType){
+		Debug.Log ("CmdSpawnUnits TeamID : " + teamID);
+		if(teamID == 1){
+			PlanningPhaseManager.instance.CmdSpawnAI (ownerName, unitType, GameManager.GM.respawnPosition_Team1[0].transform.position);
+		}
+		else if(teamID == 2){
+			PlanningPhaseManager.instance.CmdSpawnAI (ownerName, unitType, GameManager.GM.respawnPosition_Team1[0].transform.position);
+		}
+
+	}
+
+	[Command]
+	public void CmdAddUnit(){
+		StopCoroutine ("addUnitTimer");
+		StartCoroutine ("addUnitTimer", 2f);
+//		Debug.Log ("AddUnit");
+//		aiObject.Clear ();
+//		Debug.Log (AIManager.instance.AIUnits.Count);
+//		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+//			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == GameManager.GM.localPlayer.name){
+//				aiObject.Add (AIManager.instance.AIUnits[i]);
+//				Debug.Log ("Added");
+//			}
+//		}
+	}
+
+	public void AddUnit(){
+
+		Debug.Log ("AddUnit");
+		aiObject.Clear ();
+		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == this.gameObject.name){
+				aiObject.Add (AIManager.instance.AIUnits[i]);
+				Debug.Log ("Added");
+			}
+		}
+	}
+
+	IEnumerator addUnitTimer(float t){
+		yield return new WaitForSeconds (t);
+		AddUnit ();
+	}
+
+	[Command]
+	public void CmdSetUnitPosition(int unitType, int positionType){
+		//1 = High, 2 = Low, 3 = midHigh, 4 = midRight, 5 = midMid, 6 = midLeft
+
+		Debug.Log ("Player Name: " + this.gameObject.name);
+
+		AIStats aiStats;
+
+		for(int i = 0; i < aiObject.Count; i++){
+			aiStats = aiObject [i].GetComponent<AIStats> ();
+			Debug.Log ("getStats "+ this.gameObject.name);
+			if(aiStats.OwnerName == this.gameObject.name){
+				Debug.Log ("found AI "+ this.gameObject.name);
+				//tank Units
+				if(!aiStats.isPlanned){
+					Debug.Log ("Not Planned " + this.gameObject.name);
+					if(aiStats.unitType == unitType){
+						Debug.Log ("positionTYpe : " + positionType);
+						if(teamID == 1){
+//							aiObject[i].transform.position = GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position;
+							aiStats.NavAgent.enabled = false;
+							aiObject[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
+							aiStats.NavAgent.enabled = true;
+							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+							Debug.Log ("SetPosition 1" + GameManager.GM.respawnPosition_Team1[0].transform.position);
+						}
+						else if(teamID == 2){
+//							aiObject[i].transform.position = GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position;
+							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.NavAgent.enabled = false;
+							aiObject[i].transform.position = GameManager.GM.respawnPosition_Team2[0].transform.position;
+							aiStats.NavAgent.enabled = true;
+							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							Debug.Log ("SetPosition 2" + GameManager.GM.respawnPosition_Team2[0].transform.position);
+						}
+						aiStats.isPlanned = true;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	//Damage AI
+	[Command]
+	public void CmdDamageAI(string aiName, int damage){
+		Debug.Log (aiName);
+		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+			if(AIManager.instance.AIUnits[i].name == aiName){
+				AIManager.instance.AIUnits [i].GetComponent<AIStats> ().curHealth -= damage;
+			}
+		}
+	}
+
+	#endregion //=======================================================================================================
+
+	void Awake(){
+
+		if(isLocalPlayer){
+			Debug.Log ("isLocalAwake");
+			isLocal = true;
+			GameManager.GM.localPlayerStatsScript = this;
+		}
+
+	}
 
 	void Start(){
+
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
-		foreach (Transform marker in mapMarker.transform)
-			marker.gameObject.SetActive (false);
 
 
 		//Add player to TeamManager
@@ -73,7 +192,6 @@ public class PlayerStats : NetworkBehaviour {
 			GameManager.GM.localPlayerStatsScript = this;
 			GameManager.GM.RespawnPlayer ();
 
-
 			//			RpcRespawnPlayer ();
 		}
 		else if(!isLocalPlayer){
@@ -89,7 +207,6 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
-					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
 				}
 				setColor = true;
 			}
@@ -108,11 +225,9 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 1){
 					meshRenderer [i].material.color = Color.yellow;
-					mapMarker.Find ("RedMapMarker").gameObject.SetActive (true);
 				}
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
-					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
 				}
 				//					setColor = true;
 			}
@@ -122,12 +237,20 @@ public class PlayerStats : NetworkBehaviour {
 //			return;
 //		}
 
+		if(isLocalPlayer){
+//			Debug.Log ("isLocal");
+//			isLocal = true;
+		}
+
 		if(!isAlive){
 			return;
 		}
 		//Test
 		if(isLocalPlayer){
-
+//			if(frontTorso_Health > 0 && !this.gameObject.activeSelf){
+			if(frontTorso_Health > 0){
+				this.gameObject.SetActive (true);
+			}
 			//Eject
 			if(Input.GetKeyDown(KeyCode.R)){
 				Debug.Log ("Eject");
@@ -273,10 +396,16 @@ public class PlayerStats : NetworkBehaviour {
 					}
 				}
 			}
+
 		}
 
 
 		GetComponent<PlayerShoot> ().SetWeapon();
+		//UI
+		ammoUIScript.StartStuffs ();
+		if(GameManager.GM.gameObject == this.gameObject){
+			GameManager.GM.playerUIScript.StartStuffs ();
+		}
 //		CmdResetStats ();
 		if(isServer){
 			RpcStartStuff ();
@@ -334,6 +463,11 @@ public class PlayerStats : NetworkBehaviour {
 
 
 		GetComponent<PlayerShoot> ().SetWeapon();
+		//UI
+		ammoUIScript.StartStuffs ();
+		if(GameManager.GM.gameObject == this.gameObject){
+			GameManager.GM.playerUIScript.StartStuffs ();
+		}
 		CmdResetStats ();
 	}
 
@@ -371,6 +505,9 @@ public class PlayerStats : NetworkBehaviour {
 
 	[Command]
 	public void CmdResetStats(){
+		if(GameManager.GM.isPlanningPhase){
+			return;
+		}
 		frontTorso_Health = frontTorsoStats.maxHealth;
 		backTorso_Health = backTorsoStats.maxHealth;
 		leftTorso_Health = leftTorsoStats.maxHealth;
@@ -435,8 +572,10 @@ public class PlayerStats : NetworkBehaviour {
 
 	[ClientRpc]
 	public void RpcRespawnPlayer(){
+		Debug.Log ("Respawn Player");
 		if(GameManager.GM.localPlayer == this.gameObject){
 			GameManager.GM.RespawnPlayer ();
+//			this.gameObject.SetActive (true);
 		}
 
 	}
