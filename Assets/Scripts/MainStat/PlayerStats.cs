@@ -58,6 +58,13 @@ public class PlayerStats : NetworkBehaviour {
 	#region AI region ================================================================================================
 
 	public List<GameObject> aiObject;
+	public List<PlanningPhase_DragableUI> aiUI;
+
+	public void AddaiUI(PlanningPhase_DragableUI temp){
+
+		aiUI.Remove (temp);
+		aiUI.Add (temp);
+	}
 
 	[Command]
 	public void CmdSpawnUnits(string ownerName, int unitType){
@@ -126,24 +133,64 @@ public class PlayerStats : NetworkBehaviour {
 							aiStats.NavAgent.enabled = false;
 							aiObject[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
 							aiStats.NavAgent.enabled = true;
-							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
-							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+//							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+							aiStats.NavAgent.SetDestination (aiUI[i].uiAIStatsScript.destination);
+//							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+							aiStats.SetDestination (aiUI[i].uiAIStatsScript.destination);
 							Debug.Log ("SetPosition 1" + GameManager.GM.respawnPosition_Team1[0].transform.position);
 						}
 						else if(teamID == 2){
 //							aiObject[i].transform.position = GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position;
-							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+//							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
 							aiStats.NavAgent.enabled = false;
 							aiObject[i].transform.position = GameManager.GM.respawnPosition_Team2[0].transform.position;
 							aiStats.NavAgent.enabled = true;
-							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
-							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+//							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.NavAgent.SetDestination (aiUI[i].uiAIStatsScript.destination);
+//							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.SetDestination (aiUI[i].uiAIStatsScript.destination);
 							Debug.Log ("SetPosition 2" + GameManager.GM.respawnPosition_Team2[0].transform.position);
 						}
-						aiStats.isPlanned = true;
+//						aiStats.isPlanned = true;
 						break;
 					}
 				}
+			}
+		}
+	}
+
+	[Command]
+	public void CmdSetUnitPosition_UI(int teamID ,string aiName, Vector3 destination){
+		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+			if(AIManager.instance.AIUnits[i].name == aiName){
+				AIStats aiStats = AIManager.instance.AIUnits[i].GetComponent<AIStats>();
+
+				aiStats.NavAgent.enabled = false;
+
+				if(!aiStats.isRespawned){
+					if(teamID == 1){
+						aiObject[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
+						aiStats.isRespawned = true;
+					}
+					else if(teamID == 2){
+						aiObject [i].transform.position = GameManager.GM.respawnPosition_Team2 [0].transform.position;
+						aiStats.isRespawned = true;
+					}
+				}
+
+				aiStats.NavAgent.enabled = true;
+				aiStats.NavAgent.SetDestination (destination);
+				aiStats.SetDestination (destination);
+			}
+		}
+	}
+
+	public void PlanAI(int unitType){
+		for(int i = 0; i < aiUI.Count; i++){
+			AIStats _aiStatsScript = AIManager.instance.AIUnits [i].GetComponent<AIStats> ();
+			if(!_aiStatsScript.isPlanned){
+				_aiStatsScript.isPlanned = true;
+				aiUI [i].aiName = _aiStatsScript.gameObject.name;
 			}
 		}
 	}

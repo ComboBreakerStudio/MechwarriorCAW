@@ -41,7 +41,7 @@ public class SlotRegionUI : MonoBehaviour, IDropHandler{
 		}
 		if(!GameManager.GM.isPlanningPhase && isRegion){
 			isSpawned = true;
-			uiAiStatsScript.SetTeamID (destinationPosition);
+//			uiAiStatsScript.SetTeamID (destinationPosition);
 			uiAiStatsScript.spawnPointPosition = spawnPointPosition;
 			SetPosition ();
 			//here to set position

@@ -21,7 +21,7 @@ public class SniperBehavior : NetworkBehaviour {
     [Header("AI Sight")]
     public float viewRadius;
     public Transform targetposition;
-	public Vector3 AIpoint;
+    public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -87,7 +87,7 @@ public class SniperBehavior : NetworkBehaviour {
         // Determine what to do if there is a target inside the List
         if (visibleTarget.Contains(targetposition))
         {
-            agent.isStopped = true;
+            //agent.isStopped = true;
 
 
             if (setupbehaviour == AISetupBehaviour.NotSetup)
@@ -108,7 +108,7 @@ public class SniperBehavior : NetworkBehaviour {
                 lineRenderer.enabled = false;
             }
 
-            agent.isStopped = false;
+            //agent.isStopped = false;
 
             if (PlayerCommandToWander == false)
                 behaviour = AIState.Idle;
@@ -119,12 +119,15 @@ public class SniperBehavior : NetworkBehaviour {
 
         if (behaviour == AIState.Idle)
         {
-            float distToTarget = Vector3.Distance(transform.position, AIpoint);
+            if (AIpoint == null)
+            {
+                return;
+            }
+            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
 
             if (distToTarget < 10f)
-			{
-				agent.isStopped = true;
-				behaviour = AIState.Wandering;
+            {
+                agent.isStopped = true;
 
             }
 
@@ -140,7 +143,7 @@ public class SniperBehavior : NetworkBehaviour {
                     {
                         agent.isStopped = false;
 
-                        agent.SetDestination(AIpoint);
+                        agent.SetDestination(AIpoint.position);
                     }
                 } 
             }
@@ -277,9 +280,4 @@ public class SniperBehavior : NetworkBehaviour {
         NetworkServer.Spawn(go);
     }
 
-	public void SetAIPoint(Vector3 positon){
-		Debug.Log ("AIPoint : " + positon);
-		behaviour = AIState.Idle;
-		AIpoint = positon;
-	}
 }

@@ -69,7 +69,7 @@ public class PlanningPhase_UI_AIStats : NetworkBehaviour {
 		}
 	}
 
-	public void SetTeamID(Vector3 position){
+	public void SetTeamID(){
 		teamID = GameManager.GM.localPlayerStatsScript.teamID;
 //		CmdSetTeamID (aiName, teamID, position);
 	}

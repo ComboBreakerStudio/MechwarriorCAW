@@ -21,12 +21,14 @@ public class TankBehaviour : NetworkBehaviour {
 
     NavMeshAgent agent;
 
+    public TeamManager team;
+
     public List<Transform> visibleTarget = new List<Transform>();
 
     [Header("AI Sight")]
     public float viewRadius;
     public Transform targetposition;
-	public Vector3 AIpoint;
+    public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -61,18 +63,23 @@ public class TankBehaviour : NetworkBehaviour {
 
     public bool PlayerCommandToWander;
 
+
 	// Use this for initialization
     public override void OnStartServer()
     {
         agent = GetComponent<NavMeshAgent>();
 
+        team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
         StartCoroutine(AITankBehaviour());
 	}
 
     void Update()
     {
-        
+        if(childTarget!=null)
+        {
+            agent.SetDestination(childTarget.transform.position);
+        }
 
         //I Change this keycode if you guys decide to change to something
         if (Input.GetKeyDown(KeyCode.F2))
@@ -81,6 +88,7 @@ public class TankBehaviour : NetworkBehaviour {
             {
                 PlayerCommandToWander = true;
             }
+
             else if (PlayerCommandToWander == true)
             {
                 PlayerCommandToWander = false;
@@ -100,48 +108,32 @@ public class TankBehaviour : NetworkBehaviour {
         //I Check if there is a target visible within the sight radius
         else if (visibleTarget.Contains(targetposition))
         {
-            //I I just want to avoid null error
-            if (TargetRoot != null)
-            {
-                if (childTarget == null)
-                {
-                    childTarget = GameObject.FindWithTag("Target").transform;
-                }
-
-            }
-
-            //I If there is a child target that rotate, the tank will do the circling
-            if(childTarget!=null)
-            {
-                agent.SetDestination(childTarget.transform.position);
-            }
 
             Firing();
+
         }
 
         //I This is when the player can command what the AI to move somewhere.
         if (behaviour == AIState.Idle)
         {
-            float distToTarget = Vector3.Distance(transform.position, AIpoint);
-
-            //I If the AI is within the destination, the AI will not move if there is no command.
-            if (distToTarget < 20f)
+            if (AIpoint == null)
             {
-                agent.isStopped = true;
-				behaviour = AIState.Wandering;
+                return;
             }
+            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
+
+
 
             //I Change this keycode if you guys decide to change to something
-//            if (Input.GetKeyDown(KeyCode.F1))
-//            {
-//                //Debug.Log("Button Pressed");
-//                //If the AI is not within the destination specified, the AI will not even move.
-//                if (distToTarget > 20f)
-//                {
-//                    agent.isStopped = false;
-//                    agent.SetDestination(AIpoint);
-//                }
-//            }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                //Debug.Log("Button Pressed");
+                //If the AI is not within the destination specified, the AI will not even move.
+                if (distToTarget > 20f)
+                {
+                    agent.SetDestination(AIpoint.position);
+                }
+            }
                 
         }
 
@@ -206,6 +198,8 @@ public class TankBehaviour : NetworkBehaviour {
     //I AI Insight
     void Firing()
     {
+
+        Debug.Log("Fire");
         behaviour = AIState.InSight;
 
         Vector3 direction = targetposition.position;
@@ -226,6 +220,7 @@ public class TankBehaviour : NetworkBehaviour {
               fireInterval = 2.0f;
              }
         }
+
 
     }
 
@@ -249,14 +244,20 @@ public class TankBehaviour : NetworkBehaviour {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    
-
-                    if (GameObject.Find("RotateRoot(Clone)") == null)
+                    for(int j=0;j<team.team1.Count;j++)
                     {
-                        CreateTargetRoot();
-                    }
+                        if(team.team1[j])
+                        {
+                            visibleTarget.Add(targetposition);
+                        }
 
-                    visibleTarget.Add(targetposition);
+                        if (GameObject.FindWithTag("Target") == null)
+                        {
+
+                            CreateTargetRoot();
+
+                        }
+                    }
                 }
             }
         }
@@ -271,13 +272,15 @@ public class TankBehaviour : NetworkBehaviour {
     void CreateTargetRoot()
     {
         Transform childObject = Instantiate(TargetRoot);
-        //I Reposition the target root
-        if ((TargetRoot.position - targetposition.position).sqrMagnitude<=0.2f*0.2f)
-        {
-            TargetRoot.position = targetposition.position;
-        }
-        childObject.transform.parent = targetposition;
+        childObject.transform.SetParent(targetposition,false);
+        //childObject.transform.parent = targetposition;
+        childTarget = GameObject.FindWithTag("Target").transform;
+
+        //TargetRoot.position =  Vector3.zero;
+
     }
+
+
 
     //I I comment this part for now since this is for testing part
     [Command]
@@ -287,9 +290,4 @@ public class TankBehaviour : NetworkBehaviour {
         NetworkServer.Spawn(go);
     }
 
-	public void SetAIPoint(Vector3 positon){
-		Debug.Log ("AIPoint : " + positon);
-		behaviour = AIState.Idle;
-		AIpoint = positon;
-	}
 }

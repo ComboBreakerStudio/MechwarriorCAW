@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.AI;
 
 public class AIStats : NetworkBehaviour {
+    
 	[SyncVar]
 	public int teamID;
 	[SyncVar]
@@ -16,7 +17,7 @@ public class AIStats : NetworkBehaviour {
 
 	public int unitType;
 
-	public bool isPlanned;
+	public bool isPlanned, isRespawned;
 
 	public NavMeshAgent NavAgent;
 
