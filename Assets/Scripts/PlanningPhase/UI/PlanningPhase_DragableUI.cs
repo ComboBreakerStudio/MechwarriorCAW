@@ -87,8 +87,9 @@ public class PlanningPhase_DragableUI : MonoBehaviour , IBeginDragHandler, IDrag
 		//		uiAiStatsScript.SetPosition ();
 		//		}
 //				GameManager.GM.localPlayerStatsScript.CmdSetUnitPosition(uiAIStatsScript.unitType, spawnPointPosition);
-		GameManager.GM.localPlayerStatsScript.PlanAI (uiAIStatsScript.unitType);
-		GameManager.GM.localPlayerStatsScript.CmdSetUnitPosition_UI(uiAIStatsScript.teamID, aiName, uiAIStatsScript.destination);
+//		Debug.Log(uiAIStatsScript.unitType);
+		GameManager.GM.localPlayerStatsScript.PlanAI (uiAIStatsScript.unitType, GameManager.GM.localPlayer.name, this);
+		GameManager.GM.localPlayerStatsScript.CmdSetUnitPosition_UI(aiName, uiAIStatsScript.destination);
 	}
 
 }

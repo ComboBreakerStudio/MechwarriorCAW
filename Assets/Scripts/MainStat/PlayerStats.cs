@@ -92,6 +92,10 @@ public class PlayerStats : NetworkBehaviour {
 //			}
 //		}
 	}
+	[ClientRpc]
+	public void RpcAddUnit(){
+		AddUnit ();
+	}
 
 	public void AddUnit(){
 
@@ -101,6 +105,7 @@ public class PlayerStats : NetworkBehaviour {
 			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == this.gameObject.name){
 				aiObject.Add (AIManager.instance.AIUnits[i]);
 				Debug.Log ("Added");
+				AIManager.instance.AIUnits [i].GetComponent<AIStats> ().teamID = teamID;
 			}
 		}
 	}
@@ -108,6 +113,7 @@ public class PlayerStats : NetworkBehaviour {
 	IEnumerator addUnitTimer(float t){
 		yield return new WaitForSeconds (t);
 		AddUnit ();
+		RpcAddUnit ();
 	}
 
 	[Command]
@@ -160,7 +166,7 @@ public class PlayerStats : NetworkBehaviour {
 	}
 
 	[Command]
-	public void CmdSetUnitPosition_UI(int teamID ,string aiName, Vector3 destination){
+	public void CmdSetUnitPosition_UI(string aiName, Vector3 destination){
 		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
 			if(AIManager.instance.AIUnits[i].name == aiName){
 				AIStats aiStats = AIManager.instance.AIUnits[i].GetComponent<AIStats>();
@@ -169,11 +175,11 @@ public class PlayerStats : NetworkBehaviour {
 
 				if(!aiStats.isRespawned){
 					if(teamID == 1){
-						aiObject[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
+						AIManager.instance.AIUnits[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
 						aiStats.isRespawned = true;
 					}
 					else if(teamID == 2){
-						aiObject [i].transform.position = GameManager.GM.respawnPosition_Team2 [0].transform.position;
+						AIManager.instance.AIUnits [i].transform.position = GameManager.GM.respawnPosition_Team2 [0].transform.position;
 						aiStats.isRespawned = true;
 					}
 				}
@@ -185,12 +191,26 @@ public class PlayerStats : NetworkBehaviour {
 		}
 	}
 
-	public void PlanAI(int unitType){
+	public void PlanAI(int unitType, string ownerName, PlanningPhase_DragableUI _aiUI){
 		for(int i = 0; i < aiUI.Count; i++){
-			AIStats _aiStatsScript = AIManager.instance.AIUnits [i].GetComponent<AIStats> ();
-			if(!_aiStatsScript.isPlanned){
-				_aiStatsScript.isPlanned = true;
-				aiUI [i].aiName = _aiStatsScript.gameObject.name;
+
+			if(aiUI[i] == _aiUI){
+//				Debug.Log ("Hi");
+				for(int i2 = 0; i2 < aiObject.Count; i2++){
+
+					AIStats _aiStatsScript = aiObject[i2].GetComponent<AIStats>();
+//					Debug.Log (_aiStatsScript.OwnerName + ownerName);
+
+					if(_aiStatsScript.OwnerName == ownerName){
+						Debug.Log (_aiStatsScript.OwnerName + ownerName);
+						if(_aiStatsScript.unitType == unitType){
+							if(!_aiStatsScript.isPlanned){
+								_aiStatsScript.isPlanned = true;
+								aiUI [i].aiName = _aiStatsScript.gameObject.name;
+							}
+						}
+					}
+				}
 			}
 		}
 	}

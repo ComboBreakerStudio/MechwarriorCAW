@@ -26,10 +26,15 @@ public class AIStats : NetworkBehaviour {
 	void Start () {
 		if(isServer){
 			RegisterAI ();
+//			RegisterAI ();
 //			Debug.Log ("AIServer " + AIName);
 			curHealth = maxHealth;
 		}
+		AIManager.instance.AIUnits.Add (this.gameObject);
 		NavAgent = GetComponent<NavMeshAgent> ();
+
+		NavAgent.enabled = false;
+		aiBehaviorScript.enabled = false;
 	}
 
 	void Update(){
@@ -48,7 +53,6 @@ public class AIStats : NetworkBehaviour {
 		string _ID = transform.gameObject.name + GetComponent<NetworkIdentity> ().netId;
 		AIName = _ID;
 		transform.gameObject.name = AIName;
-		AIManager.instance.AIUnits.Add (this.gameObject);
 	}
 
 //	[Command]
@@ -58,7 +62,9 @@ public class AIStats : NetworkBehaviour {
 
 	public void SetDestination(Vector3 destination){
 		NavAgent.SetDestination (destination);
-		aiBehaviorScript.SendMessage ("SetAIPoint", destination);
+
+		aiBehaviorScript.enabled = true;
+//		aiBehaviorScript.SendMessage ("SetAIPoint", destination);
 	}
 
 }
