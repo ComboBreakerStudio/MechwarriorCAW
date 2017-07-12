@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour {
 	void Update () 
 	{
 		if(playerStatsScript.canMove){
-			if (Input.GetKeyDown (KeybindManager.KBM.Forward)){
-				playerAnimation.legAnim.Play ("LegMove", -1, 0f);
+			if (Input.GetKey (KeybindManager.KBM.Forward)){
+				playerAnimation.legAnim.SetBool ("isWalking", true);
 				playerCurrentSpeed += playerStatsScript.playerMoveSpeed * Time.deltaTime;
 
 				if(playerCurrentSpeed >= playerStatsScript.playerMaxSpeed){
@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour {
 					if(playerCurrentSpeed <= 0){
 						playerCurrentSpeed = 0;
 					}
+					playerAnimation.legAnim.SetBool ("isWalking", false);
 				}
 				else if(playerCurrentSpeed < 0){
 					playerCurrentSpeed += playerStatsScript.decelerationRate * Time.deltaTime;
