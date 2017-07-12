@@ -200,13 +200,15 @@ public class PlayerStats : NetworkBehaviour {
 
 					AIStats _aiStatsScript = aiObject[i2].GetComponent<AIStats>();
 //					Debug.Log (_aiStatsScript.OwnerName + ownerName);
-
-					if(_aiStatsScript.OwnerName == ownerName){
-						Debug.Log (_aiStatsScript.OwnerName + ownerName);
-						if(_aiStatsScript.unitType == unitType){
-							if(!_aiStatsScript.isPlanned){
-								_aiStatsScript.isPlanned = true;
-								aiUI [i].aiName = _aiStatsScript.gameObject.name;
+					if(!_aiStatsScript.isPlanned){
+						if(_aiStatsScript.OwnerName == ownerName){
+							Debug.Log (_aiStatsScript.OwnerName + ownerName);
+							if(_aiStatsScript.unitType == unitType){
+								if(!_aiStatsScript.isPlanned){
+									_aiStatsScript.isPlanned = true;
+									aiUI [i].aiName = _aiStatsScript.gameObject.name;
+									break;
+								}
 							}
 						}
 					}
