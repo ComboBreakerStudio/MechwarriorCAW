@@ -92,7 +92,12 @@ public class PlayerShoot : NetworkBehaviour {
 				RaycastShoot(weapon);
 			}
 			else if(!weapon.isRaycast){
-				ProjectileShoot (weapon);
+				if(weapon.needAmmo){
+					if(weapon.currentAmmo > 0){
+						ProjectileShoot (weapon);
+						weapon.currentAmmo -= 1;
+					}
+				}
 			}
 			weapon.canShoot = false;
 			StartCoroutine(coroutineName,weapon.fireRate);

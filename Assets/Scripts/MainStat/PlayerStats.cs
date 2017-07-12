@@ -361,49 +361,40 @@ public class PlayerStats : NetworkBehaviour {
 				CmdSetMatchKills ();
 			}
 		}
-
-		if(!isServer){
-			return;
-		}
-//		if(isServer){
-//			Debug.Log (this.gameObject.name);
-//		}
 //
+		#region death
 		//Death
-		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
-			canMove = false;
-		}
+//		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+//			canMove = false;
+//		}
+		if(isLocalPlayer){
 
-		if(frontTorso_Health <= 0 || backTorso_Health <=0){
-			isAlive = false;
-			CmdEnablePlayer (false);
-//			if(isLocalPlayer){
+			if(frontTorso_Health <= 0 || backTorso_Health <=0){
+				isAlive = false;
+				//			CmdEnablePlayer (false);
 				CmdSetMatchKills ();
-//			}
-			CmdResetStats ();
-			CmdEnablePlayer (true);
-			RpcRespawnPlayer ();
-//			if(isLocalPlayer){
-//				GameManager.GM.RespawnPlayer ();
-//			}
-		}
+				CmdResetStats ();
+				CmdEnablePlayer (true);
+				RpcRespawnPlayer ();
+			}
 
-		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
-			isAlive = false;
-			CmdEnablePlayer (false);
-			//			if(isLocalPlayer){
-			CmdSetMatchKills ();
-			//			}
-			CmdResetStats ();
-			CmdEnablePlayer (true);
-			RpcRespawnPlayer ();
+			if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+				isAlive = false;
+				CmdSetMatchKills ();
+				CmdResetStats ();
+				CmdEnablePlayer (true);
+				RpcRespawnPlayer ();
+			}
 		}
 
 		if(!isAlive){
 			return;
 		}
+		#endregion
 		//End of Death
-
+		if(!isServer){
+			return;
+		}
 		if(!leftTorsoDown){
 			if(leftTorso_Health <= 0){
 				RpcDisableLeftTorso (true);
@@ -608,9 +599,9 @@ public class PlayerStats : NetworkBehaviour {
 
 	[Command]
 	public void CmdResetStats(){
-		if(GameManager.GM.isPlanningPhase){
-			return;
-		}
+//		if(GameManager.GM.isPlanningPhase){
+//			return;
+//		}
 		frontTorso_Health = frontTorsoStats.maxHealth;
 		backTorso_Health = backTorsoStats.maxHealth;
 		leftTorso_Health = leftTorsoStats.maxHealth;
@@ -619,6 +610,15 @@ public class PlayerStats : NetworkBehaviour {
 		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+
+		//Guns
+		if(leftWeaponSystemStats.needAmmo){
+			leftWeaponSystemStats.currentAmmo = leftWeaponSystemStats.maxAmmo;
+		}
+		if(rightWeaponSystemStats.needAmmo){
+			rightWeaponSystemStats.currentAmmo = rightWeaponSystemStats.maxAmmo;
+		}
+
 
 		//Movement
 		playerMoveSpeed = legs.playerMoveSpeed;
@@ -673,7 +673,7 @@ public class PlayerStats : NetworkBehaviour {
 		rightTorsoStats.gameObject.SetActive (!t);
 	}
 
-	[ClientRpc]
+//	[ClientRpc]
 	public void RpcRespawnPlayer(){
 		Debug.Log ("Respawn Player");
 		if(GameManager.GM.localPlayer == this.gameObject){
