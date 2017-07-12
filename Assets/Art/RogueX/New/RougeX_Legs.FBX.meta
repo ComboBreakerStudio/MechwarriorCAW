@@ -211,7 +211,8 @@ ModelImporter:
     4300054: ThighSocket_Left
     4300056: PelvisAxle
     4300058: Exhausts
-    7400000: Take 001
+    7400000: LegIdle
+    7400002: LegMove
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -235,7 +236,187 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LegIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Left_Pelvis
+        weight: 1
+      - path: Left_Pelvis/KneeAxle_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Knee_Rear_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Feet_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Left_Foot
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Left_Foot/Feet_Front_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Left_Foot/Left_Toe
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Leg_Lower_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Leg_Mid_Left
+        weight: 1
+      - path: Left_Pelvis/Leg_Upper_Left
+        weight: 1
+      - path: Left_Pelvis/ThighSocket_Left
+        weight: 1
+      - path: PelvisAxle
+        weight: 1
+      - path: PelvisAxle/Exhausts
+        weight: 1
+      - path: Right_Pelvis
+        weight: 1
+      - path: Right_Pelvis/KneeAxle_Right
+        weight: 1
+      - path: Right_Pelvis/Leg_Upper_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Knee_Rear_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Leg_Mid_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Leg_Lower_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Feet_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Right_Foot
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Right_Foot/Feet_Front_Right001
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Right_Foot/Right_Toe
+        weight: 1
+      - path: Right_Pelvis/ThighSocket_Right
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LegMove
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Left_Pelvis
+        weight: 1
+      - path: Left_Pelvis/KneeAxle_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Knee_Rear_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Feet_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Left_Foot
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Left_Foot/Feet_Front_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Left_Calf/Left_Foot/Left_Toe
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Left_Knee/Leg_Lower_Left
+        weight: 1
+      - path: Left_Pelvis/Left_Thigh/Leg_Mid_Left
+        weight: 1
+      - path: Left_Pelvis/Leg_Upper_Left
+        weight: 1
+      - path: Left_Pelvis/ThighSocket_Left
+        weight: 1
+      - path: PelvisAxle
+        weight: 1
+      - path: PelvisAxle/Exhausts
+        weight: 1
+      - path: Right_Pelvis
+        weight: 1
+      - path: Right_Pelvis/KneeAxle_Right
+        weight: 1
+      - path: Right_Pelvis/Leg_Upper_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Knee_Rear_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Leg_Mid_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Leg_Lower_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Feet_Right
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Right_Foot
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Right_Foot/Feet_Front_Right001
+        weight: 1
+      - path: Right_Pelvis/Right_Thigh/Right_Knee/Right_Calf/Right_Foot/Right_Toe
+        weight: 1
+      - path: Right_Pelvis/ThighSocket_Right
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

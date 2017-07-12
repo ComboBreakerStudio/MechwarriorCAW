@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
 	public PlayerStats playerStatsScript;
 	public PlayerUI playerUIScript;
+	public PlayerAnimation playerAnimation;
 
 	// Use this for initialization
 	void Start () 
@@ -21,7 +22,6 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 
 		playerUIScript = GameObject.Find ("PlayerUI_Canvas").GetComponent<PlayerUI>();
-
 //		Cursor.lockState = CursorLockMode.Locked;
 //		Cursor.visible = false;
 	}
@@ -30,8 +30,10 @@ public class PlayerController : MonoBehaviour {
 	void Update () 
 	{
 		if(playerStatsScript.canMove){
-			if (Input.GetKey (KeybindManager.KBM.Forward)){
+			if (Input.GetKeyDown (KeybindManager.KBM.Forward)){
+				playerAnimation.legAnim.Play ("LegMove", -1, 0f);
 				playerCurrentSpeed += playerStatsScript.playerMoveSpeed * Time.deltaTime;
+
 				if(playerCurrentSpeed >= playerStatsScript.playerMaxSpeed){
 					playerCurrentSpeed = playerStatsScript.playerMaxSpeed;
 				}
