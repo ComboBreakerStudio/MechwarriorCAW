@@ -226,6 +226,40 @@ public class PlayerStats : NetworkBehaviour {
 		}
 	}
 
+	public LayerMask aiCommandMask;
+	public Camera myCamera;
+
+	[Command]
+	public void CmdCommandAI(){
+		RaycastHit hit;
+		if (Physics.Raycast (myCamera.transform.position, myCamera.transform.forward, out hit, 1000, aiCommandMask)) {
+			if(hit.collider.gameObject.CompareTag("Player")){
+				//Same Team Member
+				if (hit.collider.gameObject.GetComponent<DealDamage> ().playerStats.teamID == teamID) {
+					
+				}
+				//Not same Team
+				else {
+				
+				}
+			}
+			if(hit.collider.gameObject.CompareTag("AI")){
+				//Same Team Member
+				if(hit.collider.gameObject.GetComponent<AIStats>().teamID == teamID){
+					
+				}
+				//Not same Team
+				else{
+					
+				}
+			}
+
+			if(hit.collider.gameObject.CompareTag("Terrain")){
+				Debug.Log ("Terrain");
+			}
+		}
+	}
+
 	#endregion //=======================================================================================================
 
 	void Awake(){

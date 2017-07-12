@@ -83,6 +83,15 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		transform.Translate (Vector3.forward * playerCurrentSpeed * Time.deltaTime);
+
+		//Unit Control
+		#region Unit Control Region
+
+		if(Input.GetKeyDown(KeyCode.Alpha1)){
+			playerStatsScript.CmdCommandAI();
+		}
+
+		#endregion
 	}
 
 	void ShakeScreen(){
