@@ -14,6 +14,9 @@ using AIEnums;
 
 public class SniperBehavior : NetworkBehaviour {
 
+    public AIStats statsScript;
+    public TeamManager team;
+
     NavMeshAgent agent;
 
     public List<Transform> visibleTarget = new List<Transform>();
@@ -65,25 +68,14 @@ public class SniperBehavior : NetworkBehaviour {
         //Debug.Log("SERVER STARTED");
         agent = GetComponent<NavMeshAgent>();
 
+        team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
+
 
         StartCoroutine(AISniper());
     }
 
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            if (PlayerCommandToWander == false)
-            {
-                PlayerCommandToWander = true;
-            }
-            else if (PlayerCommandToWander == true)
-            {
-                PlayerCommandToWander = false;
-            }
-        }
-
         // Determine what to do if there is a target inside the List
         if (visibleTarget.Contains(targetposition))
         {
@@ -130,24 +122,8 @@ public class SniperBehavior : NetworkBehaviour {
                 agent.isStopped = true;
 
             }
-
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                if (setupbehaviour == AISetupBehaviour.Setup)
-                {
-                    setupbehaviour = AISetupBehaviour.NotSetup;
-                }
-                else if (setupbehaviour == AISetupBehaviour.NotSetup)
-                {
-                    if (distToTarget > 10f)
-                    {
-                        agent.isStopped = false;
-
-                        agent.SetDestination(AIpoint.position);
-                    }
-                } 
-            }
         }
+
         else if (behaviour == AIState.Wandering)
         {
             //Debug.Log("Wandering");
@@ -246,7 +222,6 @@ public class SniperBehavior : NetworkBehaviour {
     void FindVisibleTarget()
     {
         visibleTarget.Clear();
-        targetposition = null;
 
         Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -254,13 +229,36 @@ public class SniperBehavior : NetworkBehaviour {
         {
             targetposition = targetInViewRadius[i].transform;
 
+
+            //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
+            //I The code is basically from sebastian lague, except I don't make it cone of vision style.
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
             if (Vector3.Angle(transform.position,dirToTarget) < 360)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    visibleTarget.Add(targetposition);
+                    if (statsScript.teamID == 1)
+                    {
+                        for (int j = 0; j < team.team2.Count; j++)
+                        {
+                            if (team.team2[j])
+                            {
+                                visibleTarget.Add(targetposition);
+                            }
+                        }
+                    }
+                    else if (statsScript.teamID == 2)
+                    {
+                        for (int j = 0; j < team.team1.Count; j++)
+                        {
+                            if (team.team1[j])
+                            {
+                                visibleTarget.Add(targetposition);
+                            }
+                        }
+                    }
+
                 }
             }
         }

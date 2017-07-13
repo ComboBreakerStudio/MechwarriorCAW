@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using AIEnums;
 
 
+
 /// <summary>
 /// Tank behaviour.
 /// If some of the part is not understandable, do specify which part. I'm not going to comment everything and detailed
@@ -18,10 +19,10 @@ using AIEnums;
 public class TankBehaviour : NetworkBehaviour {
 
 	public AIStats statsScript;
+    public TeamManager team;
 
     NavMeshAgent agent;
 
-    public TeamManager team;
 
     public List<Transform> visibleTarget = new List<Transform>();
 
@@ -61,10 +62,9 @@ public class TankBehaviour : NetworkBehaviour {
     public float timeInterval;
     public float fireInterval;
 
-    public bool PlayerCommandToWander;
 
 
-	// Use this for initialization
+
     public override void OnStartServer()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -81,36 +81,22 @@ public class TankBehaviour : NetworkBehaviour {
             agent.SetDestination(childTarget.transform.position);
         }
 
-        //I Change this keycode if you guys decide to change to something
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            if (PlayerCommandToWander == false)
-            {
-                PlayerCommandToWander = true;
-            }
 
-            else if (PlayerCommandToWander == true)
-            {
-                PlayerCommandToWander = false;
-            }
-        }
 
         //I IF there is no target, basically the AI go Idle, then the player can command to wander or move them.
         if (!visibleTarget.Contains(targetposition))
         {
 
-            if (PlayerCommandToWander == false)
+            if (statsScript.PlayerCommandToWander == false)
                 behaviour = AIState.Idle;
-            else if (PlayerCommandToWander == true)
+            else if (statsScript.PlayerCommandToWander == true)
                 behaviour = AIState.Wandering;
         }
 
         //I Check if there is a target visible within the sight radius
         else if (visibleTarget.Contains(targetposition))
         {
-
             Firing();
-
         }
 
         //I This is when the player can command what the AI to move somewhere.
@@ -121,19 +107,6 @@ public class TankBehaviour : NetworkBehaviour {
                 return;
             }
             float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
-
-
-
-            //I Change this keycode if you guys decide to change to something
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                //Debug.Log("Button Pressed");
-                //If the AI is not within the destination specified, the AI will not even move.
-                if (distToTarget > 20f)
-                {
-                    agent.SetDestination(AIpoint.position);
-                }
-            }
                 
         }
 
@@ -198,8 +171,6 @@ public class TankBehaviour : NetworkBehaviour {
     //I AI Insight
     void Firing()
     {
-
-        Debug.Log("Fire");
         behaviour = AIState.InSight;
 
         Vector3 direction = targetposition.position;
@@ -244,21 +215,48 @@ public class TankBehaviour : NetworkBehaviour {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    for(int j=0;j<team.team1.Count;j++)
+                    //I For AI detection if the target is the same team or not.
+                    //I This is where it got bugged, when I test it alone, it work fine but when client joined, it goes bugged
+                    if (statsScript.teamID == 1)
                     {
-                        if(team.team1[j])
+                        for (int j = 0; j < team.team2.Count; j++)
                         {
-                            visibleTarget.Add(targetposition);
-                        }
+                            if (team.team2[j])
+                            {
+                                visibleTarget.Add(targetposition);
+                            }
 
-                        if (GameObject.FindWithTag("Target") == null)
-                        {
+                            if (GameObject.FindWithTag("Target") == null)
+                            {
 
-                            CreateTargetRoot();
+                                CreateTargetRoot();
 
+                            }
                         }
                     }
+                    else if (statsScript.teamID == 2)
+                    {
+                        for (int j = 0; j < team.team1.Count; j++)
+                        {
+                            if (team.team1[j])
+                            {
+                                visibleTarget.Add(targetposition);
+                            }
+
+                            if (GameObject.FindWithTag("Target") == null)
+                            {
+
+                                CreateTargetRoot();
+
+                            }
+                        }
+                    }
+
                 }
+            }
+            else if(Vector3.Angle (transform.position, dirToTarget)>360)
+            {
+                childTarget = null;
             }
         }
     }
