@@ -49,6 +49,7 @@ public class SniperBehavior : NetworkBehaviour {
     public Transform firingPoint;
     public GameObject bulletPrefab;
     public float minimumRange;
+    public float maximumRange;
 
 
     [Header("Update Time")]

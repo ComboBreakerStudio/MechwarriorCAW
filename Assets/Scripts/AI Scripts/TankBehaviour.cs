@@ -50,7 +50,7 @@ public class TankBehaviour : NetworkBehaviour {
     public Transform firingPoint;
     public GameObject bulletPrefab;
     public float minimumRange;
-
+    public float maximumRange;
 
 
     [Header("AI Circle Around")]
@@ -182,6 +182,7 @@ public class TankBehaviour : NetworkBehaviour {
         if (Distance() > minimumRange && Distance() < viewRadius)
         {
           fireInterval -= 0.45f;
+          
           if (fireInterval <= 0f)
             {
                 //I This part I comment first, since I don't know either you want to keep spawning bullet or using object pooling
