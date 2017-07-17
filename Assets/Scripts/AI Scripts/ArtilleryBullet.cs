@@ -17,9 +17,14 @@ public class ArtilleryBullet : NetworkBehaviour {
 
     public Transform targetPosition;
 
-    public float fireAngle;
 
+    public float fireAngle;
     public float bulletSpeed;
+
+    [Header("Explosions")]
+    public float explosionRadius;
+    public LayerMask targetLayer;
+
 
     void Awake()
     {
@@ -77,11 +82,20 @@ public class ArtilleryBullet : NetworkBehaviour {
 
         float elapse_time = 0f;
 
+        //Debug.Log(flightDuration);
+
         while (elapse_time < flightDuration)
         {
             transform.Translate(0, (Vy - (bulletSpeed * elapse_time)) * Time.deltaTime, Vz * Time.deltaTime);
 
             elapse_time += Time.deltaTime;
+
+            if (elapse_time >= flightDuration)
+            {
+                ExplosionDamage();
+
+                Destroy(gameObject);
+            }
 
             yield return null;
         }
@@ -92,12 +106,16 @@ public class ArtilleryBullet : NetworkBehaviour {
         return Vector3.Distance(transform.position, targetPosition.position);
     }
 
-
-    void OnTriggerEnter(Collider coll)
+    void ExplosionDamage()
     {
-        if (coll.CompareTag("Terrain"))
+        Collider[] targetInExplosion = Physics.OverlapSphere(transform.position, explosionRadius, targetLayer);
+
+
+        foreach (Collider h in targetInExplosion)
         {
-            Destroy(gameObject);
+            //I Put the Player Stats here to apply damage
+
+
         }
     }
 

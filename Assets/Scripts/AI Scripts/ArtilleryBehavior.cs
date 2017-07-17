@@ -26,6 +26,9 @@ public class ArtilleryBehavior : NetworkBehaviour {
     public float maximumRange;
     public float firingDelay;
 
+    [Header("Target Location")]
+    public Transform previousLocation;
+
     float fireInterval;
 
     void Start()
@@ -43,11 +46,7 @@ public class ArtilleryBehavior : NetworkBehaviour {
           yield return new WaitForSeconds(0.15f);
            
         }
-
     }
-
-
-
     void Firing()
     {
 
@@ -61,7 +60,8 @@ public class ArtilleryBehavior : NetworkBehaviour {
         if (Distance() < minimumRange)
         {
             //I For now I leave it empty since it is dependant on position of the target. Which is kind from the player view
-            //I and I'm not sure what to do yet.
+            //I For me to register all of the player list in the team manager and I'm not sure what to do yet.
+
 
         }
 
@@ -75,6 +75,10 @@ public class ArtilleryBehavior : NetworkBehaviour {
                 CmdSpawn();
                 fireInterval = firingDelay;
             }
+        }
+        else if (Distance() > maximumRange)
+        {
+            //previousLocation = null;
         }
 
     }
@@ -91,4 +95,5 @@ public class ArtilleryBehavior : NetworkBehaviour {
         GameObject go = (GameObject)Instantiate(bullet, firingPoint.position,Quaternion.identity);
         NetworkServer.Spawn(go);
     }
+
 }

@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Bullet\BulletStats.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI Scripts\ArtilleryBullet.cs">
     <Files>
-      <File FileName="Assets\Scripts\AI Scripts\AIStats.cs" Line="60" Column="1" />
-      <File FileName="Assets\Scripts\AI Scripts\ArtilleryBullet.cs" Line="87" Column="10" />
-      <File FileName="Assets\Scripts\AI Scripts\AIEditor.cs" Line="96" Column="11" />
+      <File FileName="Assets\Scripts\AI Scripts\AIStats.cs" Line="176" Column="9" />
+      <File FileName="Assets\Scripts\AI Scripts\ArtilleryBullet.cs" Line="117" Column="13" />
+      <File FileName="Assets\Scripts\AI Scripts\AIEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI Scripts\SniperBehavior.cs" Line="196" Column="10" />
       <File FileName="Assets\Scripts\AI Scripts\TankBehaviour.cs" Line="185" Column="11" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI Scripts\SniperBehavior.cs" Line="52" Column="31" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI Scripts\ArtilleryBehavior.cs" Line="19" Column="30" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI Scripts\ArtilleryBehavior.cs" Line="64" Column="13" NotebookId="1" />
       <File FileName="Assets\Scripts\Bullet\BulletStats.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

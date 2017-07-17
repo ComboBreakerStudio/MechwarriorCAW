@@ -31,6 +31,9 @@ public class AIStats : NetworkBehaviour {
     public Transform targetOwner;
 
 
+    float HoldTimer = 1.0f;
+
+
 	void Start () {
 		if(isServer){
 			RegisterAI ();
@@ -57,11 +60,9 @@ public class AIStats : NetworkBehaviour {
 			this.gameObject.SetActive(false);
 		}
 
-        float distToTarget = Vector3.Distance(transform.position, targetOwner.position);
-
-
 
         //I To keep updating the distance, otherwise the agent will just ram to the target it should follow
+        /*
         if (PlayerCommandToWander == false)
         {
             if (distToTarget < 40f)
@@ -73,19 +74,23 @@ public class AIStats : NetworkBehaviour {
                 NavAgent.isStopped = false;
             }
         }
+        */
 
         if (FollowingPlayer == true)
         {
-            if (distToTarget > 40f)
+            if (Distance() > 40f)
             {
+                NavAgent.isStopped = false;
                 NavAgent.SetDestination(targetOwner.position);
             }
-            else if (distToTarget < 40f)
+            else if (Distance() < 40f)
             {
                 NavAgent.isStopped = true;
             }
         }
-        AICommands();
+
+        CallUnitAFV1();
+        Formation();
 	}
 //	[Command]
 	void RegisterAI()
@@ -107,42 +112,67 @@ public class AIStats : NetworkBehaviour {
 //		aiBehaviorScript.SendMessage ("SetAIPoint", destination);
 	}
 
-    //I AI Commands
-    public void AICommands()
+
+    void Formation()
     {
-        //I Change this keycode if you guys decide to change to something or what should design should be
-        if (Input.GetKeyDown(KeyCode.F2))
+
+    }
+
+
+
+    //I Hotkeyed units
+    public void CallUnitAFV1()
+    {
+        if (Input.GetKey(KeyCode.Alpha1))
         {
-            //I Command for the wander
-            if (PlayerCommandToWander == false)
+            HoldTimer -= 0.2f;
+            if (HoldTimer <= 0f)
             {
-                PlayerCommandToWander = true;
-            }
-            else if (PlayerCommandToWander == true)
-            {
-                PlayerCommandToWander = false;
-            }
-            if (FollowingPlayer == true)
-            {
-                FollowingPlayer = false;
+                if (Distance() > 30f)
+                {
+                    NavAgent.SetDestination(targetOwner.position);
+                }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.F3))
+    }
+
+    public void CallUnitAFV2()
+    {
+        if (Input.GetKey(KeyCode.Alpha2))
         {
-            //I Command for follow me
-            if (FollowingPlayer == false)
+            HoldTimer -= 0.2f;
+            if (HoldTimer <= 0f)
             {
-                FollowingPlayer = true;
-            }
-            else if (FollowingPlayer == true)
-            {
-                FollowingPlayer = false;
-            }
-            if (PlayerCommandToWander == true)
-            {
-                PlayerCommandToWander = false;
+                if (Distance() > 30f)
+                {
+                    NavAgent.SetDestination(targetOwner.position);
+                }
             }
         }
+    }
+
+    public void CallUnitSniper()
+    {
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            HoldTimer -= 0.2f;
+            if(HoldTimer<=0f)
+            {
+                if (Distance() > 30f)
+                {
+                    NavAgent.SetDestination(targetOwner.position);
+                }
+            }
+        }
+    }
+
+    private float Distance()
+    {
+        return Vector3.Distance(transform.position, targetOwner.position);
+    }
+
+    public void ReregisterNavmesh()
+    {
 
     }
 
