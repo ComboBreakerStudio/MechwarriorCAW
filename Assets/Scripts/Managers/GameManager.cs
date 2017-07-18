@@ -5,23 +5,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	//Please put keybinding in other manager
-
 	public static GameManager GM;
-
-	public KeyCode forward{ get; set;}
-	public KeyCode backward{ get; set;}
-	public KeyCode left{ get; set;}
-	public KeyCode right{ get; set;}
-
-	//Pause
-	public KeyCode menuButton;
 
 	public GameObject localPlayer;
 	public PlayerStats localPlayerStatsScript;
+	public PlayerShoot localPlayerShootScript;
 
 	public GameObject[] respawnPosition_Team1;
 	public GameObject[] respawnPosition_Team2;
+
+	public PlayerUI playerUIScript;
+
 
 	void Awake()
 	{
@@ -35,12 +29,6 @@ public class GameManager : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-
-		forward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "W"));
-		backward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
-		left = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
-		right = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
-		menuButton = KeyCode.Escape;
 	}
 
 	void Start(){
@@ -54,8 +42,11 @@ public class GameManager : MonoBehaviour {
 //	[ClientRpc]
 	public void RespawnPlayer(){
 //		localPlayerStatsScript = localPlayer.GetComponent<PlayerStats> ();
+
 		localPlayer.GetComponent<PlayerLoadout> ().LoadParts ();
 		localPlayerStatsScript.StartStuff ();
+		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
+		playerUIScript.playerStatScript = localPlayerStatsScript;
 
 //		Debug.Log ("Player Respawned");
 

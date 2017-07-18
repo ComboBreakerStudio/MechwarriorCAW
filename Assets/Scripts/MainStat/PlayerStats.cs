@@ -13,24 +13,39 @@ public class PlayerStats : NetworkBehaviour {
 	[SyncVar]
 	public bool isAlive;
 
+	//MechParts
+	[SyncVar]
+	public bool leftTorsoDown, rightTorsoDown, leftWeaponDown, rightWeaponDown, leftLegDown, rightLegDown;
+
 	public GameObject explodeVFX;
 
-	[SerializeField]
+	//Torso
+//	[SerializeField]
 	public TorsoStats frontTorsoStats, backTorsoStats, leftTorsoStats, rightTorsoStats;
 
-	[SerializeField]
+	//Legs
+//	[SerializeField]
 	public LegStats leftLegStats, rightLegStats;
+	public Legs legs;
 
-	[SerializeField]
+//	[SerializeField]
 	public WeaponSystemStats leftWeaponSystemStats, rightWeaponSystemStats;
 
 	[SyncVar]
 	public int frontTorso_Health, backTorso_Health, leftTorso_Health, rightTorso_Health,
-	leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
+				leftLeg_Health, rightLeg_Health , leftWeaponSystem_Health, rightWeaponSystem_Health;
 
+	[SyncVar]
+	public float playerMoveSpeed, playerMaxSpeed, decelerationRate;
+
+	[SyncVar]
+	public bool canMove;
 
 	//Test
 	public bool setColor;
+	Transform team1Marker;
+	Transform team2Marker;
+	public Transform mapMarker;
 
 //	public void respawn(int id){
 //		GameManager.GM.RespawnPlayer ();
@@ -38,6 +53,8 @@ public class PlayerStats : NetworkBehaviour {
 
 	void Start(){
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
+		foreach (Transform marker in mapMarker.transform)
+			marker.gameObject.SetActive (false);
 
 
 		//Add player to TeamManager
@@ -72,6 +89,7 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
+					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
 				}
 				setColor = true;
 			}
@@ -90,9 +108,11 @@ public class PlayerStats : NetworkBehaviour {
 			for(int i = 0; i < meshRenderer.Length; i++){
 				if(teamID == 1){
 					meshRenderer [i].material.color = Color.yellow;
+					mapMarker.Find ("RedMapMarker").gameObject.SetActive (true);
 				}
 				if(teamID == 2){
 					meshRenderer [i].material.color = Color.blue;
+					mapMarker.Find ("BlueMapMarker").gameObject.SetActive (true);
 				}
 				//					setColor = true;
 			}
@@ -123,34 +143,88 @@ public class PlayerStats : NetworkBehaviour {
 //			Debug.Log (this.gameObject.name);
 //		}
 //
+		//Death
+		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+			canMove = false;
+		}
+
 		if(frontTorso_Health <= 0 || backTorso_Health <=0){
 			isAlive = false;
 			CmdEnablePlayer (false);
-			if(isLocalPlayer){
+//			if(isLocalPlayer){
 				CmdSetMatchKills ();
-			}
+//			}
 			CmdResetStats ();
 			CmdEnablePlayer (true);
-			GameManager.GM.RespawnPlayer ();
+			RpcRespawnPlayer ();
+//			if(isLocalPlayer){
+//				GameManager.GM.RespawnPlayer ();
+//			}
 		}
 
-		if(leftWeaponSystem_Health <= 0 || leftTorso_Health <=0){
-			RpcDisableLeftWeaponSystem (true);
+		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+			isAlive = false;
+			CmdEnablePlayer (false);
+			//			if(isLocalPlayer){
+			CmdSetMatchKills ();
+			//			}
+			CmdResetStats ();
+			CmdEnablePlayer (true);
+			RpcRespawnPlayer ();
 		}
 
-		if(rightWeaponSystem_Health <= 0 || rightTorso_Health <=0){
-			RpcDisableRightWeaponSystem (true);
+		if(!isAlive){
+			return;
+		}
+		//End of Death
+
+		if(!leftTorsoDown){
+			if(leftTorso_Health <= 0){
+				RpcDisableLeftTorso (true);
+				RpcDisableLeftWeaponSystem (true);
+				leftTorsoDown = true;
+			}
 		}
 
-		if(leftLeg_Health <= 0){
-			RpcDisableLeftLeg (true);
+		if(!rightTorsoDown){
+			if(rightTorso_Health <= 0){
+				RpcDisableRightTorso (true);
+				RpcDisableRightWeaponSystem (true);
+				rightTorsoDown = true;
+			}
 		}
 
-		if(rightLeg_Health <= 0){
-			RpcDisableRightLeg (true);
+		if(!leftWeaponDown){
+			if(leftWeaponSystem_Health <= 0 || leftTorso_Health <=0){
+				RpcDisableLeftWeaponSystem (true);
+				leftWeaponDown = true;
+			}
+		}
+
+		if(!rightWeaponDown){
+			if(rightWeaponSystem_Health <= 0 || rightTorso_Health <=0){
+				RpcDisableRightWeaponSystem (true);
+				rightWeaponDown = true;
+			}
+		}
+
+		if(!leftLegDown){
+			if(leftLeg_Health <= 0){
+				RpcDisableLeftLeg (true);
+				leftLegDown = true;
+				CmdChangeMaxSpeed (playerMaxSpeed/2);
+			}
+		}
+
+		if(!rightLegDown){
+
+			if(rightLeg_Health <= 0){
+				RpcDisableRightLeg (true);
+				rightLegDown = true;
+				CmdChangeMaxSpeed (playerMaxSpeed/2);
+			}
 		}
 	}
-
 
 	public void StartStuff(){
 		//Set Stats Reference
@@ -159,7 +233,26 @@ public class PlayerStats : NetworkBehaviour {
 		bool setLeft = true;
 		for(int i = 0; i < playerLoadoutScript.enabledObject.Count; i++){
 			if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.torsoName){
-				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+
+//				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+
+				TorsoStats[] childTorsoStats = playerLoadoutScript.enabledObject [i].GetComponentsInChildren<TorsoStats> ();
+
+				for(int i2 = 0; i2 < childTorsoStats.Length; i2++){
+					if(childTorsoStats[i2].gameObject.name == "FrontTorso"){
+//						Debug.Log (childTorsoStats[i2].gameObject.name);
+						frontTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "BackTorso"){
+						backTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "LeftTorso"){
+						leftTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "RightTorso"){
+						rightTorsoStats = childTorsoStats [i2];
+					}
+				}
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.leftWeaponSystemName && setLeft){
 				leftWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
@@ -169,6 +262,7 @@ public class PlayerStats : NetworkBehaviour {
 				rightWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.legName){
+				legs = playerLoadoutScript.enabledObject [i].GetComponent<Legs> ();
 				LegStats[] childgo = GetComponentsInChildren<LegStats> ();
 				for(int i2 = 0; i2 < childgo.Length; i2++){
 					if(childgo[i2].gameObject.name == "LeftLeg"){
@@ -197,7 +291,25 @@ public class PlayerStats : NetworkBehaviour {
 		bool setLeft = true;
 		for(int i = 0; i < playerLoadoutScript.enabledObject.Count; i++){
 			if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.torsoName){
-				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+//				frontTorsoStats = playerLoadoutScript.enabledObject [i].GetComponent<TorsoStats> ();
+
+				TorsoStats[] childTorsoStats = playerLoadoutScript.enabledObject [i].GetComponentsInChildren<TorsoStats> ();
+
+				for(int i2 = 0; i2 < childTorsoStats.Length; i2++){
+					if(childTorsoStats[i2].gameObject.name == "FrontTorso"){
+//						Debug.Log (childTorsoStats[i2].gameObject.name);
+						frontTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "BackTorso"){
+						backTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "LeftTorso"){
+						leftTorsoStats = childTorsoStats [i2];
+					}
+					else if(childTorsoStats[i2].gameObject.name == "RightTorso"){
+						rightTorsoStats = childTorsoStats [i2];
+					}
+				}
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.leftWeaponSystemName && setLeft){
 				leftWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
@@ -207,6 +319,7 @@ public class PlayerStats : NetworkBehaviour {
 				rightWeaponSystemStats = playerLoadoutScript.enabledObject [i].GetComponent<WeaponSystemStats> ();
 			}
 			else if(playerLoadoutScript.enabledObject[i].name == playerLoadoutScript.legName){
+				legs = playerLoadoutScript.enabledObject [i].GetComponent<Legs> ();
 				LegStats[] childgo = GetComponentsInChildren<LegStats> ();
 				for(int i2 = 0; i2 < childgo.Length; i2++){
 					if(childgo[i2].gameObject.name == "LeftLeg"){
@@ -230,13 +343,19 @@ public class PlayerStats : NetworkBehaviour {
 	}
 
 	[Command]
+	void CmdChangeMaxSpeed(float maxSpeed){
+		playerMaxSpeed = maxSpeed;
+	}
+
+	[Command]
 	void CmdSetMatchKills(){
 		if(teamID == 1){
 			MatchManager.instance.team1DeathCount += 1;
 		}
 		if(teamID == 2){
-			MatchManager.instance.team2DeathCount += 2;
+			MatchManager.instance.team2DeathCount += 1;
 		}
+		Debug.Log ("Match kills");
 	}
 
 	//Disable in the Server
@@ -260,7 +379,22 @@ public class PlayerStats : NetworkBehaviour {
 		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+
+		//Movement
+		playerMoveSpeed = legs.playerMoveSpeed;
+		playerMaxSpeed = legs.playerMaxSpeed;
+		decelerationRate = legs.decelerationRate;
+
 		isAlive = true;
+		canMove = true;
+
+		//MechParts
+		leftTorsoDown = false;
+		rightTorsoDown = false;
+		leftWeaponDown = false;
+		rightWeaponDown = false;
+		leftLegDown = false;
+		rightLegDown = false;
 
 		//Enable Parts
 		RpcDisableLeftWeaponSystem(false);
@@ -290,8 +424,20 @@ public class PlayerStats : NetworkBehaviour {
 	}
 
 	[ClientRpc]
+	public void RpcDisableLeftTorso(bool t){
+		leftTorsoStats.gameObject.SetActive (!t);
+	}
+
+	[ClientRpc]
+	public void RpcDisableRightTorso(bool t){
+		rightTorsoStats.gameObject.SetActive (!t);
+	}
+
+	[ClientRpc]
 	public void RpcRespawnPlayer(){
-		GameManager.GM.RespawnPlayer ();
+		if(GameManager.GM.localPlayer == this.gameObject){
+			GameManager.GM.RespawnPlayer ();
+		}
 
 	}
 
@@ -323,6 +469,4 @@ public class PlayerStats : NetworkBehaviour {
 			rightLeg_Health -= dmg;
 		}
 	}
-
-
 }
