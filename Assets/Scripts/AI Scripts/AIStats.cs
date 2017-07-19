@@ -88,9 +88,6 @@ public class AIStats : NetworkBehaviour {
                 NavAgent.isStopped = true;
             }
         }
-
-        CallUnitAFV1();
-        Formation();
 	}
 //	[Command]
 	void RegisterAI()
@@ -111,14 +108,6 @@ public class AIStats : NetworkBehaviour {
 		aiBehaviorScript.enabled = true;
 //		aiBehaviorScript.SendMessage ("SetAIPoint", destination);
 	}
-
-
-    void Formation()
-    {
-
-    }
-
-
 
     //I Hotkeyed units
     public void CallUnitAFV1()

@@ -16,6 +16,10 @@ public class ArtilleryBehavior : NetworkBehaviour {
     public Transform target;
     public GameObject bullet;
 
+
+    public AIStats statsScript;
+
+
     [Header("Cannon Header")]
     public Transform firingPoint;
     public Transform cannonHead;
@@ -63,6 +67,8 @@ public class ArtilleryBehavior : NetworkBehaviour {
             //I For me to register all of the player list in the team manager and I'm not sure what to do yet.
 
 
+            //I Making the object move backward if the target is too close, the value should be the same as navmesh speed.
+            transform.Translate(-transform.forward * Time.deltaTime * -2f);
         }
 
         //I For the artillery to fire if the target more than minimum range and less than maximum Range
@@ -75,10 +81,6 @@ public class ArtilleryBehavior : NetworkBehaviour {
                 CmdSpawn();
                 fireInterval = firingDelay;
             }
-        }
-        else if (Distance() > maximumRange)
-        {
-            //previousLocation = null;
         }
 
     }

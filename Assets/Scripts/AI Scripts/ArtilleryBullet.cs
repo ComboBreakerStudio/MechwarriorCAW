@@ -113,7 +113,7 @@ public class ArtilleryBullet : NetworkBehaviour {
 
         foreach (Collider h in targetInExplosion)
         {
-            //I Put the Player Stats here to apply damage
+            //I Put the Player Stats here to apply damage. I'm not putting it since I don't know which script determine the player mechs health.
 
 
         }

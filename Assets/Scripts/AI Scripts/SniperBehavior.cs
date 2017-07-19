@@ -14,6 +14,8 @@ using AIEnums;
 
 public class SniperBehavior : NetworkBehaviour {
 
+    public PlayerStats stats;
+
     public AIStats statsScript;
     public TeamManager team;
 
@@ -24,7 +26,6 @@ public class SniperBehavior : NetworkBehaviour {
     [Header("AI Sight")]
     public float viewRadius;
     public Transform targetposition;
-    public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -53,7 +54,6 @@ public class SniperBehavior : NetworkBehaviour {
 
 
     [Header("Update Time")]
-    public float timeInterval;
     public float fireInterval;
 
 
@@ -71,8 +71,10 @@ public class SniperBehavior : NetworkBehaviour {
 
         team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
-
-        StartCoroutine(AISniper());
+        if (isServer)
+        {
+            StartCoroutine(AISniper());
+        }
     }
 
     void Update()
@@ -81,6 +83,10 @@ public class SniperBehavior : NetworkBehaviour {
         if (visibleTarget.Contains(targetposition))
         {
             //agent.isStopped = true;
+
+
+            //I Get component from the target for the health stats;
+            stats = targetposition.GetComponent<PlayerStats>();
 
 
             if (setupbehaviour == AISetupBehaviour.NotSetup)
@@ -96,6 +102,8 @@ public class SniperBehavior : NetworkBehaviour {
 
         else if (!visibleTarget.Contains(targetposition))
         {
+            agent.isStopped = false;
+           
             if (lineRenderer.enabled)
             {
                 lineRenderer.enabled = false;
@@ -107,22 +115,6 @@ public class SniperBehavior : NetworkBehaviour {
                 behaviour = AIState.Idle;
             else if (PlayerCommandToWander == true)
                 behaviour = AIState.Wandering;
-        }
-
-
-        if (behaviour == AIState.Idle)
-        {
-            if (AIpoint == null)
-            {
-                return;
-            }
-            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
-
-            if (distToTarget < 10f)
-            {
-                agent.isStopped = true;
-
-            }
         }
 
         else if (behaviour == AIState.Wandering)
@@ -148,10 +140,10 @@ public class SniperBehavior : NetworkBehaviour {
     {
         while (true)
         {
-            FindVisibleTarget();
+            RpcFindVisibleTarget();
 
 
-            yield return new WaitForSeconds(timeInterval);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
@@ -190,6 +182,7 @@ public class SniperBehavior : NetworkBehaviour {
 
     void Firing()
     {
+        agent.isStopped = true;
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
@@ -205,11 +198,8 @@ public class SniperBehavior : NetworkBehaviour {
             fireInterval -= 0.45f;
             if (fireInterval <= 0f)
             {
-                //Debug.Log("FIRING");
-                //CmdSpawn();
-                lineRenderer.SetPosition(0,firingPoint.position);
-                lineRenderer.SetPosition(1, targetposition.position);
-                fireInterval = 2.0f;
+                Laser();
+                fireInterval = 4.0f;
             }
         }
         else if (Distance() < minimumRange)
@@ -219,8 +209,21 @@ public class SniperBehavior : NetworkBehaviour {
         }
     }
 
+
+    void Laser()
+    {
+        //I Apply player damage here.
+        stats.frontTorso_Health -= 2;
+
+
+        lineRenderer.SetPosition(0,firingPoint.position);
+        lineRenderer.SetPosition(1, targetposition.position);
+    }
+
+
     //I Checking the visible target in the list
-    void FindVisibleTarget()
+    [ClientRpc]
+    void RpcFindVisibleTarget()
     {
         visibleTarget.Clear();
 
@@ -239,6 +242,7 @@ public class SniperBehavior : NetworkBehaviour {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
+                    //I Detecting which target team is in
                     if (statsScript.teamID == 1)
                     {
                         for (int j = 0; j < team.team2.Count; j++)

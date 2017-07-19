@@ -6,6 +6,7 @@ using UnityEditor;
 
 /// <summary>
 /// AI editor.
+/// 
 /// red is for sight range.
 /// 
 /// green is for minimum firing range.

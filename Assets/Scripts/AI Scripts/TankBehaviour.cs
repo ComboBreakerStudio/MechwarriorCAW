@@ -19,6 +19,7 @@ using AIEnums;
 public class TankBehaviour : NetworkBehaviour {
 
 	public AIStats statsScript;
+
     public TeamManager team;
 
     NavMeshAgent agent;
@@ -29,7 +30,6 @@ public class TankBehaviour : NetworkBehaviour {
     [Header("AI Sight")]
     public float viewRadius;
     public Transform targetposition;
-    public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -71,7 +71,11 @@ public class TankBehaviour : NetworkBehaviour {
 
         team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
-        StartCoroutine(AITankBehaviour());
+        if (isServer)
+        {
+            StartCoroutine(AITankBehaviour());
+
+        }
 	}
 
     void Update()
@@ -99,18 +103,6 @@ public class TankBehaviour : NetworkBehaviour {
             Firing();
         }
 
-        //I This is when the player can command what the AI to move somewhere.
-        if (behaviour == AIState.Idle)
-        {
-            if (AIpoint == null)
-            {
-                return;
-            }
-            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
-                
-        }
-
-
         else if (behaviour == AIState.Wandering)
         {
             //Debug.Log("Wandering");
@@ -123,7 +115,7 @@ public class TankBehaviour : NetworkBehaviour {
     {
         while (true)
         {
-            FindVisibleTarget();
+            RpcFindVisibleTarget();
 
 
 
@@ -152,6 +144,7 @@ public class TankBehaviour : NetworkBehaviour {
 
 
 	//I For random Wandering by using navmesh sphere
+
     public static Vector3 RandomWandering(Vector3 origin, float dist, LayerMask ground)
     {
         //I Making sure the area is within the wander Radius variable only.
@@ -192,12 +185,11 @@ public class TankBehaviour : NetworkBehaviour {
               fireInterval = 2.0f;
              }
         }
-
-
     }
 
     //I Checking the visible target in the list
-    void FindVisibleTarget()
+    [ClientRpc]
+    void RpcFindVisibleTarget()
     {
         visibleTarget.Clear();
 
@@ -274,11 +266,9 @@ public class TankBehaviour : NetworkBehaviour {
         childObject.transform.SetParent(targetposition,false);
         //childObject.transform.parent = targetposition;
         childTarget = GameObject.FindWithTag("Target").transform;
-
         //TargetRoot.position =  Vector3.zero;
 
     }
-
 
 
     //I I comment this part for now since this is for testing part
