@@ -1,0 +1,3 @@
+1 - Host must set all units and launch first in this build, so that other players can move (gg host XD)
+2 - All Units must be place
+3 - one box cannot have more than one unit

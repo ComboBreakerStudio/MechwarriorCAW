@@ -1,11 +1,17 @@
-﻿public enum AIBehaviour
+﻿
+namespace AIEnums
 {
-    InSight,
-    Wandering
-}
+    
+    public enum AIState
+    {
+        InSight,
+        Wandering,
+        Idle
+    }
 
-public enum AISetupBehaviour
-{
-    Setup,
-    NotSetup
+    public enum AISetupBehaviour
+    {
+        Setup,
+        NotSetup
+    }
 }

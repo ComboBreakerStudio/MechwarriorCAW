@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+<<<<<<< HEAD
 
 public class PlanningPhaseManager : NetworkBehaviour {
 	
@@ -9,6 +10,19 @@ public class PlanningPhaseManager : NetworkBehaviour {
 	public string objectName;
 	public Vector3 destinationPosition;
 	AIStats aiStats;
+=======
+
+public class PlanningPhaseManager : NetworkBehaviour {
+
+	public static PlanningPhaseManager instance;
+
+	public GameObject tankType, sniperType, artileryType;
+	public string objectName;
+	public Vector3 destinationPosition;
+	AIStats aiStats;
+
+
+>>>>>>> e409efdcc9aa6f6b31c31fe273612a241139ccff
 
 //	[Command]
 	public void CmdSetPosition(){
@@ -16,6 +30,7 @@ public class PlanningPhaseManager : NetworkBehaviour {
 		//then send the destination to the object
 	}
 
+<<<<<<< HEAD
 	public void start()
 	{
 		CmdSpawnAI ();
@@ -42,6 +57,35 @@ public class PlanningPhaseManager : NetworkBehaviour {
 						}
 					}
 				}
+=======
+	void Start()
+	{
+		instance = this;
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
+			
+	[Command]
+	public void CmdSpawnAI(string OwnerName, int UnitType, Vector3 position)
+	{
+		Debug.Log (OwnerName + " " + UnitType);
+		if(UnitType == 1){
+			GameObject go = Instantiate (tankType, position, Quaternion.identity);
+			go.GetComponent<AIStats> ().CmdSetOwner(OwnerName);
+			NetworkServer.Spawn (go);
+		}
+		if(UnitType == 2){
+			GameObject go = Instantiate (sniperType, position, Quaternion.identity);
+			go.GetComponent<AIStats> ().CmdSetOwner(OwnerName);	
+			NetworkServer.Spawn (go);
+		}
+		Debug.Log (GameManager.GM.localPlayerStatsScript);
+//		GameManager.GM.localPlayerStatsScript.CmdAddUnit ();
+		for(int i = 0; i < TeamManager.instance.players.Count; i++){
+			if(TeamManager.instance.players[i].name == OwnerName){
+				Debug.Log ("Found It");
+				TeamManager.instance.players [i].GetComponent<PlayerStats> ().CmdAddUnit ();
+>>>>>>> e409efdcc9aa6f6b31c31fe273612a241139ccff
 			}
 		}
 	}
@@ -56,6 +100,8 @@ public class PlanningPhaseManager : NetworkBehaviour {
 			NetworkServer.Spawn (go);
 		}
 	}
+
+
 
 
 

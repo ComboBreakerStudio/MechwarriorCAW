@@ -5,17 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	//Please put keybinding in other manager
-
 	public static GameManager GM;
-
-	public KeyCode forward{ get; set;}
-	public KeyCode backward{ get; set;}
-	public KeyCode left{ get; set;}
-	public KeyCode right{ get; set;}
-
-	//Pause
-	public KeyCode menuButton;
 
 	public GameObject localPlayer;
 	public PlayerStats localPlayerStatsScript;
@@ -25,6 +15,12 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] respawnPosition_Team2;
 
 	public PlayerUI playerUIScript;
+
+	public bool isPlanningPhase;
+
+	public GameObject uiObject,planningPhaseUI;
+
+	public SlotRegionUI[] slotRegionUIScript;
 
 
 	void Awake()
@@ -39,15 +35,10 @@ public class GameManager : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-
-		forward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "W"));
-		backward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
-		left = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
-		right = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
-		menuButton = KeyCode.Escape;
 	}
 
 	void Start(){
+//		uiObject.SetActive (false);
 	}
 
 //	[Command]
@@ -62,8 +53,11 @@ public class GameManager : MonoBehaviour {
 		localPlayer.GetComponent<PlayerLoadout> ().LoadParts ();
 		localPlayerStatsScript.StartStuff ();
 		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
-//		playerUIScript.playerStatScript = localPlayerStatsScript;
+		playerUIScript.playerStatScript = localPlayerStatsScript;
 
+		if(isPlanningPhase){
+			uiObject.SetActive (false);
+		}
 //		Debug.Log ("Player Respawned");
 
 
@@ -78,5 +72,39 @@ public class GameManager : MonoBehaviour {
 
 		localPlayer.GetComponent<PlayerStats> ().CmdEnablePlayer (true);
 		localPlayer.GetComponent<PlayerStats> ().CmdResetStats ();
+
 	}
+
+	public void SetPlanningPhase(bool phase){
+		isPlanningPhase = phase;
+		uiObject.SetActive (true);
+		StartCoroutine ("disableObjects",1f);
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	IEnumerator disableObjects(float t){
+		yield return new WaitForSeconds (t);
+		planningPhaseUI.SetActive (false);
+	}
+
+	#region AI Region
+
+
+	//1 = High, 2 = Low, 3 = midHigh, 4 = midRight, 5 = midMid, 6 = midLeft
+	public void SetAIPosition(int unitType, int spawnPointType){
+//		GameObject[] ai;
+
+//		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+//			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == localPlayer.name){
+//				aiObject.Add (AIManager.instance.AIUnits[i]);
+//			}
+//		}
+
+		localPlayerStatsScript.CmdSetUnitPosition (unitType, spawnPointType);
+//		localPlayerStatsScript.CmdAddUnit ();
+	}
+
+	#endregion
 }
