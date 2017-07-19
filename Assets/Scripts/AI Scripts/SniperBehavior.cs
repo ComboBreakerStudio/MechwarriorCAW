@@ -64,17 +64,14 @@ public class SniperBehavior : NetworkBehaviour {
     public float setupTimer;
 
     // Use this for initialization
-    public override void OnStartServer()
+    void Start()
     {
         //Debug.Log("SERVER STARTED");
         agent = GetComponent<NavMeshAgent>();
 
         team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
-        if (isServer)
-        {
-            StartCoroutine(AISniper());
-        }
+        StartCoroutine(AISniper());
     }
 
     void Update()

@@ -21,6 +21,7 @@ public class TankBehaviour : NetworkBehaviour {
 	public AIStats statsScript;
 
     public TeamManager team;
+    public PlayerStats player;
 
     NavMeshAgent agent;
 
@@ -28,6 +29,7 @@ public class TankBehaviour : NetworkBehaviour {
     public List<Transform> visibleTarget = new List<Transform>();
 
     [Header("AI Sight")]
+    //[SyncVar]
     public float viewRadius;
     public Transform targetposition;
     public LayerMask targetMask;
@@ -46,7 +48,9 @@ public class TankBehaviour : NetworkBehaviour {
 
 
     [Header("AI Shoot")]
+    //[SyncVar]
     public Transform tankHead;
+    //[SyncVar]
     public Transform firingPoint;
     public GameObject bulletPrefab;
     public float minimumRange;
@@ -62,24 +66,41 @@ public class TankBehaviour : NetworkBehaviour {
     public float timeInterval;
     public float fireInterval;
 
+    bool isCoroutineStarted = false;
 
-
-
-    public override void OnStartServer()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
         team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
-        if (isServer)
-        {
-            StartCoroutine(AITankBehaviour());
+        statsScript = gameObject.GetComponent<AIStats>();
 
-        }
 	}
+
+
 
     void Update()
     {
+
+
+        if (statsScript.teamID == 1)
+        {
+            if (!isCoroutineStarted)
+            {
+                StartCoroutine(Team1AFV());
+                isCoroutineStarted = true;
+            }
+        }
+        else if (statsScript.teamID == 2)
+        {
+            if (!isCoroutineStarted)
+            {
+                StartCoroutine(Team2AFV());
+                isCoroutineStarted = true;
+            }
+        }
+
         if(childTarget!=null)
         {
             agent.SetDestination(childTarget.transform.position);
@@ -111,12 +132,23 @@ public class TankBehaviour : NetworkBehaviour {
         }
     }
 
-    IEnumerator AITankBehaviour()
+    IEnumerator Team1AFV()
     {
         while (true)
         {
-            RpcFindVisibleTarget();
+            RpcFindTeam2();
 
+
+
+            yield return new WaitForSeconds(timeInterval);
+        }
+    }
+
+    IEnumerator Team2AFV()
+    {
+        while (true)
+        {
+            RpcFindTeam1();
 
 
             yield return new WaitForSeconds(timeInterval);
@@ -187,9 +219,7 @@ public class TankBehaviour : NetworkBehaviour {
         }
     }
 
-    //I Checking the visible target in the list
-    [ClientRpc]
-    void RpcFindVisibleTarget()
+    void RpcFindTeam1()
     {
         visibleTarget.Clear();
 
@@ -210,41 +240,20 @@ public class TankBehaviour : NetworkBehaviour {
                 {
                     //I For AI detection if the target is the same team or not.
                     //I This is where it got bugged, when I test it alone, it work fine but when client joined, it goes bugged
-                    if (statsScript.teamID == 1)
+                    for (int j = 0; j < team.team1.Count; j++)
                     {
-                        for (int j = 0; j < team.team2.Count; j++)
+                        if (team.team1[j])
                         {
-                            if (team.team2[j])
-                            {
-                                visibleTarget.Add(targetposition);
-                            }
+                            visibleTarget.Add(targetposition);
+                        }
 
-                            if (GameObject.FindWithTag("Target") == null)
-                            {
+                        if (GameObject.FindWithTag("Target") == null)
+                        {
 
-                                CreateTargetRoot();
+                            CreateTargetRoot();
 
-                            }
                         }
                     }
-                    else if (statsScript.teamID == 2)
-                    {
-                        for (int j = 0; j < team.team1.Count; j++)
-                        {
-                            if (team.team1[j])
-                            {
-                                visibleTarget.Add(targetposition);
-                            }
-
-                            if (GameObject.FindWithTag("Target") == null)
-                            {
-
-                                CreateTargetRoot();
-
-                            }
-                        }
-                    }
-
                 }
             }
             else if(Vector3.Angle (transform.position, dirToTarget)>360)
@@ -253,6 +262,54 @@ public class TankBehaviour : NetworkBehaviour {
             }
         }
     }
+
+    //I Checking the visible target in the list
+    void RpcFindTeam2()
+    {
+        visibleTarget.Clear();
+
+        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+
+
+        for (int i = 0; i < targetInViewRadius.Length; i++)
+        {
+            targetposition = targetInViewRadius[i].transform;
+
+
+            //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
+            //I The code is basically from sebastian lague, except I don't make it cone of vision style.
+            Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
+            if (Vector3.Angle(transform.position, dirToTarget) < 360)
+            {
+                float distToTarget = Vector3.Distance(transform.position, targetposition.position);
+                if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
+                {
+                    //I For AI detection if the target is the same team or not.
+                    //I This is where it got bugged, when I test it alone, it work fine but when client joined, it goes bugged
+                    for (int j = 0; j < team.team2.Count; j++)
+                    {
+                        if (team.team2[j])
+                        {
+                            visibleTarget.Add(targetposition);
+                        }
+
+                        if (GameObject.FindWithTag("Target") == null)
+                        {
+                            CreateTargetRoot();
+                        }
+                    }
+                }
+            }
+            else if (Vector3.Angle(transform.position, dirToTarget) > 360)
+            {
+                childTarget = null;
+            }
+        }
+
+
+    }
+
+
 
     //I Checking Distance
     private float Distance()

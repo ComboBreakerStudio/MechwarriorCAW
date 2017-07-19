@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 using UnityEngine.AI;
 
 public class AIStats : NetworkBehaviour {
-    
-	[SyncVar]
+
+    [SyncVar]
 	public int teamID;
 	[SyncVar]
 	public int curHealth, maxHealth;
@@ -158,11 +158,6 @@ public class AIStats : NetworkBehaviour {
     private float Distance()
     {
         return Vector3.Distance(transform.position, targetOwner.position);
-    }
-
-    public void ReregisterNavmesh()
-    {
-
     }
 
 }
