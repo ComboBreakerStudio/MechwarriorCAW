@@ -98,6 +98,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void ShakeScreen(){
-		playerUIScript.shakeScreen ();
+		//playerUIScript.shakeScreen ();
 	}
 }

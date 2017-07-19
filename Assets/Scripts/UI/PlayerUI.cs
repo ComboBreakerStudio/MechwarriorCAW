@@ -20,8 +20,8 @@ public class PlayerUI : MonoBehaviour {
 
 	bool isLocalPlayer;
 
-	public GameObject HeadHealth;
 	public GameObject TorsoHealth;
+	public GameObject BackTorsoHealth;
 	public GameObject LeftTorsoHealth;
 	public GameObject LeftArmHealth;
 	public GameObject LeftLegHealth;
@@ -29,8 +29,8 @@ public class PlayerUI : MonoBehaviour {
 	public GameObject RightArmHealth;
 	public GameObject RightLegHealth;
 
-	public List<GameObject> headUI;
 	public List<GameObject> TorsoUI;
+	public List<GameObject> BackTorsoUI;
 	public List<GameObject> LeftTorsoUI;
 	public List<GameObject> LeftArmUI;
 	public List<GameObject> LeftLegUI;
@@ -44,18 +44,18 @@ public class PlayerUI : MonoBehaviour {
 	public bool canShakeScreen;
 	public float shakeScreenTime;
 	public float shakePower;
-	// Use this for initialization
+
 	void Start () {
 		canShakeScreen = true;
 		PauseMenu.IsOn = false;
 		isLocalPlayer = true;
 
 		//Get Object
-		foreach (RectTransform img in HeadHealth.transform)
-			headUI.Add (img.gameObject);
-
 		foreach (RectTransform img in TorsoHealth.transform)
 			TorsoUI.Add (img.gameObject);
+
+		foreach (RectTransform img in BackTorsoHealth.transform)
+			BackTorsoUI.Add (img.gameObject);
 
 		foreach (RectTransform img in LeftTorsoHealth.transform)
 			LeftTorsoUI.Add (img.gameObject);
@@ -76,8 +76,8 @@ public class PlayerUI : MonoBehaviour {
 			RightLegUI.Add (img.gameObject);
 
 		//Disable Object
-		for (int i = 0; i < headUI.Count; i++)
-			headUI [i].SetActive (false);
+		for (int i = 0; i < BackTorsoUI.Count; i++)
+			BackTorsoUI [i].SetActive (false);
 
 		for (int i = 0; i < TorsoUI.Count; i++)
 			TorsoUI [i].SetActive (false);
@@ -100,7 +100,7 @@ public class PlayerUI : MonoBehaviour {
 		for (int i = 0; i < RightLegUI.Count; i++)
 			RightLegUI [i].SetActive (false);
 
-		headUI [2].SetActive (true);
+		BackTorsoUI [2].SetActive (true);
 		TorsoUI [2].SetActive (true);
 		LeftTorsoUI [2].SetActive (true);
 		LeftArmUI [2].SetActive (true);
@@ -112,7 +112,6 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//minimap.GetComponentInChildren<RawImage>().texture = 
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			TogglePauseMenu ();
 		}
@@ -120,7 +119,7 @@ public class PlayerUI : MonoBehaviour {
 	}
 
 	private void TogglePauseMenu(){
-//		Debug.Log ("Pause");
+		Debug.Log ("Pause");
 		pauseMenu.SetActive (!pauseMenu.activeSelf);
 		PauseMenu.IsOn = pauseMenu.activeSelf;
 	}
@@ -129,20 +128,12 @@ public class PlayerUI : MonoBehaviour {
 		playerStatScript = GameManager.GM.localPlayerStatsScript;
 	}
 
-	//[Client]
-	/*void mapDisplay ()
-	{
-		if (isLocalPlayer == true) {
-			minimap.SetActive (true);
+	/*public void shakeScreen(){
+		if(canShakeScreen){
+			Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
+			StartCoroutine ("ShakeScreenUITimer", 0.05f);
+			canShakeScreen = false;
 		}
-	}*/
-
-	public void shakeScreen(){
-//		if(canShakeScreen){
-//			Health.transform.localPosition = new Vector2 (Health.transform.localPosition.x,Health.transform.localPosition.y + shakePower);
-//			StartCoroutine ("ShakeScreenUITimer", 0.05f);
-//			canShakeScreen = false;
-//		}
 	}
 
 	IEnumerator ShakeScreenUITimer(float t){
@@ -159,13 +150,14 @@ public class PlayerUI : MonoBehaviour {
 
 		yield return new WaitForSeconds (shakeScreenTime);
 		canShakeScreen = true;
+	}*/
 
-	}
+
 
 	void healthDisplay()
 	{
 		if(playerStatScript != null){
-			//Front
+			//Front Torso
 			if (playerStatScript.frontTorso_Health <= 0) {
 				TorsoUI [0].SetActive (false);
 			} else if (playerStatScript.frontTorso_Health <= 35) {
@@ -179,21 +171,21 @@ public class PlayerUI : MonoBehaviour {
 				TorsoUI [1].SetActive (false);
 				TorsoUI [2].SetActive (true);
 			}
-			//Head
+			//Back Torso
 			if (playerStatScript.backTorso_Health <= 0) {
-				headUI [0].SetActive (false);
+				BackTorsoUI [0].SetActive (false);
 			} 
 			else if(playerStatScript.backTorso_Health <= 15) {
-				headUI [2].SetActive (false);
-				headUI [1].SetActive (true);
+				BackTorsoUI [2].SetActive (false);
+				BackTorsoUI [1].SetActive (true);
 			}
 			else if(playerStatScript.backTorso_Health <= 10) {
-				headUI [1].SetActive (false);
-				headUI [0].SetActive (true);
+				BackTorsoUI [1].SetActive (false);
+				BackTorsoUI [0].SetActive (true);
 			} else if (playerStatScript.backTorso_Health > 15) {
-				headUI [0].SetActive (false);
-				headUI [1].SetActive (false);
-				headUI [2].SetActive (true);
+				BackTorsoUI [0].SetActive (false);
+				BackTorsoUI [1].SetActive (false);
+				BackTorsoUI [2].SetActive (true);
 			}
 			//left torso
 			if (playerStatScript.leftTorso_Health <= 0) {
