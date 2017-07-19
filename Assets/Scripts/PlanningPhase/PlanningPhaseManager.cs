@@ -2,15 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-<<<<<<< HEAD
-
-public class PlanningPhaseManager : NetworkBehaviour {
-	
-	public List <GameObject> spawnObject;
-	public string objectName;
-	public Vector3 destinationPosition;
-	AIStats aiStats;
-=======
 
 public class PlanningPhaseManager : NetworkBehaviour {
 
@@ -22,7 +13,6 @@ public class PlanningPhaseManager : NetworkBehaviour {
 	AIStats aiStats;
 
 
->>>>>>> e409efdcc9aa6f6b31c31fe273612a241139ccff
 
 //	[Command]
 	public void CmdSetPosition(){
@@ -30,34 +20,6 @@ public class PlanningPhaseManager : NetworkBehaviour {
 		//then send the destination to the object
 	}
 
-<<<<<<< HEAD
-	public void start()
-	{
-		CmdSpawnAI ();
-	}
-
-	public void Update(){
-		GetAI ();
-	}
-
-	public void GetAI(){
-		if (Input.GetMouseButtonDown (0)) { 
-			RaycastHit hit; 
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); 
-
-			if (Physics.Raycast (ray, out hit, 1200.0f)) {
-				Debug.Log (hit.transform.gameObject.name);
-				aiStats = hit.transform.gameObject.GetComponent<AIStats>();
-				if (aiStats != null) {
-					objectName = aiStats.AIName;
-				} else {
-					for (int i = 0; i < spawnObject.Count; i++) {
-						if (spawnObject [i].GetComponent<AIStats> ().AIName == objectName) {
-							spawnObject [i].GetComponent<AIWalkPoint> ().newPosition = hit.point;
-						}
-					}
-				}
-=======
 	void Start()
 	{
 		instance = this;
@@ -85,23 +47,9 @@ public class PlanningPhaseManager : NetworkBehaviour {
 			if(TeamManager.instance.players[i].name == OwnerName){
 				Debug.Log ("Found It");
 				TeamManager.instance.players [i].GetComponent<PlayerStats> ().CmdAddUnit ();
->>>>>>> e409efdcc9aa6f6b31c31fe273612a241139ccff
 			}
 		}
 	}
-			
-	[Command]
-	public void CmdSpawnAI()
-	{
-		for (int i = 0; i < AIManager.instance.AIUnits.Count; i++)
-		{
-			GameObject go = Instantiate (AIManager.instance.AIUnits[i]);
-			spawnObject.Add (go);
-			NetworkServer.Spawn (go);
-		}
-	}
-
-
 
 
 

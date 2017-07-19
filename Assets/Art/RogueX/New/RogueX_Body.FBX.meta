@@ -133,7 +133,8 @@ ModelImporter:
     4300042: MissilePod_Door_Left-Top
     4300044: Right Shoulder
     4300046: Rear_Hatch
-    7400000: Take 001
+    7400000: BodyIdle
+    7400002: BodyMove
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -157,7 +158,127 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: BodyMove
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Cheek
+        weight: 1
+      - path: Cheek/Left_Torso
+        weight: 1
+      - path: Cheek/Left_Torso/Missile_Pod_Left
+        weight: 1
+      - path: Cheek/Left_Torso/Missile_Pod_Left/MissilePod_Door_Left-Bottom
+        weight: 1
+      - path: Cheek/Left_Torso/Missile_Pod_Left/MissilePod_Door_Left-Top
+        weight: 1
+      - path: Cheek/Rear_Hatch
+        weight: 1
+      - path: Cheek/Right Shoulder
+        weight: 1
+      - path: Cheek/Right_Torso
+        weight: 1
+      - path: Cheek/Right_Torso/Missile Pod
+        weight: 1
+      - path: Cheek/Right_Torso/Missile Pod/MissilePod_Door_Right-Bottom
+        weight: 1
+      - path: Cheek/Right_Torso/Missile Pod/MissilePod_Door_Right-Top
+        weight: 1
+      - path: Cheek/Turret
+        weight: 1
+      - path: Cheek/Turret/Plane020
+        weight: 1
+      - path: Cheek/Turret/Turret_Back
+        weight: 1
+      - path: Cheek/Turret/Turret_Guns
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: BodyIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Cheek
+        weight: 1
+      - path: Cheek/Left_Torso
+        weight: 1
+      - path: Cheek/Left_Torso/Missile_Pod_Left
+        weight: 1
+      - path: Cheek/Left_Torso/Missile_Pod_Left/MissilePod_Door_Left-Bottom
+        weight: 1
+      - path: Cheek/Left_Torso/Missile_Pod_Left/MissilePod_Door_Left-Top
+        weight: 1
+      - path: Cheek/Rear_Hatch
+        weight: 1
+      - path: Cheek/Right Shoulder
+        weight: 1
+      - path: Cheek/Right_Torso
+        weight: 1
+      - path: Cheek/Right_Torso/Missile Pod
+        weight: 1
+      - path: Cheek/Right_Torso/Missile Pod/MissilePod_Door_Right-Bottom
+        weight: 1
+      - path: Cheek/Right_Torso/Missile Pod/MissilePod_Door_Right-Top
+        weight: 1
+      - path: Cheek/Turret
+        weight: 1
+      - path: Cheek/Turret/Plane020
+        weight: 1
+      - path: Cheek/Turret/Turret_Back
+        weight: 1
+      - path: Cheek/Turret/Turret_Guns
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

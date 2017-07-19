@@ -2,32 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-<<<<<<< HEAD
-
-public class AIStats : NetworkBehaviour {
-
-=======
 using UnityEngine.AI;
 
 public class AIStats : NetworkBehaviour {
     
 	[SyncVar]
->>>>>>> e409efdcc9aa6f6b31c31fe273612a241139ccff
 	public int teamID;
 	[SyncVar]
 	public int curHealth, maxHealth;
-<<<<<<< HEAD
-	public string AIName;
-
-	void Start () {
-		RegisterAI ();
-	}
-
-	void RegisterAI()
-	{
-		string _ID = "AI Unit" + GetComponent<NetworkIdentity> ().netId;
-		AIName = _ID;
-=======
 	[SyncVar]
 	public string AIName;
 	[SyncVar]
@@ -83,7 +65,6 @@ public class AIStats : NetworkBehaviour {
 
 		aiBehaviorScript.enabled = true;
 //		aiBehaviorScript.SendMessage ("SetAIPoint", destination);
->>>>>>> e409efdcc9aa6f6b31c31fe273612a241139ccff
 	}
 
 }

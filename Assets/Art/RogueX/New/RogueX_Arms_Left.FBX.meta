@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: dfc3230307146f44d8963d4c3ef4b93b
-timeCreated: 1499364613
+timeCreated: 1500492866
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -18,6 +18,14 @@ ModelImporter:
     100020: Hydraulic_Wire
     100022: Left_Arm
     100024: Left_Arm 1
+    100026: Box002
+    100028: CannonBarrel001
+    100030: Circle002
+    100032: Cylinder041
+    100034: Cylinder042
+    100036: Cylinder043
+    100038: Cylinder044
+    100040: Cylinder045
     400000: Box010
     400002: CannonBarrel
     400004: Canon_Recoil_Controller
@@ -31,25 +39,58 @@ ModelImporter:
     400020: Hydraulic_Wire
     400022: Left_Arm
     400024: Left_Arm 1
+    400026: Box002
+    400028: CannonBarrel001
+    400030: Circle002
+    400032: Cylinder041
+    400034: Cylinder042
+    400036: Cylinder043
+    400038: Cylinder044
+    400040: Cylinder045
     2300000: Box010
     2300002: CannonBarrel
     2300004: Line009
     2300006: AutoCannon
     2300008: Hydraulic_Wire
     2300010: Left_Arm 1
+    2300012: Box002
+    2300014: CannonBarrel001
+    2300016: Cylinder041
+    2300018: Cylinder042
+    2300020: Cylinder043
+    2300022: Cylinder044
+    2300024: Cylinder045
+    2300026: //RootNode
     3300000: Box010
     3300002: CannonBarrel
     3300004: Line009
     3300006: AutoCannon
     3300008: Hydraulic_Wire
     3300010: Left_Arm 1
+    3300012: Box002
+    3300014: CannonBarrel001
+    3300016: Cylinder041
+    3300018: Cylinder042
+    3300020: Cylinder043
+    3300022: Cylinder044
+    3300024: Cylinder045
+    3300026: //RootNode
     4300000: Box010
     4300002: CannonBarrel
     4300004: Line009
     4300006: AutoCannon
     4300008: Hydraulic_Wire
     4300010: Left_Arm
-    7400000: Take 001
+    4300012: AutoCannon001
+    4300014: CannonBarrel001
+    4300016: Box002
+    4300018: Cylinder042
+    4300020: Cylinder045
+    4300022: Cylinder043
+    4300024: Cylinder041
+    4300026: Cylinder044
+    7400000: LeftArmIdle
+    7400002: LeftArmShoot
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -73,7 +114,107 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LeftArmIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Left_Arm
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller/Bone002(mirrored)001
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller/Bone002(mirrored)001/Bone003(mirrored)001
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller/Bone002(mirrored)001/CannonBarrel
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Hydraulic_Wire
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/Bone003(mirrored)
+        weight: 1
+      - path: Left_Arm/Left_Arm 1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LeftArmShoot
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Left_Arm
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller/Bone002(mirrored)001
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller/Bone002(mirrored)001/Bone003(mirrored)001
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Canon_Recoil_Controller/Bone002(mirrored)001/CannonBarrel
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/AutoCannon/Hydraulic_Wire
+        weight: 1
+      - path: Left_Arm/Bone002(mirrored)/Bone003(mirrored)
+        weight: 1
+      - path: Left_Arm/Left_Arm 1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

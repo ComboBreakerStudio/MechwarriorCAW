@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		if(playerStatsScript.canMove){
 			if (Input.GetKey (KeybindManager.KBM.Forward)){
+				playerAnimation.bodyAnim.SetBool ("isWalking", true);
 				playerAnimation.legAnim.SetBool ("isWalking", true);
 				playerCurrentSpeed += playerStatsScript.playerMoveSpeed * Time.deltaTime;
 
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour {
 					if(playerCurrentSpeed <= 0){
 						playerCurrentSpeed = 0;
 					}
+					playerAnimation.bodyAnim.SetBool ("isWalking", false);
 					playerAnimation.legAnim.SetBool ("isWalking", false);
 				}
 				else if(playerCurrentSpeed < 0){

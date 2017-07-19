@@ -18,6 +18,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public Transform camObject;
 
 	public ThirdPersonCamera camScript;
+	public PlayerAnimation playerAnimation;
 
 	[SerializeField]
 	public Camera cam;
@@ -61,6 +62,7 @@ public class PlayerShoot : NetworkBehaviour {
 		//Attack
 		if (Input.GetButton ("Fire1")) {
 			if(leftWeapon.canShoot && leftWeapon.gameObject.activeSelf){
+				playerAnimation.leftHandAnim.SetBool ("isShooting", true);
 				Debug.Log ("PressedLeft");
 				WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
 				//if it's melee
@@ -75,6 +77,7 @@ public class PlayerShoot : NetworkBehaviour {
 				WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
 				//if it's melee
 				if(rightWeapon.isMelee){
+					playerAnimation.rightHandAnim.SetBool ("isAttacking", true);
 					camScript.isMelee = true;
 					Debug.Log ("Melee");
 				}
@@ -106,14 +109,16 @@ public class PlayerShoot : NetworkBehaviour {
 
 	IEnumerator ResetLeftWeaponAttack(float t){
 		yield return new WaitForSeconds (t);
+		playerAnimation.leftHandAnim.SetBool ("isShooting", false);
 		leftWeapon.canShoot = true;
 	}
 
 	IEnumerator ResetRightWeaponAttack(float t){
 		yield return new WaitForSeconds (t);
+		playerAnimation.rightHandAnim.SetBool ("isAttacking", false);
 		rightWeapon.canShoot = true;
 	}
-
+		
 //	[Command]
 	public void RaycastShoot(WeaponSystemStats weapon){
 		Debug.Log ("Shoot");
