@@ -175,6 +175,7 @@ public class PlayerShoot : NetworkBehaviour {
 			else if(weapon == rightWeapon){
 				CmdProjectileShoot (ga.transform.position, target.transform.position, false, playerStatsScript.gameObject.name, weapon.damage);
 			}
+		leftWeapon.currentHeat += leftWeapon.heatRegenRate;
 //		}
 	}
 
