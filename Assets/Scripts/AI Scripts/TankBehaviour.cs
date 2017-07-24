@@ -20,9 +20,6 @@ public class TankBehaviour : NetworkBehaviour {
 
 	public AIStats statsScript;
 
-    public TeamManager team;
-    public PlayerStats player;
-
     NavMeshAgent agent;
 
 
@@ -66,40 +63,23 @@ public class TankBehaviour : NetworkBehaviour {
     public float timeInterval;
     public float fireInterval;
 
-    bool isCoroutineStarted = false;
+
+    public List<Transform> targetInViewRadius = new List<Transform>();
+
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        team = GameObject.Find("TeamManager").GetComponent<TeamManager>();
-
+       
         statsScript = gameObject.GetComponent<AIStats>();
 
+        StartCoroutine(TankScript());
 	}
 
 
 
     void Update()
     {
-
-
-        if (statsScript.teamID == 1)
-        {
-            if (!isCoroutineStarted)
-            {
-                StartCoroutine(Team1AFV());
-                isCoroutineStarted = true;
-            }
-        }
-        else if (statsScript.teamID == 2)
-        {
-            if (!isCoroutineStarted)
-            {
-                StartCoroutine(Team2AFV());
-                isCoroutineStarted = true;
-            }
-        }
 
         if(childTarget!=null)
         {
@@ -132,11 +112,11 @@ public class TankBehaviour : NetworkBehaviour {
         }
     }
 
-    IEnumerator Team1AFV()
+    IEnumerator TankScript()
     {
         while (true)
         {
-            RpcFindTeam2();
+            FindVisibleTarget();
 
 
 
@@ -144,16 +124,6 @@ public class TankBehaviour : NetworkBehaviour {
         }
     }
 
-    IEnumerator Team2AFV()
-    {
-        while (true)
-        {
-            RpcFindTeam1();
-
-
-            yield return new WaitForSeconds(timeInterval);
-        }
-    }
 
     //I Wandering
     void Wandering()
@@ -219,93 +189,42 @@ public class TankBehaviour : NetworkBehaviour {
         }
     }
 
-    void RpcFindTeam1()
+    void FindVisibleTarget()
     {
         visibleTarget.Clear();
 
-        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        Collider[] allInstances = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        //targetInViewRadius = new List<Transform>();
 
-        for (int i = 0; i < targetInViewRadius.Length; i++)
+
+        for (int i = 0; i < allInstances.Length; i++)
         {
-            targetposition = targetInViewRadius[i].transform;
+            targetposition = allInstances[i].transform;
 
 
-            //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
-            //I The code is basically from sebastian lague, except I don't make it cone of vision style.
-            Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
-            if (Vector3.Angle(transform.position,dirToTarget) < 360)
-            {
-                float distToTarget = Vector3.Distance(transform.position, targetposition.position);
-                if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
-                {
-                    //I For AI detection if the target is the same team or not.
-                    //I This is where it got bugged, when I test it alone, it work fine but when client joined, it goes bugged
-                    for (int j = 0; j < team.team1.Count; j++)
-                    {
-                        if (team.team1[j])
-                        {
-                            visibleTarget.Add(targetposition);
-                        }
-
-                        if (GameObject.FindWithTag("Target") == null)
-                        {
-
-                            CreateTargetRoot();
-
-                        }
-                    }
-                }
-            }
-            else if(Vector3.Angle (transform.position, dirToTarget)>360)
-            {
-                childTarget = null;
-            }
-        }
-    }
-
-    //I Checking the visible target in the list
-    void RpcFindTeam2()
-    {
-        visibleTarget.Clear();
-
-        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
-
-
-        for (int i = 0; i < targetInViewRadius.Length; i++)
-        {
-            targetposition = targetInViewRadius[i].transform;
-
-
-            //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
-            //I The code is basically from sebastian lague, except I don't make it cone of vision style.
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
             if (Vector3.Angle(transform.position, dirToTarget) < 360)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    //I For AI detection if the target is the same team or not.
-                    //I This is where it got bugged, when I test it alone, it work fine but when client joined, it goes bugged
-                    for (int j = 0; j < team.team2.Count; j++)
+                    if (allInstances[i].GetComponent<TestScript>() != null)
                     {
-                        if (team.team2[j])
+                        if (allInstances[i].GetComponent<TestScript>().teamID != this.statsScript.teamID)
                         {
                             visibleTarget.Add(targetposition);
                         }
 
-                        if (GameObject.FindWithTag("Target") == null)
-                        {
-                            CreateTargetRoot();
-                        }
+                    }
+                    if (GameObject.Find("Target") == null)
+                    {
+                        CreateTargetRoot();
                     }
                 }
             }
-            else if (Vector3.Angle(transform.position, dirToTarget) > 360)
-            {
-                childTarget = null;
-            }
-        }
 
+
+        }
 
     }
 

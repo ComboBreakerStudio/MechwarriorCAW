@@ -41,9 +41,9 @@ public class AIStats : NetworkBehaviour {
 //			Debug.Log ("AIServer " + AIName);
 			curHealth = maxHealth;
 		}
-		AIManager.instance.AIUnits.Add (this.gameObject);
+//		AIManager.instance.AIUnits.Add (this.gameObject);
 		NavAgent = GetComponent<NavMeshAgent> ();
-        targetOwner = GameObject.Find(OwnerName).transform;
+//        targetOwner = GameObject.Find(OwnerName).transform;
 
 
 		NavAgent.enabled = false;
