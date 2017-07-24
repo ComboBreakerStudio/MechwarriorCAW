@@ -50,6 +50,9 @@ public class PlayerStats : NetworkBehaviour {
 
 	//UI
 	public AmmoUI ammoUIScript;
+	public List<GameObject> minimapMarker;
+	public GameObject Marker;
+	PlayerStats otherPlayer;
 
 //	public void respawn(int id){
 //		GameManager.GM.RespawnPlayer ();
@@ -278,6 +281,9 @@ public class PlayerStats : NetworkBehaviour {
 
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
 
+		foreach (RectTransform marker in Marker.transform) {
+			minimapMarker.Add (marker.gameObject);
+		}
 
 		//Add player to TeamManager
 		if (isServer) {
@@ -334,6 +340,17 @@ public class PlayerStats : NetworkBehaviour {
 				}
 				//					setColor = true;
 			}
+
+		for(int i=0; i<minimapMarker.Count; i++)
+		{
+			if (isLocalPlayer) {
+				minimapMarker [0].SetActive (true);
+			} else if (!isLocalPlayer && otherPlayer.teamID == GameManager.GM.localPlayerStatsScript.teamID) {
+				//
+			} else if (!isLocalPlayer && otherPlayer.teamID != GameManager.GM.localPlayerStatsScript.teamID) {
+				//
+			}
+		}
 
 //		}
 //		if(!isLocalPlayer){
