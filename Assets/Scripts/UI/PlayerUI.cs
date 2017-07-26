@@ -41,12 +41,12 @@ public class PlayerUI : MonoBehaviour {
 	public PlayerStats playerStatScript;
 
 	//ShakeScreen
-	public bool canShakeScreen;
-	public float shakeScreenTime;
-	public float shakePower;
+	//public bool canShakeScreen;
+	//public float shakeScreenTime;
+	//public float shakePower;
 
 	void Start () {
-		canShakeScreen = true;
+		//canShakeScreen = true;
 		PauseMenu.IsOn = false;
 		isLocalPlayer = true;
 
@@ -286,4 +286,26 @@ public class PlayerUI : MonoBehaviour {
 			}
 		}
 	}
+
+	//Untested code for feedback (UI shaking)
+	public float shakeAmount = 30.0f;
+	public float shakeTimer = 1.0f;
+
+	public void UIShake()
+	{
+		if (shakeTimer > 0) {
+			Vector2 shakePos = Random.insideUnitCircle * shakeAmount;
+			transform.position = new Vector3 (transform.position.x + shakePos.x, transform.position.y + shakePos.y);
+			shakeTimer -= Time.deltaTime;
+		}
+	}
+
+	public void ShakeCamera(float shakePower, float shakeDuration)
+	{
+		shakeAmount = shakePower;
+		shakeTimer = shakeDuration;
+	}
+
+	//Untested code for feedback (Hit feedback)
+
 }
