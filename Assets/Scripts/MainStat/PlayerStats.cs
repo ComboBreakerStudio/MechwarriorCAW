@@ -281,8 +281,21 @@ public class PlayerStats : NetworkBehaviour {
 
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
 
-		foreach (RectTransform marker in Marker.transform) {
+		foreach (Transform marker in Marker.transform) {
 			minimapMarker.Add (marker.gameObject);
+		}
+		for (int i = 0; i < minimapMarker.Count; i++) {
+			minimapMarker [i].gameObject.SetActive (false);
+		}
+		for(int i=0; i<minimapMarker.Count; i++)
+		{
+			if (isLocalPlayer) {
+				minimapMarker [0].SetActive (true);
+			} else if (!isLocalPlayer && otherPlayer.teamID == GameManager.GM.localPlayerStatsScript.teamID) {
+				minimapMarker [1].SetActive (true);
+			} else if (!isLocalPlayer && otherPlayer.teamID != GameManager.GM.localPlayerStatsScript.teamID) {
+				minimapMarker [2].SetActive (true);
+			}
 		}
 
 		//Add player to TeamManager
@@ -341,16 +354,7 @@ public class PlayerStats : NetworkBehaviour {
 				//					setColor = true;
 			}
 
-		for(int i=0; i<minimapMarker.Count; i++)
-		{
-			if (isLocalPlayer) {
-				minimapMarker [0].SetActive (true);
-			} else if (!isLocalPlayer && otherPlayer.teamID == GameManager.GM.localPlayerStatsScript.teamID) {
-				//
-			} else if (!isLocalPlayer && otherPlayer.teamID != GameManager.GM.localPlayerStatsScript.teamID) {
-				//
-			}
-		}
+
 
 //		}
 //		if(!isLocalPlayer){

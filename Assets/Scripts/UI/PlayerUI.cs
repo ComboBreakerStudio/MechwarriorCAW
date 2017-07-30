@@ -307,5 +307,20 @@ public class PlayerUI : MonoBehaviour {
 	}
 
 	//Untested code for feedback (Hit feedback)
-
+	public RectTransform hitMarker;
+	public RectTransform hitFlash;
+	bool confirmHit;
+	bool beingHit;
+	float hitduration = 0.1f;	
+	//at void start both rectransform activestate is false
+	public void ConfirmHitMarker()
+	{
+		if (confirmHit) {
+			hitMarker.gameObject.SetActive (true);
+			hitduration -= Time.deltaTime;
+		} else if (beingHit){
+			hitFlash.gameObject.SetActive (true);
+			hitduration -= Time.deltaTime;
+		}
+	}
 }
