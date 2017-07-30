@@ -115,7 +115,7 @@ public class PlayerUI : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			TogglePauseMenu ();
 		}
-		heatBar.fillAmount = playerStatScript.leftWeaponSystemStats.currentHeat/100;
+		heatBar.fillAmount = (playerStatScript.leftWeaponSystemStats.currentHeat + playerStatScript.rightWeaponSystemStats.currentHeat)/100;
 		healthDisplay ();
 	}
 
