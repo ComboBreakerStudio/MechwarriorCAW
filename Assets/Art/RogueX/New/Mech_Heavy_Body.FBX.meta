@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: a2b3532d9e54b204b9b2a51e1b3f30be
+timeCreated: 1501090594
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cheek001
+    100002: Left_Torso001
+    100004: LegPelvis
+    100006: //RootNode
+    100008: Missile Pod001
+    100010: Missile_Pod_Left001
+    100012: MissilePod_Door_Left-Bottom001
+    100014: MissilePod_Door_Left-Top001
+    100016: MissilePod_Door_Right-Bottom001
+    100018: MissilePod_Door_Right-Top001
+    100020: Plane025
+    100022: Plane032
+    100024: Plane033
+    100026: Rear_Hatch001
+    100028: Right Shoulder001
+    100030: Right_Arm001
+    100032: Right_Torso001
+    100034: Turret001
+    100036: Turret_Back001
+    100038: Turret_Guns001
+    100040: WaistPivot
+    400000: Cheek001
+    400002: Left_Torso001
+    400004: LegPelvis
+    400006: //RootNode
+    400008: Missile Pod001
+    400010: Missile_Pod_Left001
+    400012: MissilePod_Door_Left-Bottom001
+    400014: MissilePod_Door_Left-Top001
+    400016: MissilePod_Door_Right-Bottom001
+    400018: MissilePod_Door_Right-Top001
+    400020: Plane025
+    400022: Plane032
+    400024: Plane033
+    400026: Rear_Hatch001
+    400028: Right Shoulder001
+    400030: Right_Arm001
+    400032: Right_Torso001
+    400034: Turret001
+    400036: Turret_Back001
+    400038: Turret_Guns001
+    400040: WaistPivot
+    2300000: Cheek001
+    2300002: Left_Torso001
+    2300004: Missile Pod001
+    2300006: Missile_Pod_Left001
+    2300008: MissilePod_Door_Left-Bottom001
+    2300010: MissilePod_Door_Left-Top001
+    2300012: MissilePod_Door_Right-Bottom001
+    2300014: MissilePod_Door_Right-Top001
+    2300016: Plane025
+    2300018: Plane032
+    2300020: Plane033
+    2300022: Rear_Hatch001
+    2300024: Right Shoulder001
+    2300026: Right_Arm001
+    2300028: Right_Torso001
+    2300030: Turret001
+    2300032: Turret_Back001
+    2300034: Turret_Guns001
+    2300036: WaistPivot
+    3300000: Cheek001
+    3300002: Left_Torso001
+    3300004: Missile Pod001
+    3300006: Missile_Pod_Left001
+    3300008: MissilePod_Door_Left-Bottom001
+    3300010: MissilePod_Door_Left-Top001
+    3300012: MissilePod_Door_Right-Bottom001
+    3300014: MissilePod_Door_Right-Top001
+    3300016: Plane025
+    3300018: Plane032
+    3300020: Plane033
+    3300022: Rear_Hatch001
+    3300024: Right Shoulder001
+    3300026: Right_Arm001
+    3300028: Right_Torso001
+    3300030: Turret001
+    3300032: Turret_Back001
+    3300034: Turret_Guns001
+    3300036: WaistPivot
+    4300000: WaistPivot
+    4300002: Cheek001
+    4300004: Plane032
+    4300006: Plane033
+    4300008: Turret_Back001
+    4300010: Turret001
+    4300012: Plane025
+    4300014: Right_Torso001
+    4300016: Left_Torso001
+    4300018: Missile Pod001
+    4300020: MissilePod_Door_Right-Bottom001
+    4300022: MissilePod_Door_Right-Top001
+    4300024: Missile_Pod_Left001
+    4300026: MissilePod_Door_Left-Bottom001
+    4300028: MissilePod_Door_Left-Top001
+    4300030: Rear_Hatch001
+    4300032: Right Shoulder001
+    4300034: Right_Arm001
+    4300036: Turret_Guns001
+    7400000: BodyIdle
+    7400002: BodyMove
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: BodyIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: LegPelvis
+        weight: 1
+      - path: LegPelvis/WaistPivot
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Plane032
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Plane033
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret001/Plane025
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret001/Right_Torso001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret_Back001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Left_Torso001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile Pod001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile Pod001/MissilePod_Door_Right-Bottom001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile Pod001/MissilePod_Door_Right-Top001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile_Pod_Left001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile_Pod_Left001/MissilePod_Door_Left-Bottom001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile_Pod_Left001/MissilePod_Door_Left-Top001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Rear_Hatch001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Right Shoulder001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Right_Arm001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Turret_Guns001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: BodyMove
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: LegPelvis
+        weight: 1
+      - path: LegPelvis/WaistPivot
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Plane032
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Plane033
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret001/Plane025
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret001/Right_Torso001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Cheek001/Turret_Back001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Left_Torso001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile Pod001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile Pod001/MissilePod_Door_Right-Bottom001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile Pod001/MissilePod_Door_Right-Top001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile_Pod_Left001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile_Pod_Left001/MissilePod_Door_Left-Bottom001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Missile_Pod_Left001/MissilePod_Door_Left-Top001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Rear_Hatch001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Right Shoulder001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Right_Arm001
+        weight: 1
+      - path: LegPelvis/WaistPivot/Turret_Guns001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -26,21 +26,29 @@ public class BulletStats : NetworkBehaviour {
 	void OnTriggerEnter(Collider coll){
 		//		Debug.Log (coll.gameObject.name);
 		//		CmdDebug();
+		if(coll.CompareTag("Player")){
 
-		Debug.Log(coll.gameObject.name);
-		DealDamage dm = coll.GetComponent<DealDamage> ();
+			Debug.Log(coll.gameObject.name);
+			DealDamage dm = coll.GetComponent<DealDamage> ();
 
-		if(dm != null){
-			if(dm.playerStats.gameObject.name != playerName){
-				if(playerName != ""){
-					//			Debug.Log (coll.name);
-					Destroy (this.gameObject);
-					if(canDamage){
-						GameManager.GM.localPlayerShootScript.CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, damage);
+			if(dm != null){
+				if(dm.playerStats.gameObject.name != playerName){
+					if(playerName != ""){
+						//			Debug.Log (coll.name);
+						Destroy (this.gameObject);
+						if(canDamage){
+							GameManager.GM.localPlayerShootScript.CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, damage);
+						}
+						CmdSpawnFX (transform.position);
 					}
-					CmdSpawnFX (transform.position);
 				}
 			}
+		}
+		if(coll.CompareTag("AI")){
+			Debug.Log ("Hit AI");
+			Destroy (this.gameObject);
+			GameManager.GM.localPlayerStatsScript.CmdDamageAI (coll.gameObject.name, damage);
+			CmdSpawnFX (transform.position);
 		}
 	}
 
@@ -51,7 +59,7 @@ public class BulletStats : NetworkBehaviour {
 		}
 	}
 
-	[Command]
+//	[Command]
 	public void CmdSpawnFX(Vector3 position){
 		GameObject ga = Instantiate (explodeFX);
 		ga.transform.position = position;

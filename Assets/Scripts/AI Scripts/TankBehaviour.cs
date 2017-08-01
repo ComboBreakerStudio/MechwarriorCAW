@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using AIEnums;
 
 
+
 /// <summary>
 /// Tank behaviour.
 /// If some of the part is not understandable, do specify which part. I'm not going to comment everything and detailed
@@ -21,12 +22,13 @@ public class TankBehaviour : NetworkBehaviour {
 
     NavMeshAgent agent;
 
+
     public List<Transform> visibleTarget = new List<Transform>();
 
     [Header("AI Sight")]
+    //[SyncVar]
     public float viewRadius;
     public Transform targetposition;
-    public Transform AIpoint;
     public LayerMask targetMask;
     public LayerMask wallMask;
     public LayerMask ground;
@@ -43,87 +45,52 @@ public class TankBehaviour : NetworkBehaviour {
 
 
     [Header("AI Shoot")]
+    //[SyncVar]
     public Transform tankHead;
+    //[SyncVar]
     public Transform firingPoint;
     public GameObject bulletPrefab;
     public float minimumRange;
+    public float maximumRange;
 
 
+    [Header("AI Circle Around")]
+    public Transform childTarget;
+    public Transform TargetRoot;
 
 
     [Header("Update Time for it to see target")]
     public float timeInterval;
     public float fireInterval;
 
-    public bool PlayerCommandToWander;
+    //public List<Collider> targetinViewRadius = new List<Collider>();
 
-	// Use this for initialization
-    public override void OnStartServer()
+
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+       
+        statsScript = gameObject.GetComponent<AIStats>();
 
-
-        StartCoroutine(AITankBehaviour());
+        StartCoroutine(TankScript());
 	}
+
+
 
     void Update()
     {
-        //I Change this keycode if you guys decide to change to something
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            if (PlayerCommandToWander == false)
-            {
-                PlayerCommandToWander = true;
-            }
-            else if (PlayerCommandToWander == true)
-            {
-                PlayerCommandToWander = false;
-            }
-        }
-        //I Check if there is a target visible within the sight radius
-        if (visibleTarget.Contains(targetposition))
-        {
-            agent.isStopped = true;
 
+        if(childTarget!=null)
+        {
+            agent.SetDestination(childTarget.transform.position);
+        }
+       
+
+        //I Check if there is a target visible within the sight radius
+        else if (visibleTarget.Contains(targetposition))
+        {
             Firing();
         }
-        //I IF there is no target, basically the AI go Idle, then the player can command to wander or move them.
-        else if (!visibleTarget.Contains(targetposition))
-        {
-            agent.isStopped = false;
-
-
-            if (PlayerCommandToWander == false)
-                behaviour = AIState.Idle;
-            else if (PlayerCommandToWander == true)
-                behaviour = AIState.Wandering;
-        }
-
-        //I This is when the player can command what the AI to move somewhere.
-        if (behaviour == AIState.Idle)
-        {
-            float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
-
-            //I If the AI is within the destination, the AI will not move if there is no command.
-            if (distToTarget < 20f)
-            {
-                agent.isStopped = true;
-            }
-
-            //I Change this keycode if you guys decide to change to something
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                //Debug.Log("Button Pressed");
-                //If the AI is not within the destination specified, the AI will not even move.
-                if (distToTarget > 20f)
-                {
-                    agent.isStopped = false;
-                    agent.SetDestination(AIpoint.position);
-                }
-            }
-                
-        }
-
 
         else if (behaviour == AIState.Wandering)
         {
@@ -133,7 +100,7 @@ public class TankBehaviour : NetworkBehaviour {
         }
     }
 
-    IEnumerator AITankBehaviour()
+    IEnumerator TankScript()
     {
         while (true)
         {
@@ -144,6 +111,7 @@ public class TankBehaviour : NetworkBehaviour {
             yield return new WaitForSeconds(timeInterval);
         }
     }
+
 
     //I Wandering
     void Wandering()
@@ -166,6 +134,7 @@ public class TankBehaviour : NetworkBehaviour {
 
 
 	//I For random Wandering by using navmesh sphere
+
     public static Vector3 RandomWandering(Vector3 origin, float dist, LayerMask ground)
     {
         //I Making sure the area is within the wander Radius variable only.
@@ -188,7 +157,7 @@ public class TankBehaviour : NetworkBehaviour {
         behaviour = AIState.InSight;
 
         Vector3 direction = targetposition.position;
-        direction.y = 0;
+        //direction.y = 0;
 
         tankHead.transform.LookAt(direction);
 
@@ -196,42 +165,57 @@ public class TankBehaviour : NetworkBehaviour {
         if (Distance() > minimumRange && Distance() < viewRadius)
         {
           fireInterval -= 0.45f;
+          
           if (fireInterval <= 0f)
             {
                 //I This part I comment first, since I don't know either you want to keep spawning bullet or using object pooling
 
               //Debug.Log("Firing");
-              //CmdSpawn();
+              CmdSpawn();
               fireInterval = 2.0f;
              }
         }
-
     }
 
-    //I Checking the visible target in the list
     void FindVisibleTarget()
     {
         visibleTarget.Clear();
 
-        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        Collider[] allInstances = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        //targetInViewRadius = new List<Transform>();
 
-        for (int i = 0; i < targetInViewRadius.Length; i++)
+        for (int i = 0; i < allInstances.Length; i++)
         {
-            targetposition = targetInViewRadius[i].transform;
+            targetposition = allInstances[i].transform;
 
-            //I Spheric vision, so if there is a wall in between, the AI would not even see the target.
-            //I The code is basically from sebastian lague, except I don't make it cone of vision style.
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
-            if (Vector3.Angle(transform.position,dirToTarget) < 360)
+            if (Vector3.Angle(transform.position, dirToTarget) < 360)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    visibleTarget.Add(targetposition);
+                    //I Check the collider have the script.
+                    if (allInstances[i].GetComponent<PlayerStats>() != null)
+                    {
+                        //I If it have the script, check if the player is in the same team or not. 
+                        if (allInstances[i].GetComponent<PlayerStats>().teamID != this.statsScript.teamID)
+                        {
+                            visibleTarget.Add(targetposition);
+                        }
+                    }
+                    if (GameObject.Find("Target") == null)
+                    {
+                        CreateTargetRoot();
+                    }
                 }
             }
+
+
         }
+
     }
+
+
 
     //I Checking Distance
     private float Distance()
@@ -239,12 +223,22 @@ public class TankBehaviour : NetworkBehaviour {
           return Vector3.Distance(this.transform.position, targetposition.position);
     }
 
+    void CreateTargetRoot()
+    {
+        Transform childObject = Instantiate(TargetRoot);
+        childObject.transform.SetParent(targetposition,false);
+        //childObject.transform.parent = targetposition;
+        childTarget = GameObject.FindWithTag("Target").transform;
+        //TargetRoot.position =  Vector3.zero;
+
+    }
+
 
     //I I comment this part for now since this is for testing part
     [Command]
     void CmdSpawn()
     {
-        GameObject go = (GameObject)Instantiate(bulletPrefab, firingPoint.position,Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(bulletPrefab, firingPoint.position,tankHead.transform.rotation);
         NetworkServer.Spawn(go);
     }
 

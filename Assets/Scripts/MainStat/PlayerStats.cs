@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 
 public class PlayerStats : NetworkBehaviour {
@@ -10,12 +11,17 @@ public class PlayerStats : NetworkBehaviour {
 //	public Transform[] _childObject;
 	public PlayerLoadout playerLoadoutScript;
 
+	public GameObject team1Marker, team2Marker;
+
 	[SyncVar]
 	public bool isAlive;
 
 	//MechParts
 	[SyncVar]
 	public bool leftTorsoDown, rightTorsoDown, leftWeaponDown, rightWeaponDown, leftLegDown, rightLegDown;
+
+	//Check LocalPlayer
+	public bool isLocal;
 
 	public GameObject explodeVFX;
 
@@ -44,11 +50,242 @@ public class PlayerStats : NetworkBehaviour {
 	//Test
 	public bool setColor;
 
+	//UI
+	public AmmoUI ammoUIScript;
+
 //	public void respawn(int id){
 //		GameManager.GM.RespawnPlayer ();
-//	}
+	//	}
+
+	#region AI region ================================================================================================
+
+	public List<GameObject> aiObject;
+	public List<PlanningPhase_DragableUI> aiUI;
+
+	//Adds in the object to detect the UI in planning Phase
+	public void AddaiUI(PlanningPhase_DragableUI temp){
+
+		aiUI.Remove (temp);
+		aiUI.Add (temp);
+	}
+
+	//Spawn the AI with the Owner and Unit Type
+	[Command]
+	public void CmdSpawnUnits(string ownerName, int unitType){
+		Debug.Log ("CmdSpawnUnits TeamID : " + teamID);
+		if(teamID == 1){
+			PlanningPhaseManager.instance.CmdSpawnAI (ownerName, unitType, GameManager.GM.respawnPosition_Team1[0].transform.position);
+		}
+		else if(teamID == 2){
+			PlanningPhaseManager.instance.CmdSpawnAI (ownerName, unitType, GameManager.GM.respawnPosition_Team1[0].transform.position);
+		}
+
+	}
+
+	//Link to Coroutine AddUnitTimer
+	[Command]
+	public void CmdAddUnit(){
+		StopCoroutine ("addUnitTimer");
+		StartCoroutine ("addUnitTimer", 2f);
+//		Debug.Log ("AddUnit");
+//		aiObject.Clear ();
+//		Debug.Log (AIManager.instance.AIUnits.Count);
+//		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+//			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == GameManager.GM.localPlayer.name){
+//				aiObject.Add (AIManager.instance.AIUnits[i]);
+//				Debug.Log ("Added");
+//			}
+//		}
+	}
+	[ClientRpc]
+	public void RpcAddUnit(){
+		AddUnit ();
+	}
+
+	// Add in the AI unit controlled by this Player
+	public void AddUnit(){
+
+		Debug.Log ("AddUnit");
+		aiObject.Clear ();
+		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+			if(AIManager.instance.AIUnits[i].GetComponent<AIStats>().OwnerName == this.gameObject.name){
+				aiObject.Add (AIManager.instance.AIUnits[i]);
+				Debug.Log ("Added");
+				AIManager.instance.AIUnits [i].GetComponent<AIStats> ().teamID = teamID;
+			}
+		}
+	}
+
+	IEnumerator addUnitTimer(float t){
+		yield return new WaitForSeconds (t);
+		AddUnit ();
+		RpcAddUnit ();
+	}
+
+	//Set the AI position
+	[Command]
+	public void CmdSetUnitPosition(int unitType, int positionType){
+		//1 = High, 2 = Low, 3 = midHigh, 4 = midRight, 5 = midMid, 6 = midLeft
+
+		Debug.Log ("Player Name: " + this.gameObject.name);
+
+		AIStats aiStats;
+
+		for(int i = 0; i < aiObject.Count; i++){
+			aiStats = aiObject [i].GetComponent<AIStats> ();
+			Debug.Log ("getStats "+ this.gameObject.name);
+			if(aiStats.OwnerName == this.gameObject.name){
+				Debug.Log ("found AI "+ this.gameObject.name);
+				//tank Units
+				if(!aiStats.isPlanned){
+					Debug.Log ("Not Planned " + this.gameObject.name);
+					if(aiStats.unitType == unitType){
+						Debug.Log ("positionTYpe : " + positionType);
+						if(teamID == 1){
+//							aiObject[i].transform.position = GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position;
+							aiStats.NavAgent.enabled = false;
+							aiObject[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
+							aiStats.NavAgent.enabled = true;
+//							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+							aiStats.NavAgent.SetDestination (aiUI[i].uiAIStatsScript.destination);
+//							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team1Position.transform.position);
+							aiStats.SetDestination (aiUI[i].uiAIStatsScript.destination);
+							Debug.Log ("SetPosition 1" + GameManager.GM.respawnPosition_Team1[0].transform.position);
+						}
+						else if(teamID == 2){
+//							aiObject[i].transform.position = GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position;
+//							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.NavAgent.enabled = false;
+							aiObject[i].transform.position = GameManager.GM.respawnPosition_Team2[0].transform.position;
+							aiStats.NavAgent.enabled = true;
+//							aiStats.NavAgent.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.NavAgent.SetDestination (aiUI[i].uiAIStatsScript.destination);
+//							aiStats.SetDestination (GameManager.GM.slotRegionUIScript [positionType - 1].team2Position.transform.position);
+							aiStats.SetDestination (aiUI[i].uiAIStatsScript.destination);
+							Debug.Log ("SetPosition 2" + GameManager.GM.respawnPosition_Team2[0].transform.position);
+						}
+//						aiStats.isPlanned = true;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	//Set AI Position
+	[Command]
+	public void CmdSetUnitPosition_UI(string aiName, Vector3 destination){
+		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+			if(AIManager.instance.AIUnits[i].name == aiName){
+				AIStats aiStats = AIManager.instance.AIUnits[i].GetComponent<AIStats>();
+
+				aiStats.NavAgent.enabled = false;
+
+				if(!aiStats.isRespawned){
+					if(teamID == 1){
+						AIManager.instance.AIUnits[i].transform.position = GameManager.GM.respawnPosition_Team1[0].transform.position;
+						aiStats.isRespawned = true;
+					}
+					else if(teamID == 2){
+						AIManager.instance.AIUnits [i].transform.position = GameManager.GM.respawnPosition_Team2 [0].transform.position;
+						aiStats.isRespawned = true;
+					}
+				}
+
+				aiStats.NavAgent.enabled = true;
+				aiStats.NavAgent.SetDestination (destination);
+				aiStats.SetDestination (destination);
+			}
+		}
+	}
+
+	//Set the AI that is controlled by One of the UI
+	public void PlanAI(int unitType, string ownerName, PlanningPhase_DragableUI _aiUI){
+		for(int i = 0; i < aiUI.Count; i++){
+
+			if(aiUI[i] == _aiUI){
+//				Debug.Log ("Hi");
+				for(int i2 = 0; i2 < aiObject.Count; i2++){
+
+					AIStats _aiStatsScript = aiObject[i2].GetComponent<AIStats>();
+//					Debug.Log (_aiStatsScript.OwnerName + ownerName);
+					if(!_aiStatsScript.isPlanned){
+						if(_aiStatsScript.OwnerName == ownerName){
+							Debug.Log (_aiStatsScript.OwnerName + ownerName);
+							if(_aiStatsScript.unitType == unitType){
+								if(!_aiStatsScript.isPlanned){
+									_aiStatsScript.isPlanned = true;
+									aiUI [i].aiName = _aiStatsScript.gameObject.name;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//Damage AI
+	[Command]
+	public void CmdDamageAI(string aiName, int damage){
+		Debug.Log (aiName);
+		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
+			if(AIManager.instance.AIUnits[i].name == aiName){
+				AIManager.instance.AIUnits [i].GetComponent<AIStats> ().curHealth -= damage;
+			}
+		}
+	}
+
+	public LayerMask aiCommandMask;
+	public Camera myCamera;
+
+	//Unit Commands during gameplay BUtton = 1, 2 , 3
+	[Command]
+	public void CmdCommandAI(){
+		RaycastHit hit;
+		if (Physics.Raycast (myCamera.transform.position, myCamera.transform.forward, out hit, 1000, aiCommandMask)) {
+			if(hit.collider.gameObject.CompareTag("Player")){
+				//Same Team Member
+				if (hit.collider.gameObject.GetComponent<DealDamage> ().playerStats.teamID == teamID) {
+					
+				}
+				//Not same Team
+				else {
+				
+				}
+			}
+			if(hit.collider.gameObject.CompareTag("AI")){
+				//Same Team Member
+				if(hit.collider.gameObject.GetComponent<AIStats>().teamID == teamID){
+					
+				}
+				//Not same Team
+				else{
+					
+				}
+			}
+
+			if(hit.collider.gameObject.CompareTag("Terrain")){
+				Debug.Log ("Terrain");
+			}
+		}
+	}
+
+	#endregion //=======================================================================================================
+
+	void Awake(){
+
+		if(isLocalPlayer){
+			Debug.Log ("isLocalAwake");
+			isLocal = true;
+			GameManager.GM.localPlayerStatsScript = this;
+		}
+
+	}
 
 	void Start(){
+
 		meshRenderer = GetComponentsInChildren<MeshRenderer> ();
 
 
@@ -67,7 +304,6 @@ public class PlayerStats : NetworkBehaviour {
 			//			GameManager.GM.localPlayerStatsScript = GameManager.GM.localPlayer.GetComponent<PlayerStats>();
 			GameManager.GM.localPlayerStatsScript = this;
 			GameManager.GM.RespawnPlayer ();
-
 
 			//			RpcRespawnPlayer ();
 		}
@@ -114,12 +350,20 @@ public class PlayerStats : NetworkBehaviour {
 //			return;
 //		}
 
+		if(isLocalPlayer){
+//			Debug.Log ("isLocal");
+//			isLocal = true;
+		}
+
 		if(!isAlive){
 			return;
 		}
 		//Test
 		if(isLocalPlayer){
-
+//			if(frontTorso_Health > 0 && !this.gameObject.activeSelf){
+			if(frontTorso_Health > 0){
+				this.gameObject.SetActive (true);
+			}
 			//Eject
 			if(Input.GetKeyDown(KeyCode.R)){
 				Debug.Log ("Eject");
@@ -127,49 +371,40 @@ public class PlayerStats : NetworkBehaviour {
 				CmdSetMatchKills ();
 			}
 		}
-
-		if(!isServer){
-			return;
-		}
-//		if(isServer){
-//			Debug.Log (this.gameObject.name);
-//		}
 //
+		#region death
 		//Death
-		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
-			canMove = false;
-		}
+//		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+//			canMove = false;
+//		}
+		if(isLocalPlayer){
 
-		if(frontTorso_Health <= 0 || backTorso_Health <=0){
-			isAlive = false;
-			CmdEnablePlayer (false);
-//			if(isLocalPlayer){
+			if(frontTorso_Health <= 0 || backTorso_Health <=0){
+				isAlive = false;
+				//			CmdEnablePlayer (false);
 				CmdSetMatchKills ();
-//			}
-			CmdResetStats ();
-			CmdEnablePlayer (true);
-			RpcRespawnPlayer ();
-//			if(isLocalPlayer){
-//				GameManager.GM.RespawnPlayer ();
-//			}
-		}
+				CmdResetStats ();
+				CmdEnablePlayer (true);
+				RpcRespawnPlayer ();
+			}
 
-		if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
-			isAlive = false;
-			CmdEnablePlayer (false);
-			//			if(isLocalPlayer){
-			CmdSetMatchKills ();
-			//			}
-			CmdResetStats ();
-			CmdEnablePlayer (true);
-			RpcRespawnPlayer ();
+			if(leftLeg_Health <= 0 && rightLeg_Health <= 0){
+				isAlive = false;
+				CmdSetMatchKills ();
+				CmdResetStats ();
+				CmdEnablePlayer (true);
+				RpcRespawnPlayer ();
+			}
 		}
 
 		if(!isAlive){
 			return;
 		}
+		#endregion
 		//End of Death
-
+		if(!isServer){
+			return;
+		}
 		if(!leftTorsoDown){
 			if(leftTorso_Health <= 0){
 				RpcDisableLeftTorso (true);
@@ -265,10 +500,16 @@ public class PlayerStats : NetworkBehaviour {
 					}
 				}
 			}
+
 		}
 
 
 		GetComponent<PlayerShoot> ().SetWeapon();
+		//UI
+		ammoUIScript.StartStuffs ();
+		if(GameManager.GM.gameObject == this.gameObject){
+			GameManager.GM.playerUIScript.StartStuffs ();
+		}
 //		CmdResetStats ();
 		if(isServer){
 			RpcStartStuff ();
@@ -326,6 +567,11 @@ public class PlayerStats : NetworkBehaviour {
 
 
 		GetComponent<PlayerShoot> ().SetWeapon();
+		//UI
+		ammoUIScript.StartStuffs ();
+		if(GameManager.GM.gameObject == this.gameObject){
+			GameManager.GM.playerUIScript.StartStuffs ();
+		}
 		CmdResetStats ();
 	}
 
@@ -363,6 +609,9 @@ public class PlayerStats : NetworkBehaviour {
 
 	[Command]
 	public void CmdResetStats(){
+//		if(GameManager.GM.isPlanningPhase){
+//			return;
+//		}
 		frontTorso_Health = frontTorsoStats.maxHealth;
 		backTorso_Health = backTorsoStats.maxHealth;
 		leftTorso_Health = leftTorsoStats.maxHealth;
@@ -371,6 +620,62 @@ public class PlayerStats : NetworkBehaviour {
 		rightLeg_Health = rightLegStats.maxHealth;
 		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
 		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+
+		//Guns
+		if(leftWeaponSystemStats.needAmmo){
+			leftWeaponSystemStats.currentAmmo = leftWeaponSystemStats.maxAmmo;
+		}
+		if(rightWeaponSystemStats.needAmmo){
+			rightWeaponSystemStats.currentAmmo = rightWeaponSystemStats.maxAmmo;
+		}
+
+
+		//Movement
+		playerMoveSpeed = legs.playerMoveSpeed;
+		playerMaxSpeed = legs.playerMaxSpeed;
+		decelerationRate = legs.decelerationRate;
+
+		isAlive = true;
+		canMove = true;
+
+		//MechParts
+		leftTorsoDown = false;
+		rightTorsoDown = false;
+		leftWeaponDown = false;
+		rightWeaponDown = false;
+		leftLegDown = false;
+		rightLegDown = false;
+
+		//Enable Parts
+		RpcDisableLeftWeaponSystem(false);
+		RpcDisableRightWeaponSystem(false);
+		RpcDisableLeftLeg(false);
+		RpcDisableRightLeg(false);
+		RpcResetStats ();
+	}
+
+	[ClientRpc]
+	public void RpcResetStats(){
+		//		if(GameManager.GM.isPlanningPhase){
+		//			return;
+		//		}
+		frontTorso_Health = frontTorsoStats.maxHealth;
+		backTorso_Health = backTorsoStats.maxHealth;
+		leftTorso_Health = leftTorsoStats.maxHealth;
+		rightTorso_Health = rightTorsoStats.maxHealth;
+		leftLeg_Health = leftLegStats.maxHealth;
+		rightLeg_Health = rightLegStats.maxHealth;
+		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
+		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+
+		//Guns
+		if(leftWeaponSystemStats.needAmmo){
+			leftWeaponSystemStats.currentAmmo = leftWeaponSystemStats.maxAmmo;
+		}
+		if(rightWeaponSystemStats.needAmmo){
+			rightWeaponSystemStats.currentAmmo = rightWeaponSystemStats.maxAmmo;
+		}
+
 
 		//Movement
 		playerMoveSpeed = legs.playerMoveSpeed;
@@ -425,10 +730,12 @@ public class PlayerStats : NetworkBehaviour {
 		rightTorsoStats.gameObject.SetActive (!t);
 	}
 
-	[ClientRpc]
+//	[ClientRpc]
 	public void RpcRespawnPlayer(){
+		Debug.Log ("Respawn Player");
 		if(GameManager.GM.localPlayer == this.gameObject){
 			GameManager.GM.RespawnPlayer ();
+//			this.gameObject.SetActive (true);
 		}
 
 	}

@@ -14,6 +14,8 @@ using AIEnums;
 
 public class SniperBehavior : NetworkBehaviour {
 
+    public AIStats statsScript;
+
     NavMeshAgent agent;
 
     public List<Transform> visibleTarget = new List<Transform>();
@@ -32,6 +34,8 @@ public class SniperBehavior : NetworkBehaviour {
     public AIState behaviour = AIState.Wandering;
     public AISetupBehaviour setupbehaviour = AISetupBehaviour.NotSetup;
 
+    [Header("Laser")]
+    public LineRenderer lineRenderer;
 
     [Header("AI wandering Range")]
     public float timer;
@@ -85,7 +89,7 @@ public class SniperBehavior : NetworkBehaviour {
         // Determine what to do if there is a target inside the List
         if (visibleTarget.Contains(targetposition))
         {
-            agent.isStopped = true;
+            //agent.isStopped = true;
 
 
             if (setupbehaviour == AISetupBehaviour.NotSetup)
@@ -101,7 +105,12 @@ public class SniperBehavior : NetworkBehaviour {
 
         else if (!visibleTarget.Contains(targetposition))
         {
-            agent.isStopped = false;
+            if (lineRenderer.enabled)
+            {
+                lineRenderer.enabled = false;
+            }
+
+            //agent.isStopped = false;
 
             if (PlayerCommandToWander == false)
                 behaviour = AIState.Idle;
@@ -112,6 +121,10 @@ public class SniperBehavior : NetworkBehaviour {
 
         if (behaviour == AIState.Idle)
         {
+            if (AIpoint == null)
+            {
+                return;
+            }
             float distToTarget = Vector3.Distance(transform.position, AIpoint.position);
 
             if (distToTarget < 10f)
@@ -120,7 +133,7 @@ public class SniperBehavior : NetworkBehaviour {
 
             }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 if (setupbehaviour == AISetupBehaviour.Setup)
                 {
@@ -202,8 +215,12 @@ public class SniperBehavior : NetworkBehaviour {
 
     void Firing()
     {
+        if (!lineRenderer.enabled)
+        {
+            lineRenderer.enabled = true;
+        }
 
-        Vector3 direction = targetposition.position;
+        Vector3 direction = targetposition.position - this.transform.position;
         direction.y = 0;
 
         transform.LookAt(direction);
@@ -215,6 +232,8 @@ public class SniperBehavior : NetworkBehaviour {
             {
                 //Debug.Log("FIRING");
                 //CmdSpawn();
+                lineRenderer.SetPosition(0,firingPoint.position);
+                lineRenderer.SetPosition(1, targetposition.position);
                 fireInterval = 2.0f;
             }
         }
@@ -231,21 +250,31 @@ public class SniperBehavior : NetworkBehaviour {
         visibleTarget.Clear();
         targetposition = null;
 
-        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        Collider[] allInstances = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        //targetInViewRadius = new List<Transform>();
 
-        for (int i = 0; i < targetInViewRadius.Length; i++)
+        for (int i = 0; i < allInstances.Length; i++)
         {
-            targetposition = targetInViewRadius[i].transform;
+            targetposition = allInstances[i].transform;
 
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
-            if (Vector3.Angle(transform.position,dirToTarget) < 360)
+            if (Vector3.Angle(transform.position, dirToTarget) < 360)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    visibleTarget.Add(targetposition);
+
+                    if (allInstances[i].GetComponent<PlayerStats>() != null)
+                    {
+                        if (allInstances[i].GetComponent<PlayerStats>().teamID != this.statsScript.teamID)
+                        {
+                            visibleTarget.Add(targetposition);
+                        }
+                    }
                 }
             }
+
+
         }
     }
 

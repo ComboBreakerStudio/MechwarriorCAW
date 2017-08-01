@@ -18,6 +18,7 @@ public class PlayerShoot : NetworkBehaviour {
 	public Transform camObject;
 
 	public ThirdPersonCamera camScript;
+	public PlayerAnimation playerAnimation;
 
 	[SerializeField]
 	public Camera cam;
@@ -62,27 +63,32 @@ public class PlayerShoot : NetworkBehaviour {
 		if (Input.GetButton ("Fire1")) {
 			if(leftWeapon.canShoot && leftWeapon.gameObject.activeSelf){
 				Debug.Log ("PressedLeft");
+				AudioManagerScript.Instance.PlaySFX (AudioClipID.SFX_AUTO_CANNON_SHOT);
 				WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
 				//if it's melee
 				if(leftWeapon.isMelee){
 					camScript.isMelee = true;
 				}
+				playerAnimation.leftHandAnim.SetBool ("isShooting", true);
 			}
 		}
 		if(Input.GetButton ("Fire2")){
-			if(rightWeapon.canShoot && rightWeapon.gameObject.activeSelf){
+			if (rightWeapon.canShoot && rightWeapon.gameObject.activeSelf) {
 				Debug.Log ("PressedRight");
 				WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
 				//if it's melee
-				if(rightWeapon.isMelee){
+				if (rightWeapon.isMelee) {
+					AudioManagerScript.Instance.PlayLoopingSFX (AudioClipID.SFX_BUZZSAW_SAWING);
+					playerAnimation.rightHandAnim.SetBool ("isAttacking", true);
 					camScript.isMelee = true;
 					Debug.Log ("Melee");
 				}
-			}
+			} 
 		}
 		//Key Up
 		if(!Input.GetButton("Fire1") && !Input.GetButton("Fire2")){
 			camScript.isMelee = false;
+			AudioManagerScript.Instance.StopLoopingSFX (AudioClipID.SFX_BUZZSAW_SAWING);
 		}
 	}
 
@@ -92,7 +98,12 @@ public class PlayerShoot : NetworkBehaviour {
 				RaycastShoot(weapon);
 			}
 			else if(!weapon.isRaycast){
-				ProjectileShoot (weapon);
+				if(weapon.needAmmo){
+					if(weapon.currentAmmo > 0){
+						ProjectileShoot (weapon);
+						weapon.currentAmmo -= 1;
+					}
+				}
 			}
 			weapon.canShoot = false;
 			StartCoroutine(coroutineName,weapon.fireRate);
@@ -102,13 +113,15 @@ public class PlayerShoot : NetworkBehaviour {
 	IEnumerator ResetLeftWeaponAttack(float t){
 		yield return new WaitForSeconds (t);
 		leftWeapon.canShoot = true;
+		playerAnimation.leftHandAnim.SetBool ("isShooting", false);
 	}
 
 	IEnumerator ResetRightWeaponAttack(float t){
 		yield return new WaitForSeconds (t);
 		rightWeapon.canShoot = true;
+		playerAnimation.rightHandAnim.SetBool ("isAttacking", false);
 	}
-
+		
 //	[Command]
 	public void RaycastShoot(WeaponSystemStats weapon){
 		Debug.Log ("Shoot");
@@ -116,20 +129,27 @@ public class PlayerShoot : NetworkBehaviour {
 //		RpcShoot ();
 
 		if (Physics.Raycast (weapon.gunEnd.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask)) {
-			Debug.Log (_hit.collider.name);
+			Debug.Log ("Tag " + _hit.collider.gameObject.tag);
+
 //			if (_hit.collider.tag == PLAYER_TAG)
 //			{
-//				CmdPlayerShot (_hit.collider.name);
+//				CmdPlayerShot (_hit.collider.name);aa
 //			}
 //			CmdOnHit(_hit.point, _hit.normal);
 
-			DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage> ();
+			if(_hit.collider.gameObject.tag == "Player"){
+				Debug.Log ("MeleePlayer");
+				DealDamage dm = _hit.collider.gameObject.GetComponent<DealDamage> ();
 
-			if (dm != null) {
-//				dm.ApplyDamage ((int)weapon.damage);
-				Debug.Log ("ApplyDamage");
-				CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
-//				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
+				if (dm != null) {
+					//				dm.ApplyDamage ((int)weapon.damage);
+					Debug.Log ("ApplyDamage");
+					CmdPlayerShot (dm.playerStats.gameObject.name, dm.partsID, (int)weapon.damage);
+					//				Debug.Log (_hit.collider.gameObject.name + " Dmg : "+ dm.partsID + (int)weapon.damage);
+				}
+			}
+			else if(_hit.collider.CompareTag("AI")){
+				playerStatsScript.CmdDamageAI (_hit.collider.name, (int)weapon.damage);
 			}
 
 			if (weapon == leftWeapon) {
@@ -142,6 +162,8 @@ public class PlayerShoot : NetworkBehaviour {
 			if (weapon == leftWeapon) {
 
 				CmdOnHit (weapon.gunEnd.transform.position, true);
+				AudioManagerScript.Instance.PlaySFX (AudioClipID.SFX_EXPLOSION);
+
 			} else if (weapon == rightWeapon) {
 				CmdOnHit (weapon.gunEnd.transform.position, false);
 			}

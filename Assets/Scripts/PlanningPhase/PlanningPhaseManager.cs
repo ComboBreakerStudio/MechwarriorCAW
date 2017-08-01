@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlanningPhaseManager : MonoBehaviour {
-	
-	public List <GameObject> spawnObject;
+public class PlanningPhaseManager : NetworkBehaviour {
+
+	public static PlanningPhaseManager instance;
+
+	public GameObject tankType, sniperType, artileryType;
 	public string objectName;
 	public Vector3 destinationPosition;
 	AIStats aiStats;
+
+
 
 //	[Command]
 	public void CmdSetPosition(){
@@ -18,57 +22,33 @@ public class PlanningPhaseManager : MonoBehaviour {
 
 	void Start()
 	{
-//		CmdSpawnAI ();
-
+		instance = this;
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 	}
-
-	public void Update(){
-//		GetAI ();
-	}
-
-	public void localSpawn(){
-		for (int i = 0; i < AIManager.instance.playerAIUnits.Count; i++)
-		{
-			GameObject go = Instantiate (AIManager.instance.playerAIUnits[i]);
-			spawnObject.Add (go);
-//			NetworkServer.Spawn (go);
+			
+	[Command]
+	public void CmdSpawnAI(string OwnerName, int UnitType, Vector3 position)
+	{
+		Debug.Log (OwnerName + " " + UnitType);
+		if(UnitType == 1){
+			GameObject go = Instantiate (tankType, position, Quaternion.identity);
+			go.GetComponent<AIStats> ().CmdSetOwner(OwnerName);
+			NetworkServer.Spawn (go);
 		}
-	}
-
-	public void GetAI(){
-		if (Input.GetMouseButtonDown (0)) { 
-			RaycastHit hit; 
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); 
-
-			if (Physics.Raycast (ray, out hit, 1200.0f)) {
-				Debug.Log (hit.transform.gameObject.name);
-				aiStats = hit.transform.gameObject.GetComponent<AIStats>();
-				if (aiStats != null) {
-					objectName = aiStats.AIName;
-				} else {
-					for (int i = 0; i < spawnObject.Count; i++) {
-						if (spawnObject [i].GetComponent<AIStats> ().AIName == objectName) {
-							spawnObject [i].GetComponent<AIWalkPoint> ().destinationPosition = hit.point;
-							spawnObject [i].GetComponent<AIWalkPoint> ().CmdMove();
-						}
-					}
-				}
+		if(UnitType == 2){
+			GameObject go = Instantiate (sniperType, position, Quaternion.identity);
+			go.GetComponent<AIStats> ().CmdSetOwner(OwnerName);	
+			NetworkServer.Spawn (go);
+		}
+		Debug.Log (GameManager.GM.localPlayerStatsScript);
+//		GameManager.GM.localPlayerStatsScript.CmdAddUnit ();
+		for(int i = 0; i < TeamManager.instance.players.Count; i++){
+			if(TeamManager.instance.players[i].name == OwnerName){
+				Debug.Log ("Found It");
+				TeamManager.instance.players [i].GetComponent<PlayerStats> ().CmdAddUnit ();
 			}
 		}
-	}
-			
-//	[Command]
-	public void CmdSpawnAI()
-	{
-//		for (int i = 0; i < AIManager.instance.AIUnits.Count; i++)
-//		{
-//			GameObject go = Instantiate (AIManager.instance.AIUnits[i]);
-//			spawnObject.Add (go);
-//			NetworkServer.Spawn (go);
-//			Debug.Log ("Spawn");
-//		}
 	}
 
 
