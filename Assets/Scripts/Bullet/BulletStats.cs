@@ -59,7 +59,7 @@ public class BulletStats : NetworkBehaviour {
 		}
 	}
 
-	[Command]
+//	[Command]
 	public void CmdSpawnFX(Vector3 position){
 		GameObject ga = Instantiate (explodeFX);
 		ga.transform.position = position;

@@ -11,6 +11,8 @@ public class PlayerStats : NetworkBehaviour {
 //	public Transform[] _childObject;
 	public PlayerLoadout playerLoadoutScript;
 
+	public GameObject team1Marker, team2Marker;
+
 	[SyncVar]
 	public bool isAlive;
 
@@ -60,12 +62,14 @@ public class PlayerStats : NetworkBehaviour {
 	public List<GameObject> aiObject;
 	public List<PlanningPhase_DragableUI> aiUI;
 
+	//Adds in the object to detect the UI in planning Phase
 	public void AddaiUI(PlanningPhase_DragableUI temp){
 
 		aiUI.Remove (temp);
 		aiUI.Add (temp);
 	}
 
+	//Spawn the AI with the Owner and Unit Type
 	[Command]
 	public void CmdSpawnUnits(string ownerName, int unitType){
 		Debug.Log ("CmdSpawnUnits TeamID : " + teamID);
@@ -78,6 +82,7 @@ public class PlayerStats : NetworkBehaviour {
 
 	}
 
+	//Link to Coroutine AddUnitTimer
 	[Command]
 	public void CmdAddUnit(){
 		StopCoroutine ("addUnitTimer");
@@ -97,6 +102,7 @@ public class PlayerStats : NetworkBehaviour {
 		AddUnit ();
 	}
 
+	// Add in the AI unit controlled by this Player
 	public void AddUnit(){
 
 		Debug.Log ("AddUnit");
@@ -116,6 +122,7 @@ public class PlayerStats : NetworkBehaviour {
 		RpcAddUnit ();
 	}
 
+	//Set the AI position
 	[Command]
 	public void CmdSetUnitPosition(int unitType, int positionType){
 		//1 = High, 2 = Low, 3 = midHigh, 4 = midRight, 5 = midMid, 6 = midLeft
@@ -165,6 +172,7 @@ public class PlayerStats : NetworkBehaviour {
 		}
 	}
 
+	//Set AI Position
 	[Command]
 	public void CmdSetUnitPosition_UI(string aiName, Vector3 destination){
 		for(int i = 0; i < AIManager.instance.AIUnits.Count; i++){
@@ -191,6 +199,7 @@ public class PlayerStats : NetworkBehaviour {
 		}
 	}
 
+	//Set the AI that is controlled by One of the UI
 	public void PlanAI(int unitType, string ownerName, PlanningPhase_DragableUI _aiUI){
 		for(int i = 0; i < aiUI.Count; i++){
 
@@ -231,6 +240,7 @@ public class PlayerStats : NetworkBehaviour {
 	public LayerMask aiCommandMask;
 	public Camera myCamera;
 
+	//Unit Commands during gameplay BUtton = 1, 2 , 3
 	[Command]
 	public void CmdCommandAI(){
 		RaycastHit hit;
@@ -602,6 +612,53 @@ public class PlayerStats : NetworkBehaviour {
 //		if(GameManager.GM.isPlanningPhase){
 //			return;
 //		}
+		frontTorso_Health = frontTorsoStats.maxHealth;
+		backTorso_Health = backTorsoStats.maxHealth;
+		leftTorso_Health = leftTorsoStats.maxHealth;
+		rightTorso_Health = rightTorsoStats.maxHealth;
+		leftLeg_Health = leftLegStats.maxHealth;
+		rightLeg_Health = rightLegStats.maxHealth;
+		leftWeaponSystem_Health = leftWeaponSystemStats.maxHealth;
+		rightWeaponSystem_Health = rightWeaponSystemStats.maxHealth;
+
+		//Guns
+		if(leftWeaponSystemStats.needAmmo){
+			leftWeaponSystemStats.currentAmmo = leftWeaponSystemStats.maxAmmo;
+		}
+		if(rightWeaponSystemStats.needAmmo){
+			rightWeaponSystemStats.currentAmmo = rightWeaponSystemStats.maxAmmo;
+		}
+
+
+		//Movement
+		playerMoveSpeed = legs.playerMoveSpeed;
+		playerMaxSpeed = legs.playerMaxSpeed;
+		decelerationRate = legs.decelerationRate;
+
+		isAlive = true;
+		canMove = true;
+
+		//MechParts
+		leftTorsoDown = false;
+		rightTorsoDown = false;
+		leftWeaponDown = false;
+		rightWeaponDown = false;
+		leftLegDown = false;
+		rightLegDown = false;
+
+		//Enable Parts
+		RpcDisableLeftWeaponSystem(false);
+		RpcDisableRightWeaponSystem(false);
+		RpcDisableLeftLeg(false);
+		RpcDisableRightLeg(false);
+		RpcResetStats ();
+	}
+
+	[ClientRpc]
+	public void RpcResetStats(){
+		//		if(GameManager.GM.isPlanningPhase){
+		//			return;
+		//		}
 		frontTorso_Health = frontTorsoStats.maxHealth;
 		backTorso_Health = backTorsoStats.maxHealth;
 		leftTorso_Health = leftTorsoStats.maxHealth;

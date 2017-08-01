@@ -1,0 +1,626 @@
+fileFormatVersion: 2
+guid: abc5a71f257c8ef4eb1e89006255b10f
+timeCreated: 1501087941
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone002
+    100002: Box003
+    100004: Box005
+    100006: Cylinder046
+    100008: Cylinder047
+    100010: Exhausts001
+    100012: Feet_Front_Left
+    100014: Feet_Front_Right003
+    100016: Feet_Left
+    100018: Feet_Right002
+    100020: IK Chain001
+    100022: IK Chain002
+    100024: Knee_Rear_Left
+    100026: Knee_Rear_Right002
+    100028: KneeAxle_Left
+    100030: KneeAxle_Right
+    100032: LeftCalf
+    100034: LeftFoot
+    100036: LeftKnee
+    100038: LeftLegController
+    100040: LeftThigh
+    100042: LeftToe
+    100044: LeftToeEnd
+    100046: Leg_Lower_Left
+    100048: Leg_Lower_Right002
+    100050: Leg_Mid_Left
+    100052: Leg_Mid_Right002
+    100054: Leg_Upper_Left
+    100056: Leg_Upper_Right
+    100058: LegPelvis
+    100060: //RootNode
+    100062: PelvisAxle001
+    100064: Plane027
+    100066: Plane029
+    100068: Plane034
+    100070: RightCalf
+    100072: RightFoot
+    100074: RightKnee
+    100076: RightLegController
+    100078: RightThigh
+    100080: RightToe
+    100082: RightToeEnd
+    100084: SkidPlate_Left001
+    100086: SkidPlate_Right001
+    100088: Sphere001
+    100090: Sphere002
+    100092: ThighSocket_Right001
+    400000: Bone002
+    400002: Box003
+    400004: Box005
+    400006: Cylinder046
+    400008: Cylinder047
+    400010: Exhausts001
+    400012: Feet_Front_Left
+    400014: Feet_Front_Right003
+    400016: Feet_Left
+    400018: Feet_Right002
+    400020: IK Chain001
+    400022: IK Chain002
+    400024: Knee_Rear_Left
+    400026: Knee_Rear_Right002
+    400028: KneeAxle_Left
+    400030: KneeAxle_Right
+    400032: LeftCalf
+    400034: LeftFoot
+    400036: LeftKnee
+    400038: LeftLegController
+    400040: LeftThigh
+    400042: LeftToe
+    400044: LeftToeEnd
+    400046: Leg_Lower_Left
+    400048: Leg_Lower_Right002
+    400050: Leg_Mid_Left
+    400052: Leg_Mid_Right002
+    400054: Leg_Upper_Left
+    400056: Leg_Upper_Right
+    400058: LegPelvis
+    400060: //RootNode
+    400062: PelvisAxle001
+    400064: Plane027
+    400066: Plane029
+    400068: Plane034
+    400070: RightCalf
+    400072: RightFoot
+    400074: RightKnee
+    400076: RightLegController
+    400078: RightThigh
+    400080: RightToe
+    400082: RightToeEnd
+    400084: SkidPlate_Left001
+    400086: SkidPlate_Right001
+    400088: Sphere001
+    400090: Sphere002
+    400092: ThighSocket_Right001
+    2300000: Box003
+    2300002: Box005
+    2300004: Cylinder046
+    2300006: Cylinder047
+    2300008: Exhausts001
+    2300010: Feet_Front_Left
+    2300012: Feet_Front_Right003
+    2300014: Feet_Left
+    2300016: Feet_Right002
+    2300018: Knee_Rear_Left
+    2300020: Knee_Rear_Right002
+    2300022: KneeAxle_Left
+    2300024: KneeAxle_Right
+    2300026: Leg_Lower_Left
+    2300028: Leg_Lower_Right002
+    2300030: Leg_Mid_Left
+    2300032: Leg_Mid_Right002
+    2300034: Leg_Upper_Left
+    2300036: Leg_Upper_Right
+    2300038: PelvisAxle001
+    2300040: Plane027
+    2300042: Plane029
+    2300044: Plane034
+    2300046: SkidPlate_Left001
+    2300048: SkidPlate_Right001
+    2300050: Sphere001
+    2300052: Sphere002
+    2300054: ThighSocket_Right001
+    3300000: Box003
+    3300002: Box005
+    3300004: Cylinder046
+    3300006: Cylinder047
+    3300008: Exhausts001
+    3300010: Feet_Front_Left
+    3300012: Feet_Front_Right003
+    3300014: Feet_Left
+    3300016: Feet_Right002
+    3300018: Knee_Rear_Left
+    3300020: Knee_Rear_Right002
+    3300022: KneeAxle_Left
+    3300024: KneeAxle_Right
+    3300026: Leg_Lower_Left
+    3300028: Leg_Lower_Right002
+    3300030: Leg_Mid_Left
+    3300032: Leg_Mid_Right002
+    3300034: Leg_Upper_Left
+    3300036: Leg_Upper_Right
+    3300038: PelvisAxle001
+    3300040: Plane027
+    3300042: Plane029
+    3300044: Plane034
+    3300046: SkidPlate_Left001
+    3300048: SkidPlate_Right001
+    3300050: Sphere001
+    3300052: Sphere002
+    3300054: ThighSocket_Right001
+    4300000: Plane029
+    4300002: Feet_Front_Right003
+    4300004: Feet_Right002
+    4300006: Cylinder046
+    4300008: Box003
+    4300010: Leg_Lower_Right002
+    4300012: Knee_Rear_Right002
+    4300014: Plane027
+    4300016: Leg_Mid_Right002
+    4300018: KneeAxle_Right
+    4300020: Leg_Upper_Right
+    4300022: ThighSocket_Right001
+    4300024: SkidPlate_Right001
+    4300026: PelvisAxle001
+    4300028: Exhausts001
+    4300030: Sphere002
+    4300032: Feet_Front_Left
+    4300034: Feet_Left
+    4300036: Cylinder047
+    4300038: Box005
+    4300040: Leg_Lower_Left
+    4300042: Plane034
+    4300044: Knee_Rear_Left
+    4300046: Leg_Mid_Left
+    4300048: KneeAxle_Left
+    4300050: Leg_Upper_Left
+    4300052: Sphere001
+    4300054: SkidPlate_Left001
+    7400000: LegIdle
+    7400002: LegMoveFront
+    7400004: LegMoveBack
+    7400006: LegMoveBack
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LegIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: LeftLegController
+        weight: 1
+      - path: LeftLegController/IK Chain002
+        weight: 1
+      - path: LeftThigh
+        weight: 1
+      - path: LeftThigh/LeftKnee
+        weight: 1
+      - path: LeftThigh/LeftKnee/KneeAxle_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Knee_Rear_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Box005
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Feet_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Feet_Left/Cylinder047
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/Feet_Front_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/LeftToeEnd
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/Sphere002
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Leg_Lower_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Leg_Lower_Left/Plane034
+        weight: 1
+      - path: LeftThigh/LeftKnee/Leg_Mid_Left
+        weight: 1
+      - path: LeftThigh/Leg_Upper_Left
+        weight: 1
+      - path: LeftThigh/SkidPlate_Left001
+        weight: 1
+      - path: LeftThigh/Sphere001
+        weight: 1
+      - path: LegPelvis
+        weight: 1
+      - path: LegPelvis/Bone002
+        weight: 1
+      - path: LegPelvis/Exhausts001
+        weight: 1
+      - path: LegPelvis/PelvisAxle001
+        weight: 1
+      - path: RightLegController
+        weight: 1
+      - path: RightLegController/IK Chain001
+        weight: 1
+      - path: RightThigh
+        weight: 1
+      - path: RightThigh/Leg_Upper_Right
+        weight: 1
+      - path: RightThigh/RightKnee
+        weight: 1
+      - path: RightThigh/RightKnee/KneeAxle_Right
+        weight: 1
+      - path: RightThigh/RightKnee/Leg_Mid_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002/Knee_Rear_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002/Plane027
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Box003
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Feet_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Feet_Right002/Cylinder046
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/Feet_Front_Right003
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/Plane029
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/RightToeEnd
+        weight: 1
+      - path: RightThigh/SkidPlate_Right001
+        weight: 1
+      - path: RightThigh/ThighSocket_Right001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LegMoveFront
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: LeftLegController
+        weight: 1
+      - path: LeftLegController/IK Chain002
+        weight: 1
+      - path: LeftThigh
+        weight: 1
+      - path: LeftThigh/LeftKnee
+        weight: 1
+      - path: LeftThigh/LeftKnee/KneeAxle_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Knee_Rear_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Box005
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Feet_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Feet_Left/Cylinder047
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/Feet_Front_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/LeftToeEnd
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/Sphere002
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Leg_Lower_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Leg_Lower_Left/Plane034
+        weight: 1
+      - path: LeftThigh/LeftKnee/Leg_Mid_Left
+        weight: 1
+      - path: LeftThigh/Leg_Upper_Left
+        weight: 1
+      - path: LeftThigh/SkidPlate_Left001
+        weight: 1
+      - path: LeftThigh/Sphere001
+        weight: 1
+      - path: LegPelvis
+        weight: 1
+      - path: LegPelvis/Bone002
+        weight: 1
+      - path: LegPelvis/Exhausts001
+        weight: 1
+      - path: LegPelvis/PelvisAxle001
+        weight: 1
+      - path: RightLegController
+        weight: 1
+      - path: RightLegController/IK Chain001
+        weight: 1
+      - path: RightThigh
+        weight: 1
+      - path: RightThigh/Leg_Upper_Right
+        weight: 1
+      - path: RightThigh/RightKnee
+        weight: 1
+      - path: RightThigh/RightKnee/KneeAxle_Right
+        weight: 1
+      - path: RightThigh/RightKnee/Leg_Mid_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002/Knee_Rear_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002/Plane027
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Box003
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Feet_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Feet_Right002/Cylinder046
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/Feet_Front_Right003
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/Plane029
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/RightToeEnd
+        weight: 1
+      - path: RightThigh/SkidPlate_Right001
+        weight: 1
+      - path: RightThigh/ThighSocket_Right001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LegMoveBack
+      takeName: Take 001
+      firstFrame: 61
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: LeftLegController
+        weight: 1
+      - path: LeftLegController/IK Chain002
+        weight: 1
+      - path: LeftThigh
+        weight: 1
+      - path: LeftThigh/LeftKnee
+        weight: 1
+      - path: LeftThigh/LeftKnee/KneeAxle_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Knee_Rear_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Box005
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Feet_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/Feet_Left/Cylinder047
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/Feet_Front_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/LeftToeEnd
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/LeftFoot/LeftToe/Sphere002
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Leg_Lower_Left
+        weight: 1
+      - path: LeftThigh/LeftKnee/LeftCalf/Leg_Lower_Left/Plane034
+        weight: 1
+      - path: LeftThigh/LeftKnee/Leg_Mid_Left
+        weight: 1
+      - path: LeftThigh/Leg_Upper_Left
+        weight: 1
+      - path: LeftThigh/SkidPlate_Left001
+        weight: 1
+      - path: LeftThigh/Sphere001
+        weight: 1
+      - path: LegPelvis
+        weight: 1
+      - path: LegPelvis/Bone002
+        weight: 1
+      - path: LegPelvis/Exhausts001
+        weight: 1
+      - path: LegPelvis/PelvisAxle001
+        weight: 1
+      - path: RightLegController
+        weight: 1
+      - path: RightLegController/IK Chain001
+        weight: 1
+      - path: RightThigh
+        weight: 1
+      - path: RightThigh/Leg_Upper_Right
+        weight: 1
+      - path: RightThigh/RightKnee
+        weight: 1
+      - path: RightThigh/RightKnee/KneeAxle_Right
+        weight: 1
+      - path: RightThigh/RightKnee/Leg_Mid_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002/Knee_Rear_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/Leg_Lower_Right002/Plane027
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Box003
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Feet_Right002
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/Feet_Right002/Cylinder046
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/Feet_Front_Right003
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/Plane029
+        weight: 1
+      - path: RightThigh/RightKnee/RightCalf/RightFoot/RightToe/RightToeEnd
+        weight: 1
+      - path: RightThigh/SkidPlate_Right001
+        weight: 1
+      - path: RightThigh/ThighSocket_Right001
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

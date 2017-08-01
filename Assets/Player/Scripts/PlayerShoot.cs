@@ -62,30 +62,33 @@ public class PlayerShoot : NetworkBehaviour {
 		//Attack
 		if (Input.GetButton ("Fire1")) {
 			if(leftWeapon.canShoot && leftWeapon.gameObject.activeSelf){
-				playerAnimation.leftHandAnim.SetBool ("isShooting", true);
 				Debug.Log ("PressedLeft");
+				AudioManagerScript.Instance.PlaySFX (AudioClipID.SFX_AUTO_CANNON_SHOT);
 				WeaponAttack (leftWeapon, "ResetLeftWeaponAttack");
 				//if it's melee
 				if(leftWeapon.isMelee){
 					camScript.isMelee = true;
 				}
+				playerAnimation.leftHandAnim.SetBool ("isShooting", true);
 			}
 		}
 		if(Input.GetButton ("Fire2")){
-			if(rightWeapon.canShoot && rightWeapon.gameObject.activeSelf){
+			if (rightWeapon.canShoot && rightWeapon.gameObject.activeSelf) {
 				Debug.Log ("PressedRight");
 				WeaponAttack (rightWeapon, "ResetRightWeaponAttack");
 				//if it's melee
-				if(rightWeapon.isMelee){
+				if (rightWeapon.isMelee) {
+					AudioManagerScript.Instance.PlayLoopingSFX (AudioClipID.SFX_BUZZSAW_SAWING);
 					playerAnimation.rightHandAnim.SetBool ("isAttacking", true);
 					camScript.isMelee = true;
 					Debug.Log ("Melee");
 				}
-			}
+			} 
 		}
 		//Key Up
 		if(!Input.GetButton("Fire1") && !Input.GetButton("Fire2")){
 			camScript.isMelee = false;
+			AudioManagerScript.Instance.StopLoopingSFX (AudioClipID.SFX_BUZZSAW_SAWING);
 		}
 	}
 
@@ -109,14 +112,14 @@ public class PlayerShoot : NetworkBehaviour {
 
 	IEnumerator ResetLeftWeaponAttack(float t){
 		yield return new WaitForSeconds (t);
-		playerAnimation.leftHandAnim.SetBool ("isShooting", false);
 		leftWeapon.canShoot = true;
+		playerAnimation.leftHandAnim.SetBool ("isShooting", false);
 	}
 
 	IEnumerator ResetRightWeaponAttack(float t){
 		yield return new WaitForSeconds (t);
-		playerAnimation.rightHandAnim.SetBool ("isAttacking", false);
 		rightWeapon.canShoot = true;
+		playerAnimation.rightHandAnim.SetBool ("isAttacking", false);
 	}
 		
 //	[Command]
@@ -127,6 +130,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 		if (Physics.Raycast (weapon.gunEnd.transform.position, cam.transform.forward, out _hit, weapon.attackRange, mask)) {
 			Debug.Log ("Tag " + _hit.collider.gameObject.tag);
+
 //			if (_hit.collider.tag == PLAYER_TAG)
 //			{
 //				CmdPlayerShot (_hit.collider.name);aa
@@ -158,6 +162,8 @@ public class PlayerShoot : NetworkBehaviour {
 			if (weapon == leftWeapon) {
 
 				CmdOnHit (weapon.gunEnd.transform.position, true);
+				AudioManagerScript.Instance.PlaySFX (AudioClipID.SFX_EXPLOSION);
+
 			} else if (weapon == rightWeapon) {
 				CmdOnHit (weapon.gunEnd.transform.position, false);
 			}

@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour {
 
 	public static GameManager GM;
+
+	public string mapSceneName;
 
 	public GameObject localPlayer;
 	public PlayerStats localPlayerStatsScript;
@@ -16,9 +19,9 @@ public class GameManager : MonoBehaviour {
 
 	public PlayerUI playerUIScript;
 
-	public bool isPlanningPhase;
+	public bool isPlanningPhase, isPlanned;
 
-	public GameObject uiObject,planningPhaseUI;
+	public GameObject uiObject,planningPhaseUI, planningPhaseSpawn, team1Block, team2Block;
 
 	public SlotRegionUI[] slotRegionUIScript;
 
@@ -39,6 +42,11 @@ public class GameManager : MonoBehaviour {
 
 	void Start(){
 //		uiObject.SetActive (false);
+		SceneManager.LoadScene(mapSceneName, LoadSceneMode.Additive);
+		if(isPlanningPhase){
+			uiObject.SetActive (false);
+//			Debug.Log ("AA");
+		}
 	}
 
 //	[Command]
@@ -55,18 +63,34 @@ public class GameManager : MonoBehaviour {
 		localPlayerShootScript = localPlayer.GetComponent<PlayerShoot> ();
 		playerUIScript.playerStatScript = localPlayerStatsScript;
 
+		if(localPlayerStatsScript.teamID == 1){
+			localPlayerStatsScript.team1Marker.SetActive (true);
+			localPlayerStatsScript.team2Marker.SetActive (false);
+		}
+		else if(localPlayerStatsScript.teamID == 2){
+			localPlayerStatsScript.team1Marker.SetActive (false);
+			localPlayerStatsScript.team2Marker.SetActive (true);
+		}
+
 		if(isPlanningPhase){
 			uiObject.SetActive (false);
+			Debug.Log ("AA");
 		}
 //		Debug.Log ("Player Respawned");
 
 
-//		do {
-		if (localPlayerStatsScript.teamID == 1) {
-			localPlayer.transform.position = respawnPosition_Team1 [Random.Range (0, respawnPosition_Team1.Length)].transform.position;
+		//		do {
+		if (!isPlanned) {
+			isPlanned = true;
+			localPlayer.transform.position = planningPhaseSpawn.transform.position;
 		}
-		if (localPlayerStatsScript.teamID == 2) {
-			localPlayer.transform.position = respawnPosition_Team2 [Random.Range (0, respawnPosition_Team2.Length)].transform.position;
+		else {
+			if (localPlayerStatsScript.teamID == 1) {
+				localPlayer.transform.position = respawnPosition_Team1 [Random.Range (0, respawnPosition_Team1.Length)].transform.position;
+			}
+			if (localPlayerStatsScript.teamID == 2) {
+				localPlayer.transform.position = respawnPosition_Team2 [Random.Range (0, respawnPosition_Team2.Length)].transform.position;
+			}
 		}
 //		} while (localPlayerStatsScript.teamID != 1 || localPlayerStatsScript.teamID != 2);
 
@@ -105,6 +129,20 @@ public class GameManager : MonoBehaviour {
 		localPlayerStatsScript.CmdSetUnitPosition (unitType, spawnPointType);
 //		localPlayerStatsScript.CmdAddUnit ();
 	}
+
+	void Update(){
+		if(isPlanningPhase){
+			if(localPlayerStatsScript.teamID == 1){
+				team1Block.SetActive (true);
+				team2Block.SetActive (false);
+			}
+			if(localPlayerStatsScript.teamID == 2){
+				team1Block.SetActive (false);
+				team2Block.SetActive (true);
+			}
+		}
+	}
+
 
 	#endregion
 }

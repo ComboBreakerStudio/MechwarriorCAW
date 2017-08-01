@@ -1,0 +1,1116 @@
+fileFormatVersion: 2
+guid: becdc5b5a1ad0c5409b4b5bcd6506bd6
+timeCreated: 1501085150
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Alpha_SocketJoint_Left
+    100002: Alpha_SocketJoint_Right
+    100004: Ammo Box
+    100006: Antenna
+    100008: Arm_End
+    100010: Arm_Initial
+    100012: Arm_Mid
+    100014: Bone003(mirrored)
+    100016: Bone004(mirrored)
+    100018: Bone005(mirrored)
+    100020: Bone009(mirrored)
+    100022: Bone010(mirrored)
+    100024: Bone017
+    100026: Bone018
+    100028: Bone019
+    100030: Bone020
+    100032: Bone021
+    100034: Bone022
+    100036: Bone_Body
+    100038: Bone_Left
+    100040: Bone_Pivot
+    100042: Bone_Right_Feet
+    100044: Bone_Right_Leg
+    100046: Bone_Right_Piston_2
+    100048: Bone_Right_Shin
+    100050: Bone_Right_Thigh
+    100052: Bone_Right_toe
+    100054: BoneBar_Left
+    100056: BoneBar_Right
+    100058: Box002
+    100060: Cannon_Booster
+    100062: Carrriage
+    100064: Cylinder002
+    100066: Feet
+    100068: Foot_Axle_Left
+    100070: Foot_Axle_Right
+    100072: Foot_Rear End_Left
+    100074: Foot_Rear End_Right
+    100076: Foot_Start_Left
+    100078: Foot_Start_Right
+    100080: Gun
+    100082: Gun Muzzle
+    100084: Gun_Axle
+    100086: //RootNode
+    100088: Hut
+    100090: HydraulicEnd_Left
+    100092: HydraulicEnd_Right
+    100094: IK Chain001
+    100096: IK Chain002
+    100098: Knee_Axle_Left
+    100100: Knee_Axle_Right
+    100102: Knee_SkidPlate_Left
+    100104: Knee_SkidPlate_Right
+    100106: KneePlate_Left
+    100108: KneePlate_Right
+    100110: Left_Leg
+    100112: Line006
+    100114: Line007
+    100116: MainAxle
+    100118: Mid_ Thigh_Left
+    100120: Mid_ Thigh_Right
+    100122: Plane004
+    100124: Reciever
+    100126: Rectangle001
+    100128: Rectangle002
+    100130: Right_Piston1
+    100132: Right_Piston_End
+    100134: Socket
+    100136: Socket Elevator
+    100138: Spring_Base_Left
+    100140: Spring_Base_Right
+    100142: Thigh Axle_Left
+    100144: Thigh Axle_Right
+    100146: Thigh_Cover_Left
+    100148: Thigh_Cover_Right
+    100150: Upper Leg_Left
+    100152: Upper Leg_Right
+    400000: Alpha_SocketJoint_Left
+    400002: Alpha_SocketJoint_Right
+    400004: Ammo Box
+    400006: Antenna
+    400008: Arm_End
+    400010: Arm_Initial
+    400012: Arm_Mid
+    400014: Bone003(mirrored)
+    400016: Bone004(mirrored)
+    400018: Bone005(mirrored)
+    400020: Bone009(mirrored)
+    400022: Bone010(mirrored)
+    400024: Bone017
+    400026: Bone018
+    400028: Bone019
+    400030: Bone020
+    400032: Bone021
+    400034: Bone022
+    400036: Bone_Body
+    400038: Bone_Left
+    400040: Bone_Pivot
+    400042: Bone_Right_Feet
+    400044: Bone_Right_Leg
+    400046: Bone_Right_Piston_2
+    400048: Bone_Right_Shin
+    400050: Bone_Right_Thigh
+    400052: Bone_Right_toe
+    400054: BoneBar_Left
+    400056: BoneBar_Right
+    400058: Box002
+    400060: Cannon_Booster
+    400062: Carrriage
+    400064: Cylinder002
+    400066: Feet
+    400068: Foot_Axle_Left
+    400070: Foot_Axle_Right
+    400072: Foot_Rear End_Left
+    400074: Foot_Rear End_Right
+    400076: Foot_Start_Left
+    400078: Foot_Start_Right
+    400080: Gun
+    400082: Gun Muzzle
+    400084: Gun_Axle
+    400086: //RootNode
+    400088: Hut
+    400090: HydraulicEnd_Left
+    400092: HydraulicEnd_Right
+    400094: IK Chain001
+    400096: IK Chain002
+    400098: Knee_Axle_Left
+    400100: Knee_Axle_Right
+    400102: Knee_SkidPlate_Left
+    400104: Knee_SkidPlate_Right
+    400106: KneePlate_Left
+    400108: KneePlate_Right
+    400110: Left_Leg
+    400112: Line006
+    400114: Line007
+    400116: MainAxle
+    400118: Mid_ Thigh_Left
+    400120: Mid_ Thigh_Right
+    400122: Plane004
+    400124: Reciever
+    400126: Rectangle001
+    400128: Rectangle002
+    400130: Right_Piston1
+    400132: Right_Piston_End
+    400134: Socket
+    400136: Socket Elevator
+    400138: Spring_Base_Left
+    400140: Spring_Base_Right
+    400142: Thigh Axle_Left
+    400144: Thigh Axle_Right
+    400146: Thigh_Cover_Left
+    400148: Thigh_Cover_Right
+    400150: Upper Leg_Left
+    400152: Upper Leg_Right
+    2300000: Alpha_SocketJoint_Left
+    2300002: Alpha_SocketJoint_Right
+    2300004: Ammo Box
+    2300006: Antenna
+    2300008: Arm_End
+    2300010: Arm_Initial
+    2300012: Arm_Mid
+    2300014: BoneBar_Left
+    2300016: BoneBar_Right
+    2300018: Box002
+    2300020: Cannon_Booster
+    2300022: Carrriage
+    2300024: Cylinder002
+    2300026: Feet
+    2300028: Foot_Axle_Left
+    2300030: Foot_Axle_Right
+    2300032: Foot_Rear End_Left
+    2300034: Foot_Rear End_Right
+    2300036: Foot_Start_Left
+    2300038: Foot_Start_Right
+    2300040: Gun Muzzle
+    2300042: Gun_Axle
+    2300044: Hut
+    2300046: HydraulicEnd_Left
+    2300048: HydraulicEnd_Right
+    2300050: Knee_Axle_Left
+    2300052: Knee_Axle_Right
+    2300054: Knee_SkidPlate_Left
+    2300056: Knee_SkidPlate_Right
+    2300058: KneePlate_Left
+    2300060: KneePlate_Right
+    2300062: Line006
+    2300064: Line007
+    2300066: MainAxle
+    2300068: Mid_ Thigh_Left
+    2300070: Mid_ Thigh_Right
+    2300072: Plane004
+    2300074: Reciever
+    2300076: Socket
+    2300078: Socket Elevator
+    2300080: Spring_Base_Left
+    2300082: Spring_Base_Right
+    2300084: Thigh Axle_Left
+    2300086: Thigh Axle_Right
+    2300088: Thigh_Cover_Left
+    2300090: Thigh_Cover_Right
+    2300092: Upper Leg_Left
+    2300094: Upper Leg_Right
+    3300000: Alpha_SocketJoint_Left
+    3300002: Alpha_SocketJoint_Right
+    3300004: Ammo Box
+    3300006: Antenna
+    3300008: Arm_End
+    3300010: Arm_Initial
+    3300012: Arm_Mid
+    3300014: BoneBar_Left
+    3300016: BoneBar_Right
+    3300018: Box002
+    3300020: Cannon_Booster
+    3300022: Carrriage
+    3300024: Cylinder002
+    3300026: Feet
+    3300028: Foot_Axle_Left
+    3300030: Foot_Axle_Right
+    3300032: Foot_Rear End_Left
+    3300034: Foot_Rear End_Right
+    3300036: Foot_Start_Left
+    3300038: Foot_Start_Right
+    3300040: Gun Muzzle
+    3300042: Gun_Axle
+    3300044: Hut
+    3300046: HydraulicEnd_Left
+    3300048: HydraulicEnd_Right
+    3300050: Knee_Axle_Left
+    3300052: Knee_Axle_Right
+    3300054: Knee_SkidPlate_Left
+    3300056: Knee_SkidPlate_Right
+    3300058: KneePlate_Left
+    3300060: KneePlate_Right
+    3300062: Line006
+    3300064: Line007
+    3300066: MainAxle
+    3300068: Mid_ Thigh_Left
+    3300070: Mid_ Thigh_Right
+    3300072: Plane004
+    3300074: Reciever
+    3300076: Socket
+    3300078: Socket Elevator
+    3300080: Spring_Base_Left
+    3300082: Spring_Base_Right
+    3300084: Thigh Axle_Left
+    3300086: Thigh Axle_Right
+    3300088: Thigh_Cover_Left
+    3300090: Thigh_Cover_Right
+    3300092: Upper Leg_Left
+    3300094: Upper Leg_Right
+    4300000: Spring_Base_Left
+    4300002: Foot_Rear End_Left
+    4300004: Foot_Axle_Left
+    4300006: KneePlate_Left
+    4300008: Knee_Axle_Left
+    4300010: Foot_Start_Left
+    4300012: Alpha_SocketJoint_Left
+    4300014: Thigh_Cover_Left
+    4300016: Knee_SkidPlate_Left
+    4300018: HydraulicEnd_Left
+    4300020: BoneBar_Left
+    4300022: Upper Leg_Left
+    4300024: Mid_ Thigh_Left
+    4300026: Thigh Axle_Left
+    4300028: MainAxle
+    4300030: Arm_Initial
+    4300032: Arm_Mid
+    4300034: Arm_End
+    4300036: Socket Elevator
+    4300038: Socket
+    4300040: Feet
+    4300042: Carrriage
+    4300044: Hut
+    4300046: Box002
+    4300048: Cylinder002
+    4300050: Plane004
+    4300052: Gun_Axle
+    4300054: Antenna
+    4300056: Reciever
+    4300058: Gun Muzzle
+    4300060: Line006
+    4300062: Line007
+    4300064: Cannon_Booster
+    4300066: Ammo Box
+    4300068: Foot_Rear End_Right
+    4300070: Spring_Base_Right
+    4300072: Foot_Axle_Right
+    4300074: Knee_Axle_Right
+    4300076: Foot_Start_Right
+    4300078: KneePlate_Right
+    4300080: Alpha_SocketJoint_Right
+    4300082: Thigh_Cover_Right
+    4300084: Knee_SkidPlate_Right
+    4300086: HydraulicEnd_Right
+    4300088: BoneBar_Right
+    4300090: Thigh Axle_Right
+    4300092: Upper Leg_Right
+    4300094: Mid_ Thigh_Right
+    7400000: SniperMove
+    7400002: SniperTakeAim
+    7400004: SniperShoot
+    7400006: SniperIdle
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: SniperMove
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone020
+        weight: 1
+      - path: Bone_Pivot
+        weight: 1
+      - path: Bone_Pivot/Bone021
+        weight: 1
+      - path: Bone_Pivot/Bone_Body
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Bone022
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Antenna
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Box002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Cylinder002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Gun_Axle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Plane004
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Ammo Box
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Cannon_Booster
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Gun Muzzle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line006
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line007
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Reciever
+        weight: 1
+      - path: Bone_Pivot/MainAxle
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket/Feet
+        weight: 1
+      - path: Bone_Right_Leg
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Alpha_SocketJoint_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Bone019
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Spring_Base_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Foot_Rear
+          End_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Foot_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Foot_Start_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Knee_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/KneePlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Knee_SkidPlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/BoneBar_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/HydraulicEnd_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/Right_Piston_End
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Thigh_Cover_Right
+        weight: 1
+      - path: Bone_Right_Leg/Mid_ Thigh_Right
+        weight: 1
+      - path: Bone_Right_Leg/Thigh Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Upper Leg_Right
+        weight: 1
+      - path: Left_Leg
+        weight: 1
+      - path: Left_Leg/Bone_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Alpha_SocketJoint_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Bone010(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Spring_Base_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Foot_Rear
+          End_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Foot_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Foot_Start_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Knee_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/KneePlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/Bone018
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/BoneBar_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/HydraulicEnd_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Knee_SkidPlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Thigh_Cover_Left
+        weight: 1
+      - path: Left_Leg/Mid_ Thigh_Left
+        weight: 1
+      - path: Left_Leg/Thigh Axle_Left
+        weight: 1
+      - path: Left_Leg/Upper Leg_Left
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      - path: Rectangle001/IK Chain001
+        weight: 1
+      - path: Rectangle002
+        weight: 1
+      - path: Rectangle002/IK Chain002
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SniperTakeAim
+      takeName: Take 001
+      firstFrame: 61
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone020
+        weight: 1
+      - path: Bone_Pivot
+        weight: 1
+      - path: Bone_Pivot/Bone021
+        weight: 1
+      - path: Bone_Pivot/Bone_Body
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Bone022
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Antenna
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Box002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Cylinder002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Gun_Axle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Plane004
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Ammo Box
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Cannon_Booster
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Gun Muzzle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line006
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line007
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Reciever
+        weight: 1
+      - path: Bone_Pivot/MainAxle
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket/Feet
+        weight: 1
+      - path: Bone_Right_Leg
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Alpha_SocketJoint_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Bone019
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Spring_Base_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Foot_Rear
+          End_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Foot_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Foot_Start_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Knee_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/KneePlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Knee_SkidPlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/BoneBar_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/HydraulicEnd_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/Right_Piston_End
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Thigh_Cover_Right
+        weight: 1
+      - path: Bone_Right_Leg/Mid_ Thigh_Right
+        weight: 1
+      - path: Bone_Right_Leg/Thigh Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Upper Leg_Right
+        weight: 1
+      - path: Left_Leg
+        weight: 1
+      - path: Left_Leg/Bone_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Alpha_SocketJoint_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Bone010(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Spring_Base_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Foot_Rear
+          End_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Foot_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Foot_Start_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Knee_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/KneePlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/Bone018
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/BoneBar_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/HydraulicEnd_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Knee_SkidPlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Thigh_Cover_Left
+        weight: 1
+      - path: Left_Leg/Mid_ Thigh_Left
+        weight: 1
+      - path: Left_Leg/Thigh Axle_Left
+        weight: 1
+      - path: Left_Leg/Upper Leg_Left
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      - path: Rectangle001/IK Chain001
+        weight: 1
+      - path: Rectangle002
+        weight: 1
+      - path: Rectangle002/IK Chain002
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SniperShoot
+      takeName: Take 001
+      firstFrame: 121
+      lastFrame: 180
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone020
+        weight: 1
+      - path: Bone_Pivot
+        weight: 1
+      - path: Bone_Pivot/Bone021
+        weight: 1
+      - path: Bone_Pivot/Bone_Body
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Bone022
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Antenna
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Box002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Cylinder002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Gun_Axle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Plane004
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Ammo Box
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Cannon_Booster
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Gun Muzzle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line006
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line007
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Reciever
+        weight: 1
+      - path: Bone_Pivot/MainAxle
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket/Feet
+        weight: 1
+      - path: Bone_Right_Leg
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Alpha_SocketJoint_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Bone019
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Spring_Base_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Foot_Rear
+          End_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Foot_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Foot_Start_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Knee_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/KneePlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Knee_SkidPlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/BoneBar_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/HydraulicEnd_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/Right_Piston_End
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Thigh_Cover_Right
+        weight: 1
+      - path: Bone_Right_Leg/Mid_ Thigh_Right
+        weight: 1
+      - path: Bone_Right_Leg/Thigh Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Upper Leg_Right
+        weight: 1
+      - path: Left_Leg
+        weight: 1
+      - path: Left_Leg/Bone_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Alpha_SocketJoint_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Bone010(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Spring_Base_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Foot_Rear
+          End_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Foot_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Foot_Start_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Knee_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/KneePlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/Bone018
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/BoneBar_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/HydraulicEnd_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Knee_SkidPlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Thigh_Cover_Left
+        weight: 1
+      - path: Left_Leg/Mid_ Thigh_Left
+        weight: 1
+      - path: Left_Leg/Thigh Axle_Left
+        weight: 1
+      - path: Left_Leg/Upper Leg_Left
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      - path: Rectangle001/IK Chain001
+        weight: 1
+      - path: Rectangle002
+        weight: 1
+      - path: Rectangle002/IK Chain002
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SniperIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone020
+        weight: 1
+      - path: Bone_Pivot
+        weight: 1
+      - path: Bone_Pivot/Bone021
+        weight: 1
+      - path: Bone_Pivot/Bone_Body
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Bone022
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Antenna
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Box002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Cylinder002
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Gun_Axle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Carrriage/Hut/Plane004
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Ammo Box
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Cannon_Booster
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Gun Muzzle
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line006
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Line007
+        weight: 1
+      - path: Bone_Pivot/Bone_Body/Gun/Reciever
+        weight: 1
+      - path: Bone_Pivot/MainAxle
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket
+        weight: 1
+      - path: Bone_Pivot/MainAxle/Arm_Initial/Arm_Mid/Arm_End/Socket Elevator/Socket/Feet
+        weight: 1
+      - path: Bone_Right_Leg
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Alpha_SocketJoint_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Bone019
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Bone_Right_Piston_2/Spring_Base_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Bone_Right_toe/Foot_Rear
+          End_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Bone_Right_Feet/Foot_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Foot_Start_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/Knee_Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Bone_Right_Shin/KneePlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Knee_SkidPlate_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/BoneBar_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/HydraulicEnd_Right
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Right_Piston1/Right_Piston_End
+        weight: 1
+      - path: Bone_Right_Leg/Bone_Right_Thigh/Thigh_Cover_Right
+        weight: 1
+      - path: Bone_Right_Leg/Mid_ Thigh_Right
+        weight: 1
+      - path: Bone_Right_Leg/Thigh Axle_Right
+        weight: 1
+      - path: Bone_Right_Leg/Upper Leg_Right
+        weight: 1
+      - path: Left_Leg
+        weight: 1
+      - path: Left_Leg/Bone_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Alpha_SocketJoint_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Bone010(mirrored)
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Bone009(mirrored)/Spring_Base_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Bone005(mirrored)/Foot_Rear
+          End_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Bone004(mirrored)/Foot_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Foot_Start_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/Knee_Axle_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone003(mirrored)/KneePlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/Bone018
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/BoneBar_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Bone017/HydraulicEnd_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Knee_SkidPlate_Left
+        weight: 1
+      - path: Left_Leg/Bone_Left/Thigh_Cover_Left
+        weight: 1
+      - path: Left_Leg/Mid_ Thigh_Left
+        weight: 1
+      - path: Left_Leg/Thigh Axle_Left
+        weight: 1
+      - path: Left_Leg/Upper Leg_Left
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      - path: Rectangle001/IK Chain001
+        weight: 1
+      - path: Rectangle002
+        weight: 1
+      - path: Rectangle002/IK Chain002
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

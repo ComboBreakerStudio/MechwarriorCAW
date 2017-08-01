@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour {
 		if(playerStatsScript.canMove){
 			if (Input.GetKey (KeybindManager.KBM.Forward)){
 				playerAnimation.bodyAnim.SetBool ("isWalking", true);
-				playerAnimation.legAnim.SetBool ("isWalking", true);
+				playerAnimation.legAnim.SetBool ("isWalkingFront", true);
+				AudioManagerScript.Instance.PlayLoopingSFX (AudioClipID.SFX_MECH_WALK);
 				playerCurrentSpeed += playerStatsScript.playerMoveSpeed * Time.deltaTime;
 
 				if(playerCurrentSpeed >= playerStatsScript.playerMaxSpeed){
@@ -41,12 +42,17 @@ public class PlayerController : MonoBehaviour {
 				ShakeScreen ();
 			} 
 			else if (Input.GetKey (KeybindManager.KBM.Backward)){
+				playerAnimation.bodyAnim.SetBool ("isWalking", true);
+				playerAnimation.legAnim.SetBool ("isWalkingBack", true);
+				AudioManagerScript.Instance.PlayLoopingSFX (AudioClipID.SFX_MECH_WALK);
 				playerCurrentSpeed -= playerStatsScript.playerMoveSpeed * Time.deltaTime;
+
 				if(playerCurrentSpeed <= -playerStatsScript.playerMaxSpeed/2){
 					playerCurrentSpeed = -playerStatsScript.playerMaxSpeed/2;
 				}
 				ShakeScreen ();
 			}
+
 			if (Input.GetKey (KeybindManager.KBM.Left)) {
 				transform.Rotate (0,-playerRotateSpeed * Time.deltaTime,0);
 				ShakeScreen ();
@@ -57,13 +63,16 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if(!Input.GetKey (KeybindManager.KBM.Forward) && !Input.GetKey (KeybindManager.KBM.Backward)){
+				AudioManagerScript.Instance.StopLoopingSFX (AudioClipID.SFX_MECH_WALK);
+				playerAnimation.bodyAnim.SetBool ("isWalking", false);
+				playerAnimation.legAnim.SetBool ("isWalkingFront", false);
+				playerAnimation.legAnim.SetBool ("isWalkingBack", false);
 				if(playerCurrentSpeed > 0){
 					playerCurrentSpeed -= playerStatsScript.decelerationRate * Time.deltaTime;
+
 					if(playerCurrentSpeed <= 0){
 						playerCurrentSpeed = 0;
 					}
-					playerAnimation.bodyAnim.SetBool ("isWalking", false);
-					playerAnimation.legAnim.SetBool ("isWalking", false);
 				}
 				else if(playerCurrentSpeed < 0){
 					playerCurrentSpeed += playerStatsScript.decelerationRate * Time.deltaTime;
@@ -100,6 +109,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void ShakeScreen(){
-		playerUIScript.shakeScreen ();
+//		playerUIScript.shakeScreen ();
 	}
 }

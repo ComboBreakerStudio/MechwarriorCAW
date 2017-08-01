@@ -21,7 +21,8 @@ public class PlayerSetup : NetworkBehaviour {
 		// Disable components that should be active on the player that we control
 		if (!isLocalPlayer) 
 		{
-			AssignRemoteLayer ();
+            //I For now I commenting this code, just to make my AI Detection work. But I test, there is no problem
+			//AssignRemoteLayer ();
 			DisableComponents ();
 		} 
 		else if(isLocalPlayer)
