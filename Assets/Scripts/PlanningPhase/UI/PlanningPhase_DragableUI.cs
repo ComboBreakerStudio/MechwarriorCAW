@@ -19,7 +19,7 @@ public class PlanningPhase_DragableUI : MonoBehaviour , IBeginDragHandler, IDrag
 
 	public void OnBeginDrag(PointerEventData eventData){
 //		itemBeingDragged = gameObject;
-//		startPosition = transform.position;
+		startPosition = transform.position;
 //		startParent = transform.parent;
 //		GetComponent<CanvasGroup> ().blocksRaycasts = false;
 	}
@@ -53,10 +53,23 @@ public class PlanningPhase_DragableUI : MonoBehaviour , IBeginDragHandler, IDrag
 		RaycastHit hit;
 
 		if(Physics.Raycast(ray, out hit, 1000f)){
+			if (hit.collider.gameObject.CompareTag ("Terrain")) {
+				uiAIStatsScript.destination = hit.point;
+//				Debug.Log ("Hi");
+			}
+			else {
+				transform.position = startPosition;
+				if(GameManager.GM.localPlayerStatsScript.teamID == 1){
+					uiAIStatsScript.destination = GameManager.GM.respawnPosition_Team1[0].transform.position;
+				}
+				if(GameManager.GM.localPlayerStatsScript.teamID == 2){
+					uiAIStatsScript.destination = GameManager.GM.respawnPosition_Team2[0].transform.position;
+				}
+				Debug.Log ("Eh");
+			}
 			Debug.DrawLine (ray.origin, hit.point);
 		}
 
-		uiAIStatsScript.destination = hit.point;
 	}
 
 	public bool isSpawned;

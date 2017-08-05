@@ -41,9 +41,9 @@ public class PlayerUI : MonoBehaviour {
 	public PlayerStats playerStatScript;
 
 	//ShakeScreen
-	//public bool canShakeScreen;
-	//public float shakeScreenTime;
-	//public float shakePower;
+	public bool canShakeScreen;
+	public float shakeScreenTime;
+	public float shakePower;
 
 	void Start () {
 		//canShakeScreen = true;
