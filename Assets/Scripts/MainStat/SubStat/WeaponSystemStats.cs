@@ -13,6 +13,7 @@ public class WeaponSystemStats : MonoBehaviour {
 
 
 	public bool canCool, isOverHeat, canShoot;
+	public RectTransform UI;
 
 	//Shoot
 	[Header ("Shooting Method")]
@@ -62,13 +63,15 @@ public class WeaponSystemStats : MonoBehaviour {
 			canShoot = false;
 			shoots.enabled = false;
 			controller.enabled  = false;
+			UI.gameObject.SetActive (false);
 		}
-		else if(isOverHeat == true && currentHeat <= 70.0f){
+		else if(isOverHeat == true && currentHeat <= 40.0f){
 			isOverHeat = false;
 			stats.canMove = true;
 			canShoot = true;
 			shoots.enabled = true;
 			controller.enabled  = true;
+			UI.gameObject.SetActive (true);
 		}
 		// End of Overheat Check
 

@@ -20,21 +20,25 @@ public class PlayerUI : MonoBehaviour {
 
 	bool isLocalPlayer;
 
-	public GameObject TorsoHealth;
+	public GameObject FrontTorsoHealth;
 	public GameObject BackTorsoHealth;
-	public GameObject LeftTorsoHealth;
+	public GameObject FrontLeftTorsoHealth;
+	public GameObject BackLeftTorsoHealth;
 	public GameObject LeftArmHealth;
 	public GameObject LeftLegHealth;
-	public GameObject RightTorsoHealth;
+	public GameObject FrontRightTorsoHealth;
+	public GameObject BackRightTorsoHealth;
 	public GameObject RightArmHealth;
 	public GameObject RightLegHealth;
 
-	public List<GameObject> TorsoUI;
+	public List<GameObject> FrontTorsoUI;
 	public List<GameObject> BackTorsoUI;
-	public List<GameObject> LeftTorsoUI;
+	public List<GameObject> FrontLeftTorsoUI;
+	public List<GameObject> BackLeftTorsoUI;
 	public List<GameObject> LeftArmUI;
 	public List<GameObject> LeftLegUI;
-	public List<GameObject> RightTorsoUI;
+	public List<GameObject> FrontRightTorsoUI;
+	public List<GameObject> BackRightTorsoUI;
 	public List<GameObject> RightArmUI;
 	public List<GameObject> RightLegUI;
 
@@ -51,14 +55,17 @@ public class PlayerUI : MonoBehaviour {
 		isLocalPlayer = true;
 
 		//Get Object
-		foreach (RectTransform img in TorsoHealth.transform)
-			TorsoUI.Add (img.gameObject);
+		foreach (RectTransform img in FrontTorsoHealth.transform)
+			FrontTorsoUI.Add (img.gameObject);
 
 		foreach (RectTransform img in BackTorsoHealth.transform)
 			BackTorsoUI.Add (img.gameObject);
 
-		foreach (RectTransform img in LeftTorsoHealth.transform)
-			LeftTorsoUI.Add (img.gameObject);
+		foreach (RectTransform img in FrontLeftTorsoHealth.transform)
+			FrontLeftTorsoUI.Add (img.gameObject);
+
+		foreach (RectTransform img in BackLeftTorsoHealth.transform)
+			BackLeftTorsoUI.Add (img.gameObject);
 
 		foreach (RectTransform img in LeftArmHealth.transform)
 			LeftArmUI.Add (img.gameObject);
@@ -66,8 +73,11 @@ public class PlayerUI : MonoBehaviour {
 		foreach (RectTransform img in LeftLegHealth.transform)
 			LeftLegUI.Add (img.gameObject);
 
-		foreach (RectTransform img in RightTorsoHealth.transform)
-			RightTorsoUI.Add (img.gameObject);
+		foreach (RectTransform img in FrontRightTorsoHealth.transform)
+			FrontRightTorsoUI.Add (img.gameObject);
+
+		foreach (RectTransform img in BackRightTorsoHealth.transform)
+			BackRightTorsoUI.Add (img.gameObject);
 
 		foreach (RectTransform img in RightArmHealth.transform)
 			RightArmUI.Add (img.gameObject);
@@ -79,11 +89,14 @@ public class PlayerUI : MonoBehaviour {
 		for (int i = 0; i < BackTorsoUI.Count; i++)
 			BackTorsoUI [i].SetActive (false);
 
-		for (int i = 0; i < TorsoUI.Count; i++)
-			TorsoUI [i].SetActive (false);
+		for (int i = 0; i < FrontTorsoUI.Count; i++)
+			FrontTorsoUI [i].SetActive (false);
 
-		for (int i = 0; i < LeftTorsoUI.Count; i++)
-			LeftTorsoUI [i].SetActive (false);
+		for (int i = 0; i < FrontLeftTorsoUI.Count; i++)
+			FrontLeftTorsoUI [i].SetActive (false);
+
+		for (int i = 0; i < BackLeftTorsoUI.Count; i++)
+			BackLeftTorsoUI [i].SetActive (false);
 
 		for (int i = 0; i < LeftArmUI.Count; i++)
 			LeftArmUI [i].SetActive (false);
@@ -91,8 +104,11 @@ public class PlayerUI : MonoBehaviour {
 		for (int i = 0; i < LeftLegUI.Count; i++)
 			LeftLegUI [i].SetActive (false);
 
-		for (int i = 0; i < RightTorsoUI.Count; i++)
-			RightTorsoUI [i].SetActive (false);
+		for (int i = 0; i < FrontRightTorsoUI.Count; i++)
+			FrontRightTorsoUI [i].SetActive (false);
+
+		for (int i = 0; i < BackRightTorsoUI.Count; i++)
+			BackRightTorsoUI [i].SetActive (false);
 
 		for (int i = 0; i < RightArmUI.Count; i++)
 			RightArmUI [i].SetActive (false);
@@ -100,14 +116,16 @@ public class PlayerUI : MonoBehaviour {
 		for (int i = 0; i < RightLegUI.Count; i++)
 			RightLegUI [i].SetActive (false);
 
-		BackTorsoUI [2].SetActive (true);
-		TorsoUI [2].SetActive (true);
-		LeftTorsoUI [2].SetActive (true);
-		LeftArmUI [2].SetActive (true);
-		LeftLegUI [2].SetActive (true);
-		RightTorsoUI [2].SetActive (true);
-		RightArmUI [2].SetActive (true);
-		RightLegUI [2].SetActive (true);
+		FrontTorsoUI [4].SetActive (true);
+		BackTorsoUI [4].SetActive (true);
+		FrontLeftTorsoUI [4].SetActive (true);
+		BackLeftTorsoUI [4].SetActive (true);
+		LeftArmUI [4].SetActive (true);
+		LeftLegUI [4].SetActive (true);
+		FrontRightTorsoUI [4].SetActive (true);
+		BackRightTorsoUI [4].SetActive (true);
+		RightArmUI [4].SetActive (true);
+		RightLegUI [4].SetActive (true);
 	}
 	
 	// Update is called once per frame
@@ -116,7 +134,7 @@ public class PlayerUI : MonoBehaviour {
 			TogglePauseMenu ();
 		}
 		heatBar.fillAmount = (playerStatScript.leftWeaponSystemStats.currentHeat + playerStatScript.rightWeaponSystemStats.currentHeat)/100;
-		healthDisplay ();
+		//healthDisplay ();
 	}
 
 	private void TogglePauseMenu(){
@@ -159,130 +177,194 @@ public class PlayerUI : MonoBehaviour {
 	{
 		if(playerStatScript != null){
 			//Front Torso
-			if (playerStatScript.frontTorso_Health <= 0) {
-				TorsoUI [0].SetActive (false);
+			if (playerStatScript.frontTorso_Health == 70) {
+				//resets all
+				FrontTorsoUI [0].SetActive (false);
+				FrontTorsoUI [1].SetActive (false);
+				FrontTorsoUI [2].SetActive (false);
+				FrontTorsoUI [3].SetActive (false);
+				FrontTorsoUI [4].SetActive (true);
+			} else if (playerStatScript.frontTorso_Health <= 53) {
+				FrontTorsoUI [4].SetActive (false);
+				FrontTorsoUI [3].SetActive (true);
 			} else if (playerStatScript.frontTorso_Health <= 35) {
-				TorsoUI [2].SetActive (false);
-				TorsoUI [1].SetActive (true);
-			} else if (playerStatScript.frontTorso_Health <= 20) {
-				TorsoUI [1].SetActive (false);
-				TorsoUI [0].SetActive (true);
-			} else if (playerStatScript.frontTorso_Health > 35) {
-				TorsoUI [0].SetActive (false);
-				TorsoUI [1].SetActive (false);
-				TorsoUI [2].SetActive (true);
+				FrontTorsoUI [3].SetActive (false);
+				FrontTorsoUI [2].SetActive (true);
+			} else if (playerStatScript.frontTorso_Health <= 18) {
+				FrontTorsoUI [2].SetActive (false);
+				FrontTorsoUI [1].SetActive (true);
+			} else if (playerStatScript.frontTorso_Health <= 0) {
+				FrontTorsoUI [1].SetActive (false);
+				FrontTorsoUI [0].SetActive (true);
 			}
 			//Back Torso
-			if (playerStatScript.backTorso_Health <= 0) {
+			if (playerStatScript.backTorso_Health == 20) {
+				//resets all
 				BackTorsoUI [0].SetActive (false);
-			} 
-			else if(playerStatScript.backTorso_Health <= 15) {
+				BackTorsoUI [1].SetActive (false);
+				BackTorsoUI [2].SetActive (false);
+				BackTorsoUI [3].SetActive (false);
+				BackTorsoUI [4].SetActive (true);
+			} else if(playerStatScript.backTorso_Health <= 15) {
+				BackTorsoUI [4].SetActive (false);
+				BackTorsoUI [3].SetActive (true);
+			} else if(playerStatScript.backTorso_Health <= 10) {
+				BackTorsoUI [3].SetActive (false);
+				BackTorsoUI [2].SetActive (true);
+			} else if (playerStatScript.backTorso_Health <= 5) {
 				BackTorsoUI [2].SetActive (false);
 				BackTorsoUI [1].SetActive (true);
-			}
-			else if(playerStatScript.backTorso_Health <= 10) {
+			} else if (playerStatScript.backTorso_Health <= 0) {
 				BackTorsoUI [1].SetActive (false);
 				BackTorsoUI [0].SetActive (true);
-			} else if (playerStatScript.backTorso_Health > 15) {
-				BackTorsoUI [0].SetActive (false);
-				BackTorsoUI [1].SetActive (false);
-				BackTorsoUI [2].SetActive (true);
 			}
-			//left torso
-			if (playerStatScript.leftTorso_Health <= 0) {
-				LeftTorsoUI [0].SetActive (false);
-			} 
-			else if (playerStatScript.leftTorso_Health <= 30) {
-				LeftTorsoUI [2].SetActive (false);
-				LeftTorsoUI [1].SetActive (true);
+			//front/back left torso
+			if (playerStatScript.leftTorso_Health == 45) {
+				//resets all
+				FrontLeftTorsoUI [0].SetActive (false);
+				FrontLeftTorsoUI [1].SetActive (false);
+				FrontLeftTorsoUI [2].SetActive (false);
+				FrontLeftTorsoUI [3].SetActive (false);
+				FrontLeftTorsoUI [4].SetActive (true);
+				BackLeftTorsoUI [0].SetActive (false);
+				BackLeftTorsoUI [1].SetActive (false);
+				BackLeftTorsoUI [2].SetActive (false);
+				BackLeftTorsoUI [3].SetActive (false);
+				BackLeftTorsoUI [4].SetActive (true);
+			} else if (playerStatScript.leftTorso_Health <= 34) {
+				FrontLeftTorsoUI [4].SetActive (false);
+				FrontLeftTorsoUI [3].SetActive (true);
+				BackLeftTorsoUI [4].SetActive (false);
+				BackLeftTorsoUI [3].SetActive (true);
+			} else if (playerStatScript.leftTorso_Health <= 23) {
+				FrontLeftTorsoUI [3].SetActive (false);
+				FrontLeftTorsoUI [2].SetActive (true);
+				BackLeftTorsoUI [3].SetActive (false);
+				BackLeftTorsoUI [2].SetActive (true);
+			} else if (playerStatScript.leftTorso_Health > 11) {
+				FrontLeftTorsoUI [2].SetActive (false);
+				FrontLeftTorsoUI [1].SetActive (true);
+				BackLeftTorsoUI [2].SetActive (false);
+				BackLeftTorsoUI [1].SetActive (true);
+			} else if (playerStatScript.leftTorso_Health <= 0) {
+				FrontLeftTorsoUI [1].SetActive (false);
+				FrontLeftTorsoUI [0].SetActive (true);
+				BackLeftTorsoUI [1].SetActive (false);
+				BackLeftTorsoUI [0].SetActive (true);
 			}
-			else if (playerStatScript.leftTorso_Health <= 15) {
-				LeftTorsoUI [1].SetActive (false);
-				LeftTorsoUI [0].SetActive (true);
-			} else if (playerStatScript.leftTorso_Health > 30) {
-				LeftTorsoUI [0].SetActive (false);
-				LeftTorsoUI [1].SetActive (false);
-				LeftTorsoUI [2].SetActive (true);
+			//Front/Back Right Torso
+			if (playerStatScript.rightTorso_Health == 45) {
+				//resets all 
+				FrontRightTorsoUI [0].SetActive (false);
+				FrontRightTorsoUI [1].SetActive (false);
+				FrontRightTorsoUI [2].SetActive (false);
+				FrontRightTorsoUI [3].SetActive (false);
+				FrontRightTorsoUI [4].SetActive (true);
+				BackRightTorsoUI [0].SetActive (false);
+				BackRightTorsoUI [1].SetActive (false);
+				BackRightTorsoUI [2].SetActive (false);
+				BackRightTorsoUI [3].SetActive (false);
+				BackRightTorsoUI [4].SetActive (true);
+			} else if (playerStatScript.rightTorso_Health <= 34) {
+				FrontRightTorsoUI [4].SetActive (false);
+				FrontRightTorsoUI [3].SetActive (true);
+				BackRightTorsoUI [4].SetActive (false);
+				BackRightTorsoUI [3].SetActive (true);
+			} else if (playerStatScript.rightTorso_Health <= 23) {
+				FrontRightTorsoUI [3].SetActive (false);
+				FrontRightTorsoUI [2].SetActive (true);
+				BackRightTorsoUI [3].SetActive (false);
+				BackRightTorsoUI [2].SetActive (true);
+			} else if (playerStatScript.rightTorso_Health <= 11) {
+				FrontRightTorsoUI [2].SetActive (false);
+				FrontRightTorsoUI [1].SetActive (true);
+				BackRightTorsoUI [2].SetActive (false);
+				BackRightTorsoUI [1].SetActive (true);
+			} else if (playerStatScript.rightTorso_Health <= 0) {
+				FrontRightTorsoUI [1].SetActive (false);
+				FrontRightTorsoUI [0].SetActive (true);
+				BackRightTorsoUI [1].SetActive (false);
+				BackRightTorsoUI [0].SetActive (true);
 			}
-			//Right Torso
-			if (playerStatScript.rightTorso_Health <= 0) {
-				RightTorsoUI [0].SetActive (false);
-			} 
-			else if (playerStatScript.rightTorso_Health <= 30) {
-				RightTorsoUI [2].SetActive (false);
-				RightTorsoUI [1].SetActive (true);
-			}
-			else if (playerStatScript.rightTorso_Health <= 15) {
-				RightTorsoUI [1].SetActive (false);
-				RightTorsoUI [0].SetActive (true);
-			} else if (playerStatScript.rightTorso_Health > 30) {
-				RightTorsoUI [0].SetActive (false);
-				RightTorsoUI [1].SetActive (false);
-				RightTorsoUI [2].SetActive (true);
-			}
-			//Left Weapon
-			if (playerStatScript.leftWeaponSystem_Health <= 0) {
+			//Left Arm
+			if (playerStatScript.leftWeaponSystem_Health  == 25) {
 				LeftArmUI [0].SetActive (false);
-			} 
-			else if (playerStatScript.leftWeaponSystem_Health <= 15) {
+				LeftArmUI [1].SetActive (false);
+				LeftArmUI [2].SetActive (false);
+				LeftArmUI [3].SetActive (false);
+				LeftArmUI [4].SetActive (true);
+			} else if (playerStatScript.leftWeaponSystem_Health <= 15) {
+				LeftArmUI [4].SetActive (false);
+				LeftArmUI [3].SetActive (true);
+			} else if (playerStatScript.leftWeaponSystem_Health <= 10) {
+				LeftArmUI [3].SetActive (false);
+				LeftArmUI [2].SetActive (true);
+			} else if (playerStatScript.leftWeaponSystem_Health <= 15) {
 				LeftArmUI [2].SetActive (false);
 				LeftArmUI [1].SetActive (true);
-			}
-			else if (playerStatScript.leftWeaponSystem_Health <= 10) {
+			} else if (playerStatScript.leftWeaponSystem_Health <= 0) {
 				LeftArmUI [1].SetActive (false);
 				LeftArmUI [0].SetActive (true);
-			} else if (playerStatScript.leftWeaponSystem_Health > 15) {
-				LeftArmUI [0].SetActive (false);
-				LeftArmUI [1].SetActive (false);
-				LeftArmUI [2].SetActive (true);
 			}
-			//Right Weapon
-			if (playerStatScript.rightWeaponSystem_Health <= 0) {
+			//Right Arm
+			if (playerStatScript.rightWeaponSystem_Health  == 25) {
 				RightArmUI [0].SetActive (false);
-			} 
-			else if (playerStatScript.rightWeaponSystem_Health <= 15) {
+				RightArmUI [1].SetActive (false);
+				RightArmUI [2].SetActive (false);
+				RightArmUI [3].SetActive (false);
+				RightArmUI [4].SetActive (true);
+			} else if (playerStatScript.rightWeaponSystem_Health <= 15) {
+				RightArmUI [4].SetActive (false);
+				RightArmUI [3].SetActive (true);
+			} else if (playerStatScript.rightWeaponSystem_Health <= 10) {
+				RightArmUI [3].SetActive (false);
+				RightArmUI [2].SetActive (true);
+			} else if (playerStatScript.rightWeaponSystem_Health <= 15) {
 				RightArmUI [2].SetActive (false);
 				RightArmUI [1].SetActive (true);
-			}
-			else if (playerStatScript.rightWeaponSystem_Health <= 10) {
+			} else if (playerStatScript.rightWeaponSystem_Health <= 0) {
 				RightArmUI [1].SetActive (false);
 				RightArmUI [0].SetActive (true);
-			} else if (playerStatScript.rightWeaponSystem_Health > 15) {
-				RightArmUI [0].SetActive (false);
-				RightArmUI [1].SetActive (false);
-				RightArmUI [2].SetActive (true);
 			}
 			//Left Leg
-			if (playerStatScript.leftLeg_Health <= 0) {
+			if (playerStatScript.leftLeg_Health == 40) {
 				LeftLegUI [0].SetActive (false);
-			} 
-			else if (playerStatScript.leftLeg_Health <= 20) {
+				LeftLegUI [1].SetActive (false);
+				LeftLegUI [2].SetActive (false);
+				LeftLegUI [3].SetActive (false);
+				LeftLegUI [4].SetActive (false);
+			} else if (playerStatScript.leftLeg_Health <= 30) {
+				LeftLegUI [4].SetActive (false);
+				LeftLegUI [3].SetActive (true);
+			} else if (playerStatScript.leftLeg_Health <= 20) {
+				LeftLegUI [3].SetActive (false);
+				LeftLegUI [2].SetActive (true);
+			} else if (playerStatScript.leftLeg_Health <= 10) {
 				LeftLegUI [2].SetActive (false);
 				LeftLegUI [1].SetActive (true);
-			}
-			else if (playerStatScript.leftLeg_Health <= 10) {
+			} else if (playerStatScript.leftLeg_Health <= 0) {
 				LeftLegUI [1].SetActive (false);
 				LeftLegUI [0].SetActive (true);
-			} else if (playerStatScript.leftLeg_Health > 20) {
-				LeftLegUI [0].SetActive (false);
-				LeftLegUI [1].SetActive (false);
-				LeftLegUI [2].SetActive (true);
 			}
 			//Right Leg
-			if (playerStatScript.rightLeg_Health <= 0) {
+			if (playerStatScript.rightLeg_Health == 40) {
 				RightLegUI [0].SetActive (false);
-			} 
-			else if (playerStatScript.rightLeg_Health <= 20) {
+				RightLegUI [1].SetActive (false);
+				RightLegUI [2].SetActive (false);
+				RightLegUI [3].SetActive (false);
+				RightLegUI [4].SetActive (false);
+			} else if (playerStatScript.rightLeg_Health <= 30) {
+				RightLegUI [4].SetActive (false);
+				RightLegUI [3].SetActive (true);
+			} else if (playerStatScript.rightLeg_Health <= 20) {
+				RightLegUI [3].SetActive (false);
+				RightLegUI [2].SetActive (true);
+			} else if (playerStatScript.rightLeg_Health <= 10) {
 				RightLegUI [2].SetActive (false);
 				RightLegUI [1].SetActive (true);
-			}
-			else if (playerStatScript.rightLeg_Health <= 10) {
+			} else if (playerStatScript.rightLeg_Health <= 0) {
 				RightLegUI [1].SetActive (false);
 				RightLegUI [0].SetActive (true);
-			} else if (playerStatScript.rightLeg_Health > 20) {
-				RightLegUI [0].SetActive (false);
-				RightLegUI [1].SetActive (false);
-				RightLegUI [2].SetActive (true);
 			}
 		}
 	}

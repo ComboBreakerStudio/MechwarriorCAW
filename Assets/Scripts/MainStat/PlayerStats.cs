@@ -297,15 +297,19 @@ public class PlayerStats : NetworkBehaviour {
 		for (int i = 0; i < minimapMarker.Count; i++) {
 			minimapMarker [i].gameObject.SetActive (false);
 		}
-		for(int i=0; i<minimapMarker.Count; i++)
-		{
-			if (isLocalPlayer) {
-				minimapMarker [0].SetActive (true);
-			} else if (!isLocalPlayer && otherPlayer.teamID == GameManager.GM.localPlayerStatsScript.teamID) {
-				minimapMarker [1].SetActive (true);
-			} else if (!isLocalPlayer && otherPlayer.teamID != GameManager.GM.localPlayerStatsScript.teamID) {
-				minimapMarker [2].SetActive (true);
-			}
+
+		if (isLocalPlayer) {
+			minimapMarker [0].SetActive (true);
+			minimapMarker [1].SetActive (false);
+			minimapMarker [2].SetActive (false);
+		} else if (!isLocalPlayer && otherPlayer.teamID == GameManager.GM.localPlayerStatsScript.teamID) {
+			minimapMarker [0].SetActive (false);
+			minimapMarker [1].SetActive (true);
+			minimapMarker [2].SetActive (false);
+		} else if (!isLocalPlayer && otherPlayer.teamID != GameManager.GM.localPlayerStatsScript.teamID) {
+			minimapMarker [0].SetActive (false);
+			minimapMarker [1].SetActive (false);
+			minimapMarker [2].SetActive (true);
 		}
 
 		//Add player to TeamManager
