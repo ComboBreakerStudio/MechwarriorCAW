@@ -82,6 +82,7 @@ public class PlayerShoot : NetworkBehaviour {
 					playerAnimation.rightHandAnim.SetBool ("isAttacking", true);
 					camScript.isMelee = true;
 					Debug.Log ("Melee");
+					rightWeapon.currentHeat += rightWeapon.heatRegenRate * Time.deltaTime;
 				}
 			} 
 		}

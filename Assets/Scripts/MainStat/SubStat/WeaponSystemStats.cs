@@ -14,6 +14,7 @@ public class WeaponSystemStats : MonoBehaviour {
 
 	public bool canCool, isOverHeat, canShoot;
 	public RectTransform UI;
+	public GameObject PUI;
 
 	//Shoot
 	[Header ("Shooting Method")]
@@ -42,10 +43,12 @@ public class WeaponSystemStats : MonoBehaviour {
 	public PlayerStats stats;
 	public PlayerShoot shoots;
 	public PlayerController controller;
+	public ThirdPersonCamera cam;
 
 	void Start(){
 		ResetStats ();
 		parentObject = this.gameObject.transform.parent.gameObject;
+		PUI = GetComponent<PlayerUI> ().gameObject;
 	}
 
 	void Update(){
@@ -63,6 +66,8 @@ public class WeaponSystemStats : MonoBehaviour {
 			canShoot = false;
 			shoots.enabled = false;
 			controller.enabled  = false;
+			cam.enabled = false;
+			PUI.SetActive (!PUI.activeSelf);
 			UI.gameObject.SetActive (false);
 		}
 		else if(isOverHeat == true && currentHeat <= 40.0f){
@@ -71,6 +76,8 @@ public class WeaponSystemStats : MonoBehaviour {
 			canShoot = true;
 			shoots.enabled = true;
 			controller.enabled  = true;
+			cam.enabled = true;
+			PUI.SetActive (PUI.activeSelf);
 			UI.gameObject.SetActive (true);
 		}
 		// End of Overheat Check
