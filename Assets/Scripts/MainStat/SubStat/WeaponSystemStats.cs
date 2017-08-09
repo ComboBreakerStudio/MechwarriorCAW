@@ -13,6 +13,8 @@ public class WeaponSystemStats : MonoBehaviour {
 
 
 	public bool canCool, isOverHeat, canShoot;
+	public RectTransform UI;
+	public GameObject PUI;
 
 	//Shoot
 	[Header ("Shooting Method")]
@@ -24,7 +26,7 @@ public class WeaponSystemStats : MonoBehaviour {
 	attackRange;
 
 	public int currentAmmo, maxAmmo;
-	public bool needAmmo;
+	public bool needAmmo, isShooting;
 
 	//Stats
 	[Header("Stats")]
@@ -38,21 +40,45 @@ public class WeaponSystemStats : MonoBehaviour {
 
 	public bool isMelee;
 
+	public PlayerStats stats;
+	public PlayerShoot shoots;
+	public PlayerController controller;
+	public ThirdPersonCamera cam;
+
 	void Start(){
 		ResetStats ();
 		parentObject = this.gameObject.transform.parent.gameObject;
+		PUI = GetComponent<PlayerUI> ().gameObject;
 	}
 
 	void Update(){
+		HeatSystem ();
 	}
 
+
 	void HeatSystem (){
+
 		//Overheat Check
 		if(currentHeat >= maxHeat){
 			isOverHeat = true;
+			//disable mech movement
+			stats.canMove = false;
+			canShoot = false;
+			shoots.enabled = false;
+			controller.enabled  = false;
+			cam.enabled = false;
+			PUI.SetActive (!PUI.activeSelf);
+			UI.gameObject.SetActive (false);
 		}
-		else if(currentHeat <= 0.0f){
+		else if(isOverHeat == true && currentHeat <= 40.0f){
 			isOverHeat = false;
+			stats.canMove = true;
+			canShoot = true;
+			shoots.enabled = true;
+			controller.enabled  = true;
+			cam.enabled = true;
+			PUI.SetActive (PUI.activeSelf);
+			UI.gameObject.SetActive (true);
 		}
 		// End of Overheat Check
 

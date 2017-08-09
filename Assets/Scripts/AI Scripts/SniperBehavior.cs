@@ -14,6 +14,8 @@ using AIEnums;
 
 public class SniperBehavior : NetworkBehaviour {
 
+    public AIStats statsScript;
+
     NavMeshAgent agent;
 
     public List<Transform> visibleTarget = new List<Transform>();
@@ -218,7 +220,7 @@ public class SniperBehavior : NetworkBehaviour {
             lineRenderer.enabled = true;
         }
 
-        Vector3 direction = targetposition.position;
+        Vector3 direction = targetposition.position - this.transform.position;
         direction.y = 0;
 
         transform.LookAt(direction);
@@ -248,21 +250,31 @@ public class SniperBehavior : NetworkBehaviour {
         visibleTarget.Clear();
         targetposition = null;
 
-        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        Collider[] allInstances = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
+        //targetInViewRadius = new List<Transform>();
 
-        for (int i = 0; i < targetInViewRadius.Length; i++)
+        for (int i = 0; i < allInstances.Length; i++)
         {
-            targetposition = targetInViewRadius[i].transform;
+            targetposition = allInstances[i].transform;
 
             Vector3 dirToTarget = (targetposition.position - transform.position).normalized;
-            if (Vector3.Angle(transform.position,dirToTarget) < 360)
+            if (Vector3.Angle(transform.position, dirToTarget) < 360)
             {
                 float distToTarget = Vector3.Distance(transform.position, targetposition.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, distToTarget, wallMask))
                 {
-                    visibleTarget.Add(targetposition);
+
+                    if (allInstances[i].GetComponent<PlayerStats>() != null)
+                    {
+                        if (allInstances[i].GetComponent<PlayerStats>().teamID != this.statsScript.teamID)
+                        {
+                            visibleTarget.Add(targetposition);
+                        }
+                    }
                 }
             }
+
+
         }
     }
 
